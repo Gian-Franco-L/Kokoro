@@ -1,0 +1,127 @@
+article{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 300px;
+  width: 300px;
+  margin: -10px 20px 100px 20px;
+}
+
+.apearArticles{
+  display: flex;
+  width: 100%;
+  height: 1000px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  animation: apearArticles;
+  animation-duration: 1.2s;
+  animation-timing-function: linear;
+}
+
+@keyframes apearArticles{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.disapearArticles{
+  display: flex;
+  width: 100%;
+  height: 1000px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  animation: disapearArticles;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes disapearArticles{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+.apearCart{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 100;
+  top: 0;
+  right: -500px;
+  height: 100%;
+  width: 500px;
+  background-color: grey;
+  animation-name: apearCart;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes apearCart{
+  0%{
+    transform: translate(0px);
+  }
+  100%{
+    transform: translate(-500px);
+  }
+}
+
+.CartOn{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 100;
+  top: 0;
+  right: 0px;
+  height: 100%;
+  width: 500px;
+  background-color: grey;
+}
+
+.desapearCart{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 100;
+  top: 0;
+  right: 0px;
+  height: 100%;
+  width: 500px;
+  background-color: grey;
+  animation-name: desapearCart;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes desapearCart{
+  0%{
+    transform: translate(0px);
+  }
+  100%{
+    transform: translate(500px);
+  }
+}
+
+.CartOff{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 100;
+  top: 0;
+  right: -500px;
+  height: 100%;
+  width: 500px;
+  background-color: grey;
+}
