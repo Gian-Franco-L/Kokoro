@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "react-router-dom"
 import "../CSS/Animation.css"
 
 const Header = () =>{
@@ -8,9 +7,11 @@ const Header = () =>{
         <Navbar>
         	<Name>Monica Szeki</Name>
           <Buttons>
+						{/*
 						<Link to="/">Home</Link>
 						<Link to="/sobremi">Sobre mí</Link>
 						<Link to="/contacto">Contacto</Link>
+						*/}
           </Buttons>
         </Navbar>
     )

@@ -5,19 +5,19 @@ import styled from "styled-components"
 
 const Items = ({ items, itemsPrice }) =>{
   const {
-    ArticlesCart,
+    articlesCart,
     setArticlesCart
   } = useContext(AppContext)
 
   function addToCart(payload){
-    if(ArticlesCart.filter(item => item.name === payload).length === 0){
-      setArticlesCart([...ArticlesCart, {name: payload, amount: 1}])
+    if(articlesCart.filter(item => item.name === payload).length === 0){
+      setArticlesCart([...articlesCart, {name: payload, amount: 1}])
     }
     else{
       let articleIndex
-      let articleAmount = ArticlesCart
-      for(let i=0; i<ArticlesCart.length; i++){
-        if(ArticlesCart[i].name === payload){
+      let articleAmount = articlesCart
+      for(let i=0; i<articlesCart.length; i++){
+        if(articlesCart[i].name === payload){
           articleIndex = i
         }
       }

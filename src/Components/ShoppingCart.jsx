@@ -6,7 +6,7 @@ import { ItemOnCart } from "./ItemOnCart"
 
 const ShoppingCart = ({ showCart }) =>{
     const {
-      ArticlesCart
+      articlesCart
     } = useContext(AppContext)
 
     const invisibleCar = () =>{
@@ -20,7 +20,7 @@ const ShoppingCart = ({ showCart }) =>{
     <div ref={showCart} className={"CartOff"}>
       <ExitButton><button onClick={invisibleCar}>X</button></ExitButton>
       <CartTittle><h1>Agregados al carrito</h1></CartTittle>
-      {ArticlesCart.map(item =>(
+      {articlesCart.map(item =>(
         <ItemOnCart
           item={item}
           key={uuidv4()}

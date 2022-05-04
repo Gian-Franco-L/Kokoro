@@ -9,19 +9,26 @@ import '../CSS/Animation.css';
 const ShowChoice = ({ articulos, tipes }) =>{
   const {
     startingArticles,
-    ShowArticles,
+    showArticles,
     setShowArticles,
-    ArticlesCount,
+    articlesCount,
     setArticlesCount,
     totalArticles,
     searchValue,
-    setSearchValue
+    setSearchValue,
+    priceTimeChoice,
+    setPriceTimeChoice
   } = useContext(AppContext)
 
   const showCart = useRef(null)
-
-  let filterItems = ShowArticles
-  const [priceTimeChoice, setPriceTimeChoice] = useState("none")
+  let filterItems = showArticles
+  const optionValue= [
+    {value: "none", label: "Sin filtro"},
+    {value: ">$", label: "Precio mayor a menor"},
+    {value: "<$", label: "Precio menor a mayor"},
+    {value: ">time", label: "Mas viejo a mas nuevo"},
+    {value: "<time", label: "Mas nuevo a mas viejo"}
+  ]
 
   function enabledItems() {
     articulos.current.className = "disapearArticles"
@@ -31,24 +38,6 @@ const ShowChoice = ({ articulos, tipes }) =>{
       articulos.current.style.display = "none"
       setShowArticles(startingArticles)
     }, 950)
-    setArticlesCount(20)
-  }
-
-  function moreItems() {
-    if(filterItems.length>=10)
-    {
-      let articlesAux = ShowArticles
-      let articlesCountAux = ArticlesCount
-      for(let j=0; j<10; j++){
-        articlesCountAux++
-        setArticlesCount(articlesCountAux)
-        if(articlesCountAux<=totalArticles.length){
-          articlesAux = [...articlesAux, totalArticles[articlesCountAux-1]]
-          setShowArticles(articlesAux)
-          filterItems = ShowArticles
-        }
-      }
-    }
   }
 
   const visibleCar = () =>{
@@ -58,37 +47,69 @@ const ShowChoice = ({ articulos, tipes }) =>{
     }, 980)
   }
 
+  function moreItems() {
+    if(filterItems.length>=10)
+    {
+      let articlesAux = showArticles
+      let articlesCountAux = articlesCount
+      for(let j=0; j<10; j++){
+        articlesCountAux++
+        setArticlesCount(articlesCountAux)
+        if(articlesCountAux <= totalArticles.length){
+          articlesAux = [...articlesAux, totalArticles[articlesCountAux-1]]
+          setShowArticles(articlesAux)
+        }
+      }
+    }
+  }
+
   const searchFunction = (event) =>{
     setSearchValue(event.target.value)
   }
+  const filterPriceTime = (filterChoice) =>{
+    setPriceTimeChoice(filterChoice.value)
+  }
 
   if(searchValue.length < 1){
-    filterItems = ShowArticles
+    filterItems = showArticles
   }else{
-      filterItems = ShowArticles.filter(value =>{
+    filterItems = showArticles.filter(value =>{
       const todoText = value.Name.toLowerCase()
       const searchText = searchValue.toLowerCase()
       return todoText.includes(searchText)
     })
   }
-  if(priceTimeChoice === ">$"){
-    let maxToMin = totalArticles.sort((a, b) => a.Price - b.Price)
-    filterItems = []
-    for(let i=0; i<ArticlesCount; i++){
-      filterItems[i] = maxToMin[i]
+  if(priceTimeChoice === "none"){
+    totalArticles.sort((a, b) => a.id - b.id)
+    for(let i=0; i<showArticles.length; i++){
+      filterItems[i] = totalArticles[i]
     }
   }
-  
-  const optionValue= [
-    {value: "none", label: "Sin filtro"},
-    {value: ">$", label: "Precio mayor a menor"},
-    {value: "<$", label: "Precio menor a mayor"},
-    {value: ">time", label: "Mas viejo a mas nuevo"},
-    {value: "<time", label: "Mas nuevo a mas viejo"}
-  ]
-
-  const filterPriceTime = (filterChoice) =>{
-    setPriceTimeChoice(filterChoice.value)
+  if(priceTimeChoice === ">$"){
+    totalArticles.sort((a, b) => a.Price - b.Price)
+    for(let i=0; i<showArticles.length; i++){
+      filterItems[i] = totalArticles[i]
+    }
+  }
+  if(priceTimeChoice === "<$"){
+    totalArticles.sort((a, b) => b.Price - a.Price)
+    for(let i=0; i<showArticles.length; i++){
+      filterItems[i] = totalArticles[i]
+    }
+  }
+  if(priceTimeChoice === ">time"){
+    totalArticles.sort((a, b) => a.Date - b.Date)
+    console.log(totalArticles)
+    for(let i=0; i<showArticles.length; i++){
+      filterItems[i] = totalArticles[i]
+    }
+  }
+  if(priceTimeChoice === "<time"){
+    totalArticles.sort((a, b) => b.Date - a.Date)
+    console.log(totalArticles)
+    for(let i=0; i<showArticles.length; i++){
+      filterItems[i] = totalArticles[i]
+    }
   }
   return(
     <MainContainer ref={articulos}>
