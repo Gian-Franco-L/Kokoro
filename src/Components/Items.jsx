@@ -6,38 +6,38 @@ import styled from "styled-components"
 const Items = ({ items, itemsPrice }) =>{
   const {
     articlesCart,
-    setArticlesCart
+    setArticlesCart,
+    amountToPay,
+    setAmountToPay
   } = useContext(AppContext)
 
-  function addToCart(payload){
+  function addToCart(payload, itemsPrice){
+    let reRender
+    let articleAmount = articlesCart
+
     if(articlesCart.filter(item => item.name === payload).length === 0){
-      setArticlesCart([...articlesCart, {name: payload, amount: 1}])
-    }
-    else{
-      let articleIndex
-      let articleAmount = articlesCart
+      setArticlesCart([...articlesCart, {name: payload, amount: 1, price: itemsPrice}])
+    }else{
       for(let i=0; i<articlesCart.length; i++){
         if(articlesCart[i].name === payload){
-          articleIndex = i
+          articleAmount[i].amount++
+          articleAmount[i].price = itemsPrice
+          reRender = [...articleAmount, {name: "", amount: "", price: ""}]
+          setArticlesCart(reRender)
+          setTimeout(() =>{
+            setArticlesCart(articleAmount)
+          }, 0)
         }
       }
-      articleAmount[articleIndex].amount++
-      let reRender
-      reRender = [...articleAmount, {name: "", amount: ""}]
-      setArticlesCart(reRender)
-      setTimeout(() =>{
-      setArticlesCart(articleAmount)
-      }, 0)
     }
   }
-  
   return(
     <MainContainer>
       <ArticleItem />
       <ArticleInfo>
         <ItemName><div>{items}</div></ItemName>
         {itemsPrice}
-        <AddToCartButton><button onClick={() => addToCart(items)}></button></AddToCartButton>
+        <AddToCartButton><button onClick={() => addToCart(items, itemsPrice)}></button></AddToCartButton>
       </ArticleInfo>
     </MainContainer>
   )

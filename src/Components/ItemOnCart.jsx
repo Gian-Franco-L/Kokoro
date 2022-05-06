@@ -5,12 +5,12 @@ import styled from "styled-components"
 const ItemOnCart = ({ item }) =>{
   const {
     articlesCart,
-    setArticlesCart
+    setArticlesCart,
   } = useContext(AppContext)
 
   function outOfCart(payload){
     let outArticle
-    if(articlesCart.filter(item => item.name == payload)[0].amount == 1){
+    if(articlesCart.filter(item => item.name === payload)[0].amount === 1){
       outArticle = articlesCart.filter(item => item.name !== payload)
       setArticlesCart(outArticle)
     }
@@ -18,7 +18,7 @@ const ItemOnCart = ({ item }) =>{
       let articleIndex
       let articleAmount = articlesCart
       for(let i=0; i<articlesCart.length; i++){
-        if(articlesCart[i].name == payload){
+        if(articlesCart[i].name === payload){
           articleIndex = i
         }
       }
@@ -37,6 +37,7 @@ const ItemOnCart = ({ item }) =>{
       {item.amount>1 ? item.amount : null}
       {item.name.length>0 ? <button onClick={() => outOfCart(item.name)}></button> : null}
     </MainContainer>
+    
   )
 }
 

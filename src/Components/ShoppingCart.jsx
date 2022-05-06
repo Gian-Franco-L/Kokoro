@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react"
+import React, { useContext } from "react"
 import { AppContext } from "../Context/AppContext"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
@@ -15,7 +15,15 @@ const ShoppingCart = ({ showCart }) =>{
         showCart.current.className = "CartOff"
       }, 980)
     }
-
+    const totalCount = () =>{
+      let asd = 0
+      for(let i=0; i<articlesCart.length; i++){
+        if(articlesCart[i].amount !== 0){
+          asd = asd + articlesCart[i].price * articlesCart[i].amount
+        }
+      }
+      return asd
+    }
   return(
     <div ref={showCart} className={"CartOff"}>
       <ExitButton><button onClick={invisibleCar}>X</button></ExitButton>
@@ -26,6 +34,7 @@ const ShoppingCart = ({ showCart }) =>{
           key={uuidv4()}
         />
       ))}
+      <PayPart>{totalCount()}</PayPart>
     </div>
   )
 }
@@ -42,5 +51,11 @@ const CartTittle = styled.div`
   position: relative;
   left: 27%;
   top: 5%;
+`
+
+const PayPart = styled.div`
+  position: absolute;
+  left: 45%;
+  bottom: 5%;
 `
 export { ShoppingCart }

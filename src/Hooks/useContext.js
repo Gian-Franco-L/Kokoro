@@ -214,7 +214,7 @@ const useContext = () =>{
   const [articlesCart, setArticlesCart] = useState([])
   const [searchValue, setSearchValue] = useState("")
   const [priceTimeChoice, setPriceTimeChoice] = useState("none")
-
+  const [amountToPay, setAmountToPay] = useState(0)
 
   return{
     startingArticles,
@@ -228,7 +228,9 @@ const useContext = () =>{
     searchValue,
     setSearchValue,
     priceTimeChoice,
-    setPriceTimeChoice
+    setPriceTimeChoice,
+    amountToPay,
+    setAmountToPay
   }
 }
 
