@@ -52,10 +52,7 @@ article{
 
 .apearCart{
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  z-index: 100;
+  z-index: 3;
   top: 0;
   right: -500px;
   height: 100%;
@@ -77,12 +74,9 @@ article{
 
 .CartOn{
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  z-index: 100;
+  z-index: 3;
   top: 0;
-  right: 0px;
+  right: 0;
   height: 100%;
   width: 500px;
   background-color: grey;
@@ -90,10 +84,7 @@ article{
 
 .desapearCart{
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  z-index: 100;
+  z-index: 3;
   top: 0;
   right: 0px;
   height: 100%;
@@ -118,7 +109,7 @@ article{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  z-index: 100;
+  z-index: 3;
   top: 0;
   right: -500px;
   height: 100%;

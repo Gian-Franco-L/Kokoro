@@ -26,19 +26,32 @@ const ShoppingCart = ({ showCart }) =>{
     }
   return(
     <div ref={showCart} className={"CartOff"}>
-      <ExitButton><button onClick={invisibleCar}>X</button></ExitButton>
-      <CartTittle><h1>Agregados al carrito</h1></CartTittle>
-      {articlesCart.map(item =>(
-        <ItemOnCart
-          item={item}
-          key={uuidv4()}
-        />
-      ))}
-      <PayPart>{totalCount()}</PayPart>
+      <TittleBack>
+        <ExitButton><button onClick={invisibleCar}>X</button></ExitButton>
+        <CartTittle><h1>Agregados al carrito</h1></CartTittle>
+      </TittleBack>
+      <Items>
+        {articlesCart.map(item =>(
+          <ItemOnCart
+            item={item}
+            key={uuidv4()}
+          />
+        ))}
+      </Items>
+      <PayPart>
+        <Price>
+          {articlesCart.length>0 && totalCount()}
+        </Price>
+        <NoPrice>
+          {articlesCart.length===0 && "Ingrese un item en el carrito"}
+        </NoPrice>
+      </PayPart>
     </div>
   )
 }
 
+const TittleBack = styled.div`
+`
 const ExitButton = styled.div`
   position: absolute;
   height: 20px;
@@ -48,14 +61,28 @@ const ExitButton = styled.div`
 `
 
 const CartTittle = styled.div`
-  position: relative;
-  left: 27%;
-  top: 5%;
+  margin-top: 10%;
+  margin-left: 25%;
+`
+
+const Items = styled.div`
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const PayPart = styled.div`
-  position: absolute;
-  left: 45%;
-  bottom: 5%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+`
+
+const Price = styled.div`
+`
+const NoPrice = styled.div`
 `
 export { ShoppingCart }

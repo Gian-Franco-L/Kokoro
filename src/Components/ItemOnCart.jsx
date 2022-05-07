@@ -35,7 +35,9 @@ const ItemOnCart = ({ item }) =>{
     <MainContainer>
       {item.name}
       {item.amount>1 ? item.amount : null}
-      {item.name.length>0 ? <button onClick={() => outOfCart(item.name)}></button> : null}
+      <Kick>
+        {item.name.length>0 ? <button onClick={() => outOfCart(item.name)}></button> : null}
+      </Kick>
     </MainContainer>
     
   )
@@ -44,9 +46,18 @@ const ItemOnCart = ({ item }) =>{
 const MainContainer = styled.div`
   position: relative;
   display: flex;
-  top: 5%;
+  align-items: center;
+  height: 15px;
+  width: 100px;
   left: 15%;
   margin-top: 10%;
+  max-width: 100px;
+`
+const Kick = styled.div`
+  button{
+    height: 16px;
+    width: 10px;
+  }
 `
 
 export { ItemOnCart }

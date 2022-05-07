@@ -98,7 +98,7 @@ const Slide = styled.div`
   min-width: 100%;
   overflow: hidden;
   transition: 0.3s ease all;
-  z-index: 10;
+  z-index: 1;
   max-heigth: 500px;
 
   img {
@@ -127,7 +127,7 @@ const ButtonsCarousel = styled.div`
 	width: 100%;
 	height: 100%;
 	top: 0;
-	z-index: 20;
+	z-index: 2;
 	pointer-events: none;
 `
 
