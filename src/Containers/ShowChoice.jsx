@@ -70,15 +70,7 @@ const ShowChoice = ({ articulos, tipes }) =>{
     setPriceTimeChoice(filterChoice.value)
   }
 
-  if(searchValue.length < 1){
-    filterItems = showArticles
-  }else{
-    filterItems = showArticles.filter(value =>{
-      const todoText = value.Name.toLowerCase()
-      const searchText = searchValue.toLowerCase()
-      return todoText.includes(searchText)
-    })
-  }
+  
   if(priceTimeChoice === "none"){
     totalArticles.sort((a, b) => a.id - b.id)
     for(let i=0; i<showArticles.length; i++){
@@ -99,17 +91,24 @@ const ShowChoice = ({ articulos, tipes }) =>{
   }
   if(priceTimeChoice === ">time"){
     totalArticles.sort((a, b) => a.Date - b.Date)
-    console.log(totalArticles)
     for(let i=0; i<showArticles.length; i++){
       filterItems[i] = totalArticles[i]
     }
   }
   if(priceTimeChoice === "<time"){
     totalArticles.sort((a, b) => b.Date - a.Date)
-    console.log(totalArticles)
     for(let i=0; i<showArticles.length; i++){
       filterItems[i] = totalArticles[i]
     }
+  }
+  if(searchValue.length < 1){
+    filterItems = showArticles
+  }else{
+    filterItems = totalArticles.filter(value =>{
+      const todoText = value.Name.toLowerCase()
+      const searchText = searchValue.toLowerCase()
+      return todoText.includes(searchText)
+    })
   }
   return(
     <MainContainer ref={articulos}>
