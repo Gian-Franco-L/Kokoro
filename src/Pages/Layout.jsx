@@ -3,6 +3,7 @@ import { Header } from "../Containers/Header"
 import { Carousel } from "../Containers/Carousel"
 import { Slides } from "../Components/Slides"
 import { Articles } from "../Containers/Articles"
+import { Footer } from "../Containers/Footer"
 
 const Layout = () =>{
   return(
@@ -18,6 +19,9 @@ const Layout = () =>{
         </section>
         <section>
           <Articles />
+        </section>
+        <section>
+          <Footer />
         </section>
       </main>
     </>

@@ -70,7 +70,6 @@ const ShowChoice = ({ articulos, tipes }) =>{
     setPriceTimeChoice(filterChoice.value)
   }
 
-  
   if(priceTimeChoice === "none"){
     totalArticles.sort((a, b) => a.id - b.id)
     for(let i=0; i<showArticles.length; i++){
