@@ -1,5 +1,8 @@
 import React from "react"
 import styled from "styled-components"
+import whatsapp from "../img/whatsapp-brands.svg"
+import facebook from "../img/facebook-brands.svg"
+import instagram from "../img/instagram-brands.svg"
 
 const Footer = () =>{
   return(
@@ -18,11 +21,15 @@ const Footer = () =>{
       </div>
       <div>
         <h2>Contactame</h2>
-        <Items>
-          <h5>WhatsApp</h5>
-          <h5>Instagram</h5>
-          <h5>Facebook</h5>
-        </Items>
+        <SocialMedia>
+          <a href="/"><img src={facebook} alt="face" /></a>
+        </SocialMedia>
+        <SocialMedia>
+          <a href="/"><img src={instagram} alt="insta" /></a>
+        </SocialMedia>
+        <SocialMedia>
+          <a href="/"><img src={whatsapp} alt="wpp" /></a>
+        </SocialMedia>
       </div>
     </MainContainer>
   )
@@ -31,8 +38,8 @@ const Footer = () =>{
 const MainContainer = styled.div`
   height: 200px;
   width: 100%;
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: white;
   display: flex;
   justify-content: space-around;
   align-items: top;
@@ -41,6 +48,13 @@ const MainContainer = styled.div`
 const Items = styled.div`
   margin-top: 20px;
   max-width: 250px;
+`
+
+const SocialMedia = styled.div`
+  height: 30px;
+  width: 30px;
+  bakcground-color: white;
+  margin-bottom: 10px;
 `
 
 export { Footer }

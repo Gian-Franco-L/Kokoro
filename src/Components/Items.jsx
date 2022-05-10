@@ -6,9 +6,7 @@ import styled from "styled-components"
 const Items = ({ items, itemsPrice }) =>{
   const {
     articlesCart,
-    setArticlesCart,
-    amountToPay,
-    setAmountToPay
+    setArticlesCart
   } = useContext(AppContext)
 
   function addToCart(payload, itemsPrice){
