@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import whatsapp from "../img/whatsapp-brands.svg"
-import facebook from "../img/facebook-brands.svg"
-import instagram from "../img/instagram-brands.svg"
+import whatsapp from "../../img/whatsapp-brands.svg"
+import facebook from "../../img/facebook-brands.svg"
+import instagram from "../../img/instagram-brands.svg"
 
 const Footer = () =>{
   return(

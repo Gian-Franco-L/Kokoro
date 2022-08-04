@@ -2,54 +2,12 @@ import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
 import { AiFillCaretLeft as LeftArrow} from "react-icons/ai";
 import { AiFillCaretRight as RightArrow} from "react-icons/ai";
-
-
+import { next, back } from "./Functions/next&back"
 
 const Carousel = ({ children }) =>{
   
   const slideCarousel = useRef(null)
   const intervalCarousel = useRef(null)
-
-  const next = () =>{
-    if(slideCarousel.current.children.length > 0){
-      const firstElement = slideCarousel.current.children[0]
-
-      slideCarousel.current.style.transition = "1000ms ease-out all"
-
-      const slideWidth = slideCarousel.current.children[0].offsetWidth
-
-      slideCarousel.current.style.transform = `translateX(-${slideWidth}px)`
-
-      const Transition = () =>{
-        slideCarousel.current.style.transition = "none"
-        slideCarousel.current.style.transform = "translateX(0)"
-
-        slideCarousel.current.appendChild(firstElement)
-
-        slideCarousel.current.removeEventListener("transitionend", Transition)
-      }
-
-      slideCarousel.current.addEventListener("transitionend", Transition)
-    }
-  }
-  
-  const back = () =>{
-    if(slideCarousel.current.children.length > 0){
-      const index = slideCarousel.current.children.length - 1
-      const lastElement = slideCarousel.current.children[index]
-      slideCarousel.current.insertBefore(lastElement, slideCarousel.current.firstChild)
-
-      const slideWidth = slideCarousel.current.children[0].offsetWidth
-      slideCarousel.current.style.transition = "none"
-      slideCarousel.current.style.transform = `translateX(-${slideWidth}px)`
-      
-
-      setTimeout(()=>{
-        slideCarousel.current.style.transition = "1000ms ease-out all"
-        slideCarousel.current.style.transform = "translateX(0)"
-      }, 0)
-    }
-  }
 
   useEffect(() =>{
     intervalCarousel.current = setInterval(() =>{
@@ -72,10 +30,10 @@ const Carousel = ({ children }) =>{
         {children}
       </ImgCarousel>
       <ButtonsCarousel>
-        <Button onClick={back}>
+        <Button onClick={() => back(slideCarousel)}>
 					<LeftArrow />
         </Button>
-        <Button right onClick={next}>
+        <Button right onClick={() => next(slideCarousel)}>
           <RightArrow />
         </Button>
       </ButtonsCarousel>
@@ -87,12 +45,10 @@ const MainContainer = styled.div`
   position: relative;
   overflow: hidden;
 `
-
 const ImgCarousel = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `
-
 const Slide = styled.div`
   position: relative;
   min-width: 100%;
@@ -121,7 +77,6 @@ const TextSlide = styled.div`
 		background-color: black;
 	}
 `
-
 const ButtonsCarousel = styled.div`
 	position: absolute;
 	width: 100%;
@@ -130,7 +85,6 @@ const ButtonsCarousel = styled.div`
 	z-index: 2;
 	pointer-events: none;
 `
-
 const Button = styled.div`
 	position: absolute;
 	display: flex;

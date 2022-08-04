@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import "../CSS/Animation.css"
+import "../../CSS/Animation.css"
 
 const Header = () =>{
     return(

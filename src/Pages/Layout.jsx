@@ -1,9 +1,9 @@
 import React from "react"
-import { Header } from "../Containers/Header"
-import { Carousel } from "../Containers/Carousel"
-import { Slides } from "../Components/Slides"
-import { Articles } from "../Containers/Articles"
-import { Footer } from "../Containers/Footer"
+import { Header } from "../Containers/Header/Header"
+import { Carousel } from "../Containers/Carousel/Carousel"
+import { Slides } from "../Components/Slides/Slides"
+import { Articles } from "../Containers/Articles/Articles"
+import { Footer } from "../Containers/Footer/Footer"
 
 const Layout = () =>{
   return(

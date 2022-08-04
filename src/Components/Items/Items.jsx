@@ -1,41 +1,20 @@
 import React, { useContext } from "react"
-import { AppContext } from "../Context/AppContext"
+import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
-
+import addToCart from "./Functions/addToCart"
 
 const Items = ({ items, itemsPrice }) =>{
   const {
     articlesCart,
     setArticlesCart
   } = useContext(AppContext)
-
-  function addToCart(payload, itemsPrice){
-    let reRender
-    let articleAmount = articlesCart
-
-    if(articlesCart.filter(item => item.name === payload).length === 0){
-      setArticlesCart([...articlesCart, {name: payload, amount: 1, price: itemsPrice}])
-    }else{
-      for(let i=0; i<articlesCart.length; i++){
-        if(articlesCart[i].name === payload){
-          articleAmount[i].amount++
-          articleAmount[i].price = itemsPrice
-          reRender = [...articleAmount, {name: "", amount: "", price: ""}]
-          setArticlesCart(reRender)
-          setTimeout(() =>{
-            setArticlesCart(articleAmount)
-          }, 0)
-        }
-      }
-    }
-  }
   return(
     <MainContainer>
       <ArticleItem />
       <ArticleInfo>
         <ItemName><div>{items}</div></ItemName>
         {itemsPrice}
-        <AddToCartButton><button onClick={() => addToCart(items, itemsPrice)}></button></AddToCartButton>
+        <AddToCartButton><button onClick={() => addToCart(items, itemsPrice, articlesCart, setArticlesCart)}></button></AddToCartButton>
       </ArticleInfo>
     </MainContainer>
   )

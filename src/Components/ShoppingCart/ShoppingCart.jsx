@@ -1,33 +1,19 @@
 import React, { useContext } from "react"
-import { AppContext } from "../Context/AppContext"
+import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
-import { ItemOnCart } from "./ItemOnCart"
+import { ItemOnCart } from "../ItemOnCart/ItemOnCart"
+import { invisibleCar, totalCount } from "./Functions/invCar&totalCount"
 
 const ShoppingCart = ({ showCart }) =>{
     const {
       articlesCart
     } = useContext(AppContext)
 
-    const invisibleCar = () =>{
-      showCart.current.className = "desapearCart"
-      setTimeout(() =>{
-        showCart.current.className = "CartOff"
-      }, 980)
-    }
-    const totalCount = () =>{
-      let asd = 0
-      for(let i=0; i<articlesCart.length; i++){
-        if(articlesCart[i].amount !== 0){
-          asd = asd + articlesCart[i].price * articlesCart[i].amount
-        }
-      }
-      return asd
-    }
   return(
     <div ref={showCart} className={"CartOff"}>
       <TittleBack>
-        <ExitButton><button onClick={invisibleCar}>X</button></ExitButton>
+        <ExitButton><button onClick={() =>invisibleCar(showCart)}>X</button></ExitButton>
         <CartTittle><h1>Agregados al carrito</h1></CartTittle>
       </TittleBack>
       <Items>
@@ -40,7 +26,7 @@ const ShoppingCart = ({ showCart }) =>{
       </Items>
       <PayPart>
         <Price>
-          {articlesCart.length>0 && totalCount()}
+          {articlesCart.length>0 && totalCount(articlesCart)}
         </Price>
         <NoPrice>
           {articlesCart.length===0 && "Ingrese un item en el carrito"}

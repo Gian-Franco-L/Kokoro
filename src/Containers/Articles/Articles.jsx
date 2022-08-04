@@ -1,25 +1,17 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
-import { ShowChoice } from "./ShowChoice"
-import '../CSS/Animation.css';
+import { ShowChoice } from "../ShowChoice/ShowChoice"
+import disabledItems from "./Functions/disabledItems"
+import '../../CSS/Animation.css';
 
 const Articles = () =>{
     const tipes = useRef(null)
     const articulos = useRef(null)
 
-    function disabledItems() {
-      tipes.current.className = "disapearArticles"
-      setTimeout(() => {
-        articulos.current.className = "apearArticles"
-        tipes.current.style.display = "none"
-        articulos.current.style.display = "initial"
-      }, 950)
-    }
-
     return(
       <MainContainer>
       <ArticleTipes ref={tipes}>
-        <Article onClick={disabledItems}>Primero</Article>
+        <Article onClick={() =>disabledItems(tipes, articulos)}>Primero</Article>
         <Article>Segundo</Article>
         <Article>Tercero</Article>
         <Article>Cuarto</Article>

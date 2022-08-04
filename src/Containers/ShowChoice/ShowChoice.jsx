@@ -1,10 +1,14 @@
 import React, { useContext, useRef } from "react"
 import styled from "styled-components"
-import { Items } from "../Components/Items"
-import { ShoppingCart } from "../Components/ShoppingCart"
-import { AppContext } from "../Context/AppContext"
+import { Items } from "../../Components/Items/Items"
+import { ShoppingCart } from "../../Components/ShoppingCart/ShoppingCart"
+import { AppContext } from "../../Context/AppContext"
 import Select from "react-select"
-import '../CSS/Animation.css';
+import enabledItems from "./Functions/enableItems"
+import moreItems from "./Functions/moreItems"
+import visibleCar from "./Functions/visibleCar"
+import { searchFunction, filterPriceTime } from "./Functions/search&filter"
+import '../../CSS/Animation.css';
 
 const ShowChoice = ({ articulos, tipes }) =>{
   const {
@@ -29,46 +33,6 @@ const ShowChoice = ({ articulos, tipes }) =>{
     {value: ">time", label: "Mas viejo a mas nuevo"},
     {value: "<time", label: "Mas nuevo a mas viejo"}
   ]
-
-  function enabledItems() {
-    articulos.current.className = "disapearArticles"
-    setTimeout(() => {
-      tipes.current.className = "apearArticles"
-      tipes.current.style.display = "flex"
-      articulos.current.style.display = "none"
-      setShowArticles(startingArticles)
-    }, 950)
-  }
-
-  const visibleCar = () =>{
-    showCart.current.className = "apearCart"
-    setTimeout(() =>{
-      showCart.current.className = "CartOn"
-    }, 980)
-  }
-
-  function moreItems() {
-    if(filterItems.length>=10)
-    {
-      let articlesAux = showArticles
-      let articlesCountAux = articlesCount
-      for(let j=0; j<10; j++){
-        articlesCountAux++
-        setArticlesCount(articlesCountAux)
-        if(articlesCountAux <= totalArticles.length){
-          articlesAux = [...articlesAux, totalArticles[articlesCountAux-1]]
-          setShowArticles(articlesAux)
-        }
-      }
-    }
-  }
-
-  const searchFunction = (event) =>{
-    setSearchValue(event.target.value)
-  }
-  const filterPriceTime = (filterChoice) =>{
-    setPriceTimeChoice(filterChoice.value)
-  }
 
   if(priceTimeChoice === "none"){
     totalArticles.sort((a, b) => a.id - b.id)
@@ -113,7 +77,7 @@ const ShowChoice = ({ articulos, tipes }) =>{
     <MainContainer ref={articulos}>
         <ArticleHeader>
           <BackButton>
-            <button onClick={enabledItems}>Back</button>
+            <button onClick={() => enabledItems(startingArticles, setShowArticles, setArticlesCount)}>Back</button>
           </BackButton>
           <Filter>
             <label htmlFor="filter"></label>
@@ -123,16 +87,16 @@ const ShowChoice = ({ articulos, tipes }) =>{
               classNamePrefix="select"
               name="type"
               options={optionValue}
-              onChange={filterPriceTime}
+              onChange={() => filterPriceTime(setPriceTimeChoice)}
             />
           </Filter>
           <Search>
             <input 
-            onChange={searchFunction}
+            onChange={() => searchFunction(setSearchValue)}
             />
           </Search>
           <CarButton>
-            <button onClick={visibleCar}>Car</button>
+            <button onClick={() => visibleCar(showCart)}>Car</button>
           </CarButton>
         </ArticleHeader>
         <ArticlesContainer>
@@ -147,7 +111,7 @@ const ShowChoice = ({ articulos, tipes }) =>{
             </Main>
         <ShoppingCart showCart={showCart}/>
         </ArticlesContainer>
-        <MoreItems onClick={moreItems}/>
+        <MoreItems onClick={() => moreItems(showArticles, setShowArticles, totalArticles, articlesCount, setArticlesCount, filterItems)}/>
     </MainContainer>
   )
 }
