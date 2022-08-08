@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
-import outOfCart from "./Functions/outOfCart"
+import outOfCart from "./outOfCart"
 
 const ItemOnCart = ({ item }) =>{
   const {

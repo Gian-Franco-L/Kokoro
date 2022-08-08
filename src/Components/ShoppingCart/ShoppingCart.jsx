@@ -3,7 +3,7 @@ import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ItemOnCart } from "../ItemOnCart/ItemOnCart"
-import { invisibleCar, totalCount } from "./Functions/invCar&totalCount"
+import { invisibleCar, totalCount } from "./invCar&totalCount"
 
 const ShoppingCart = ({ showCart }) =>{
     const {

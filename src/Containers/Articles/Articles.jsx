@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
 import { ShowChoice } from "../ShowChoice/ShowChoice"
-import disabledItems from "./Functions/disabledItems"
+import disabledItems from "./disabledItems"
 import '../../CSS/Animation.css';
 
 const Articles = () =>{

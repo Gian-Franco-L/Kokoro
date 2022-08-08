@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import styled from "styled-components"
 import { AiFillCaretLeft as LeftArrow} from "react-icons/ai";
 import { AiFillCaretRight as RightArrow} from "react-icons/ai";
-import { next, back } from "./Functions/next&back"
+import { next, back } from "./next&back"
 
 const Carousel = ({ children }) =>{
   
@@ -11,7 +11,7 @@ const Carousel = ({ children }) =>{
 
   useEffect(() =>{
     intervalCarousel.current = setInterval(() =>{
-      next()
+      next(slideCarousel)
     }, 3000)
 
     slideCarousel.current.addEventListener("mouseenter", () =>{
@@ -19,7 +19,7 @@ const Carousel = ({ children }) =>{
     })
     slideCarousel.current.addEventListener("mouseleave", () =>{
       intervalCarousel.current = setInterval(() =>{
-        next()
+        next(slideCarousel)
       }, 3000)
     })
   }, [])

@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
-import addToCart from "./Functions/addToCart"
+import addToCart from "./addToCart"
 
 const Items = ({ items, itemsPrice }) =>{
   const {

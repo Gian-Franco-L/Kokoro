@@ -3,36 +3,23 @@ import styled from "styled-components"
 import { Items } from "../../Components/Items/Items"
 import { ShoppingCart } from "../../Components/ShoppingCart/ShoppingCart"
 import { AppContext } from "../../Context/AppContext"
-import Select from "react-select"
-import enabledItems from "./Functions/enableItems"
-import moreItems from "./Functions/moreItems"
-import visibleCar from "./Functions/visibleCar"
-import { searchFunction, filterPriceTime } from "./Functions/search&filter"
+import CarButton from "../../Components/CarButton/CarButton"
+import Search from "../../Components/Search/Search"
+import Filter from "../../Components/Filter/Filter"
+import MoreItems from "../../Components/MoreItems/MoreItems"
+import BackButton from "../../Components/BackButton/BackButton"
 import '../../CSS/Animation.css';
 
 const ShowChoice = ({ articulos, tipes }) =>{
   const {
-    startingArticles,
     showArticles,
-    setShowArticles,
-    articlesCount,
-    setArticlesCount,
     totalArticles,
     searchValue,
-    setSearchValue,
     priceTimeChoice,
-    setPriceTimeChoice
   } = useContext(AppContext)
 
   const showCart = useRef(null)
   let filterItems = showArticles
-  const optionValue= [
-    {value: "none", label: "Sin filtro"},
-    {value: ">$", label: "Precio mayor a menor"},
-    {value: "<$", label: "Precio menor a mayor"},
-    {value: ">time", label: "Mas viejo a mas nuevo"},
-    {value: "<time", label: "Mas nuevo a mas viejo"}
-  ]
 
   if(priceTimeChoice === "none"){
     totalArticles.sort((a, b) => a.id - b.id)
@@ -76,42 +63,27 @@ const ShowChoice = ({ articulos, tipes }) =>{
   return(
     <MainContainer ref={articulos}>
         <ArticleHeader>
-          <BackButton>
-            <button onClick={() => enabledItems(startingArticles, setShowArticles, setArticlesCount)}>Back</button>
-          </BackButton>
-          <Filter>
-            <label htmlFor="filter"></label>
-            <Select
-              placeholder="Filtrar por..."
-              defaultValue=""
-              classNamePrefix="select"
-              name="type"
-              options={optionValue}
-              onChange={() => filterPriceTime(setPriceTimeChoice)}
-            />
-          </Filter>
-          <Search>
-            <input 
-            onChange={() => searchFunction(setSearchValue)}
-            />
-          </Search>
-          <CarButton>
-            <button onClick={() => visibleCar(showCart)}>Car</button>
-          </CarButton>
+          <BackButton 
+            articulos={articulos}
+            tipes={tipes}
+          />
+          <Filter />
+          <Search />
+          <CarButton showCart={showCart} />
         </ArticleHeader>
         <ArticlesContainer>
-            <Main>
-              {filterItems.map(item =>(
-                <Items 
-                  items={item.Name}
-                  itemsPrice={item.Price}
-                  key={item.Price}
-                />
-              ))}
-            </Main>
-        <ShoppingCart showCart={showCart}/>
+          <Main>
+            {filterItems.map(item =>(
+              <Items 
+                items={item.Name}
+                itemsPrice={item.Price}
+                key={item.Price}
+              />
+            ))}
+          </Main>
+          <ShoppingCart showCart={showCart}/>
         </ArticlesContainer>
-        <MoreItems onClick={() => moreItems(showArticles, setShowArticles, totalArticles, articlesCount, setArticlesCount, filterItems)}/>
+        <MoreItems  filterItems={filterItems}/>
     </MainContainer>
   )
 }
@@ -134,36 +106,6 @@ const ArticleHeader = styled.div`
   margin: 10px 0px 20px 0px;
 `
 
-const BackButton = styled.div`
-  position: relative;
-  left: 5%;
-  button{
-    height: 80px;
-    width: 230px;
-  }
-`
-
-const Filter = styled.div`
-  position: absolute;
-  left: 30%;
-  width: 200px;
-`
-
-const Search = styled.div`
-position: absolute;
-left: 55%;
-width: 200px;
-`
-
-const CarButton = styled.div`
-  position: absolute;
-  left: 80%;
-  button{
-    height: 80px;
-    width: 230px;
-  }
-`
-
 const ArticlesContainer = styled.div`
   display: flex;
 `
@@ -175,14 +117,6 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-`
-
-const MoreItems = styled.button`
-  position: relative;
-  height: 50px;
-  width: 100px;
-  left: calc(50% - 50px);
-  margin-bottom: 50px;
 `
 
 export { ShowChoice }
