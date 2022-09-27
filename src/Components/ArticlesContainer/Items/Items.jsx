@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { AppContext } from "../../Context/AppContext"
+import { AppContext } from "../../../Context/AppContext"
 import styled from "styled-components"
 import addToCart from "./addToCart"
 
@@ -25,6 +25,7 @@ const MainContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-left: 7%;
 `
 const ArticleItem = styled.div`
   position: relative;

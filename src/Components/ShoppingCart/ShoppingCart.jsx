@@ -2,8 +2,8 @@ import React, { useContext } from "react"
 import { AppContext } from "../../Context/AppContext"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
-import { ItemOnCart } from "../ItemOnCart/ItemOnCart"
-import { invisibleCar, totalCount } from "./invCar&totalCount"
+import { ItemOnCart } from "./ItemOnCart/ItemOnCart"
+import { totalCount } from "./invCar&totalCount"
 
 const ShoppingCart = ({ showCart }) =>{
     const {
@@ -13,7 +13,6 @@ const ShoppingCart = ({ showCart }) =>{
   return(
     <div ref={showCart} className={"CartOff"}>
       <TittleBack>
-        <ExitButton><button onClick={() =>invisibleCar(showCart)}>X</button></ExitButton>
         <CartTittle><h1>Agregados al carrito</h1></CartTittle>
       </TittleBack>
       <Items>
@@ -48,7 +47,7 @@ const ExitButton = styled.div`
 
 const CartTittle = styled.div`
   margin-top: 10%;
-  margin-left: 25%;
+  margin-left: 19%;
 `
 
 const Items = styled.div`

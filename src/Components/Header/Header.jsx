@@ -1,29 +1,30 @@
 import React from "react"
+import { CarButton } from "./CarButton/CarButton";
 import styled from "styled-components"
 import "../../CSS/Animation.css"
 
-const Header = () =>{
+
+const Header = ({ showCart }) =>{
     return(
         <Navbar>
         	<Name>Monica Szeki</Name>
           <Buttons>
-						{/*
-						<Link to="/">Home</Link>
-						<Link to="/sobremi">Sobre mí</Link>
-						<Link to="/contacto">Contacto</Link>
-						*/}
+						<CarButton showCart={showCart} />
           </Buttons>
         </Navbar>
     )
 }
 
 const Navbar = styled.div`
+	z-index: 100;
 	display: flex;
+	position: fixed;
+	top: 0;
 	height: 70px;
 	width: 100%;
 	background-color: black;
 	color: white;
-	justify-content: space-between;
+	justify-content: space-between;	
 `
 
 const Name = styled.div`
@@ -35,11 +36,8 @@ const Name = styled.div`
 
 const Buttons = styled.div`
 	display: flex;
-	width: 650px;
 	justify-content: space-around;
 	align-items: center;
-	font-size: 20px;
-	color: white;
 	outline: none;
 	text-decoration: none;
 `

@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import enabledItems from "./enableItems"
-import { AppContext } from "../../Context/AppContext"
+import { AppContext } from "../../../Context/AppContext"
 
 const BackButton = ({ articulos, tipes }) =>{
   const {
@@ -24,4 +24,4 @@ const Button = styled.div`
   }
 `
 
-export default BackButton
+export { BackButton }

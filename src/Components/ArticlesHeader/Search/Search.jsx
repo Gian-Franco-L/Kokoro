@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
-import { AppContext } from "../../Context/AppContext"
+import { AppContext } from "../../../Context/AppContext"
 
 const Search = () => {
   const {
@@ -19,9 +19,12 @@ const Search = () => {
 }
 
 const SearchInput = styled.div`
-position: absolute;
-left: 55%;
-width: 200px;
+  input{
+    height: 70%;
+    width: 80%;
+    margin-top: 4%;
+    margin-left: 9%;
+  }
 `
 
-export default Search
+export { Search }

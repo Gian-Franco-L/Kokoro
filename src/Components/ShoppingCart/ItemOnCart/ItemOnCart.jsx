@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { AppContext } from "../../Context/AppContext"
+import { AppContext } from "../../../Context/AppContext"
 import styled from "styled-components"
 import outOfCart from "./outOfCart"
 

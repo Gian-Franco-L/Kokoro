@@ -1,69 +1,7 @@
 import { useState } from "react"
 
 const useContext = () =>{
-  const startingArticles = [
-    {
-      id: 1,
-      Name: "hola",
-      Price: 123,
-      Date: 2012.03
-    },
-    {
-      id: 2,
-      Name: "como",
-      Price: 32,
-      Date: 2012.05
-    },
-    {
-      id: 3,
-      Name: "estas",
-      Price: 54,
-      Date: 2013.05
-    },
-    {
-      id: 4,
-      Name: "vos",
-      Price: 12,
-      Date: 2013.10
-    },
-    {
-      id: 5,
-      Name: "todo",
-      Price: 1623,
-      Date: 2013.12
-    },
-    {
-      id: 6,
-      Name: "bien",
-      Price: 321,
-      Date: 2014.00
-    },
-    {
-      id: 7,
-      Name: "vos",
-      Price: 105,
-      Date: 2014.01
-    },
-    {
-      id: 8,
-      Name: "bien bien",
-      Price: 932,
-      Date: 2014.03
-    },
-    {
-      id: 9,
-      Name: "que bueno",
-      Price: 816,
-      Date: 2014.05
-    },
-    {
-      id: 10,
-      Name: "me alegro",
-      Price: 730,
-      Date: 2014.08
-    },
-  ]
-  const totalArticles = [
+  const [totalArticles, setTotalArticles] = useState([
     {
       id: 1,
       Name: "hola",
@@ -208,29 +146,35 @@ const useContext = () =>{
       Price: 286,
       Date: 2020.11
     },
-  ]
-  const [showArticles, setShowArticles] = useState(startingArticles)
-  const [articlesCount, setArticlesCount] = useState(10)
+  ])
+  const [showArticles, setShowArticles] = useState([])
+  const [articlesLimitCount, setArticlesLimitCount] = useState(9)
+  const [articlesCount, setArticlesCount] = useState(9)
   const [articlesCart, setArticlesCart] = useState([])
   const [searchValue, setSearchValue] = useState("")
-  const [priceTimeChoice, setPriceTimeChoice] = useState("none")
   const [amountToPay, setAmountToPay] = useState(0)
+  const [articleChoice, setArticleChoice] = useState(0)
+  const [cartSwitch, setCartSwitch] = useState("off")
 
   return{
-    startingArticles,
     showArticles,
     setShowArticles,
+    articlesLimitCount,
+    setArticlesLimitCount,
     articlesCount,
     setArticlesCount,
     totalArticles,
+    setTotalArticles,
     articlesCart,
     setArticlesCart,
     searchValue,
     setSearchValue,
-    priceTimeChoice,
-    setPriceTimeChoice,
     amountToPay,
-    setAmountToPay
+    setAmountToPay,
+    articleChoice,
+    setArticleChoice,
+    cartSwitch,
+    setCartSwitch
   }
 }
 

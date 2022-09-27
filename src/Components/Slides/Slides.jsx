@@ -2,7 +2,7 @@ import React from "react"
 import img1 from "../../img/1.jpg"
 import img2 from "../../img/2.jpg"
 import img3 from "../../img/3.jpg"
-import { Slide, TextSlide } from "../../Containers/Carousel/Carousel"
+import { Slide, TextSlide } from "../Carousel/Carousel"
 
 const Slides = () =>{
     return(

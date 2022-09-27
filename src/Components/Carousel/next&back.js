@@ -20,7 +20,6 @@ const next = (slideCarousel) =>{
     slideCarousel.current.addEventListener("transitionend", Transition)
   }
 }
-
 const back = (slideCarousel) =>{
   if(slideCarousel.current.children.length > 0){
     const index = slideCarousel.current.children.length - 1
