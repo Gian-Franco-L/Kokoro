@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { visibleCar } from "./visibleCar"
 import { AppContext } from "../../../Context/AppContext"
 
-const CarButton = ({showCart}) =>{
+const CarButton = ({ showCart }) =>{
 
   const {
     cartSwitch,

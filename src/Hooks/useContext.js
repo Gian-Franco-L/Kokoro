@@ -148,13 +148,18 @@ const useContext = () =>{
     },
   ])
   const [showArticles, setShowArticles] = useState([])
-  const [articlesLimitCount, setArticlesLimitCount] = useState(9)
-  const [articlesCount, setArticlesCount] = useState(9)
+  const [articlesLimitCount, setArticlesLimitCount] = useState(12)
+  const [articlesCount, setArticlesCount] = useState(12)
   const [articlesCart, setArticlesCart] = useState([])
   const [searchValue, setSearchValue] = useState("")
   const [amountToPay, setAmountToPay] = useState(0)
   const [articleChoice, setArticleChoice] = useState(0)
   const [cartSwitch, setCartSwitch] = useState("off")
+  const [filterStatus, setFilterStatus] = useState(0)
+  const [searchedArticles, setSearchedArticles] = useState()
+  const [pageCount, setPageCount] = useState(1)
+  const [openModal, setOpenModal] = useState(false)
+  const [modalArticle, setModalArticle] = useState({})
 
   return{
     showArticles,
@@ -174,7 +179,16 @@ const useContext = () =>{
     articleChoice,
     setArticleChoice,
     cartSwitch,
-    setCartSwitch
+    setCartSwitch,
+    filterStatus,
+    setFilterStatus,
+    searchedArticles,
+    setSearchedArticles,pageCount,
+    setPageCount,
+    openModal,
+    setOpenModal,
+    modalArticle,
+    setModalArticle
   }
 }
 

@@ -4,11 +4,7 @@ import styled from "styled-components"
 import disabledItems from "./disabledItems"
 import '../../CSS/Animation.css';
 
-const TipeOfArticles = ({ children, tipes, articulos }) =>{
-  const {
-    setArticleChoice
-  } = useContext(AppContext)
-
+const TipeOfArticles = ({ children, tipes, articulos, setArticleChoice }) =>{
   return(
     <MainContainer>
     <ArticleTipes ref={tipes}>

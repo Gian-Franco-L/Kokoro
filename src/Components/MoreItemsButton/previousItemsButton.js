@@ -1,10 +1,10 @@
-export default function previousItems(setShowArticles, articlesLimitCount, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount) {
+export default function previousItems(setShowArticles, articlesLimitCount, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount) {
     let articlesCountAux = articlesCount
     let limitAlert = 0
     let articlesAux = []
 
-    for(let i=0; i<9; i++){
-      if(articlesCountAux > 0 && limitAlert<9)
+    for(let i=0; i<12; i++){
+      if(articlesCountAux > 0 && limitAlert<12)
       {
         limitAlert++
         articlesCountAux--
@@ -13,10 +13,11 @@ export default function previousItems(setShowArticles, articlesLimitCount, setAr
       }
     }
 
-    if(articlesLimitCount !== 9){
-      setArticlesCount(articlesCountAux+(9-articlesLimitCount))
-      setArticlesLimitCount(9)
+    if(articlesLimitCount !== 12){
+      setArticlesCount(articlesCountAux+(12-articlesLimitCount))
+      setArticlesLimitCount(12)
     }
     
     setShowArticles(articlesAux)
+    setPageCount(prevState => prevState - 1)
   }

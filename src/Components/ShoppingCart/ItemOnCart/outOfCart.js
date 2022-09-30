@@ -1,10 +1,10 @@
 export default function outOfCart(payload, articlesCart, setArticlesCart){
-  let outArticle
+  let outArticle, reRender
+
   if(articlesCart.filter(item => item.name === payload)[0].amount === 1){
     outArticle = articlesCart.filter(item => item.name !== payload)
     setArticlesCart(outArticle)
-  }
-  else{
+  }else{
     let articleIndex
     let articleAmount = articlesCart
     for(let i=0; i<articlesCart.length; i++){
@@ -12,10 +12,11 @@ export default function outOfCart(payload, articlesCart, setArticlesCart){
         articleIndex = i
       }
     }
+
     articleAmount[articleIndex].amount--
-    let reRender
     reRender = [...articleAmount, {name: "", amount: 0}]
     setArticlesCart(reRender)
+    
     setTimeout(() =>{
     setArticlesCart(articleAmount)
     }, 0)

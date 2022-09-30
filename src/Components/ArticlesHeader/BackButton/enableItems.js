@@ -1,10 +1,14 @@
-export default function enabledItems(startingArticles, setShowArticles, setArticlesCount, articulos, tipes) {
+export default function enabledItems(setShowArticles, setArticlesCount, articulos, tipes, totalArticles) {
+  let articlesAux = []
   articulos.current.className = "disapearArticles"
   setTimeout(() => {
     tipes.current.className = "apearTipeOfArticles"
     tipes.current.style.display = "flex"
     articulos.current.style.display = "none"
-    setShowArticles(startingArticles)
+    for(let i=0; i<12; i++){
+      articlesAux.push(totalArticles[i])
+    }
+    setShowArticles(articlesAux)
     setArticlesCount(9)
   }, 950)
 }

@@ -1,13 +1,12 @@
-export default function nextItems(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount) {
-
-  if(showArticles.length>=9)
+export default function nextItems(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount) {
+  if(showArticles.length>=12)
   {
     let articlesCountAux = articlesCount
     let limitAlert = 0
     let articlesAux = []
 
-    for(let i=0; i<9; i++){
-      if(articlesCountAux < totalArticles.length && limitAlert<9)
+    for(let i=0; i<12; i++){
+      if(articlesCountAux < totalArticles.length && limitAlert<12)
       {
         limitAlert++
         articlesCountAux++
@@ -16,7 +15,9 @@ export default function nextItems(showArticles, setShowArticles, setArticlesLimi
       }
     }
 
-    if(limitAlert !== 9) setArticlesLimitCount(limitAlert)
+    if(limitAlert !== 12) setArticlesLimitCount(limitAlert)
+    
     setShowArticles(articlesAux)
+    setPageCount(prevState => prevState + 1)
   }
 }

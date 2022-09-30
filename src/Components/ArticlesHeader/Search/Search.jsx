@@ -1,19 +1,19 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { AppContext } from "../../../Context/AppContext"
+import searchFunction from "./searchFunction"
 
 const Search = () => {
   const {
-    setSearchValue
+    setSearchValue,
+    searchValue,
+    totalArticles,
+    setSearchedArticles
   } = useContext(AppContext)
-
-  function searchFunction (event){
-    setSearchValue(event.target.value)
-  }
 
   return(
     <SearchInput>
-      <input onChange={searchFunction}/>
+      <input onChange={(event) => searchFunction(event, setSearchValue, searchValue, totalArticles, setSearchedArticles)}/>
     </SearchInput>
   )
 }

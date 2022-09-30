@@ -6,11 +6,19 @@ import addToCart from "./addToCart"
 const Items = ({ items, itemsPrice }) =>{
   const {
     articlesCart,
-    setArticlesCart
+    setArticlesCart,
+    setOpenModal,
+    setModalArticle
   } = useContext(AppContext)
+
+  function changeModalState(){
+    setOpenModal(true)
+    setModalArticle({'item': items, 'itemsPrice': itemsPrice})
+  }
+
   return(
     <MainContainer>
-      <ArticleItem />
+      <ArticleItem onClick={changeModalState}/>
       <ArticleInfo>
         <ItemName><div>{items}</div></ItemName>
         {itemsPrice}
@@ -22,6 +30,8 @@ const Items = ({ items, itemsPrice }) =>{
 
 const MainContainer = styled.div`
   position: relative;
+  height: 250px;
+  width: 200px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -30,17 +40,15 @@ const MainContainer = styled.div`
 const ArticleItem = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
-  height: 300px;
-  width: 300px;
-  margin: -10px 20px 20px 20px;
+  height: 200px;
+  width: 200px;
+  margin: 0px 20px 20px 20px;
 `
 
 const ArticleInfo = styled.div`
   position: relative;
-  width: 300px;
+  width: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;

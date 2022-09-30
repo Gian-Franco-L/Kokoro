@@ -53,7 +53,7 @@ const Items = styled.div`
 const SocialMedia = styled.div`
   height: 30px;
   width: 30px;
-  bakcground-color: white;
+  background-color: white;
   margin-bottom: 10px;
 `
 

@@ -1,44 +1,31 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
+import filterFuncion from "./filterFuncion"
+import { AppContext } from "../../../Context/AppContext"
 
-const Filter = ({
+const Filter = () => {
+  const {
     totalArticles,
-    setTotalArticles
-}) => {
-
-  function sinFiltro (){
-    setTotalArticles(totalArticles.sort((a, b) => a.id - b.id))
-  }
-  function mayorAMenor(){
-    const asd = totalArticles.sort((a, b) => b.Price - a.Price)
-    setTotalArticles(asd)
-  }
-  function MenorAMayor(){
-    setTotalArticles(totalArticles.sort((a, b) => a.Price - b.Price))
-  }
-  function viejoANuevo(){
-    setTotalArticles(totalArticles.sort((a, b) => a.Date - b.Date))
-  }
-  function nuevoAViejo(){
-    setTotalArticles(totalArticles.sort((a, b) => b.Date - a.Date))
-  }
-
+    setTotalArticles,
+    setFilterStatus
+  } = useContext(AppContext)
   return(
     <FilterItems>
-      {/* <label htmlFor="filter"></label>
-      <Select
-        placeholder="Filtrar por..."
-        defaultValue=""
-        classNamePrefix="select"
-        name="type"
-        options={optionValue}
-        onChange={filterPriceTime}
-      /> */}
-      <button onClick={sinFiltro}>Sin Filtro</button>
-      <button onClick={mayorAMenor}>Precio mayor a menor</button>
-      <button onClick={MenorAMayor}>Precio menor a mayor</button>
-      <button onClick={viejoANuevo}>Mas viejo a mas nuevo</button>
-      <button onClick={nuevoAViejo}>Mas nuevo a mas viejo</button>
+      <button onClick={() =>filterFuncion(0, totalArticles, setTotalArticles, setFilterStatus)}>
+        Sin Filtro
+      </button>
+      <button onClick={() =>filterFuncion(1, totalArticles, setTotalArticles, setFilterStatus)}>
+        Precio mayor a menor
+      </button>
+      <button onClick={() =>filterFuncion(2, totalArticles, setTotalArticles, setFilterStatus)}>
+        Precio menor a mayor
+      </button>
+      <button onClick={() =>filterFuncion(3, totalArticles, setTotalArticles, setFilterStatus)}>
+        Mas viejo a mas nuevo
+      </button>
+      <button onClick={() =>filterFuncion(4, totalArticles, setTotalArticles, setFilterStatus)}>
+        Mas nuevo a mas viejo
+      </button>
     </FilterItems>
   )
 }

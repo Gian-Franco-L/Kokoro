@@ -5,13 +5,13 @@ import { AppContext } from "../../../Context/AppContext"
 
 const BackButton = ({ articulos, tipes }) =>{
   const {
-    startingArticles,
+    totalArticles,
     setShowArticles,
-    setArticlesCount,
+    setArticlesCount
   } = useContext(AppContext)
 
   return(
-    <Button onClick={() => enabledItems(startingArticles, setShowArticles, setArticlesCount, articulos, tipes)}><button>Back</button></Button>
+    <Button onClick={() => enabledItems(setShowArticles, setArticlesCount, articulos, tipes, totalArticles)}><button>Back</button></Button>
   )
 }
 

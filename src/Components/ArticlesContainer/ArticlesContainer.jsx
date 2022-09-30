@@ -5,30 +5,26 @@ import { Items } from "./Items/Items"
 const ArticlesContainer = ({ showArticles }) =>{
   return(
     <ArticleContainer>
-      <Main>
-        {showArticles.map(item =>(
-          <Items 
-            items={item.Name}
-            itemsPrice={item.Price}
-            key={item.Price}
-          />
-        ))}
-      </Main>
+      {showArticles.map(item =>(
+        <Items 
+          items={item.Name}
+          itemsPrice={item.Price}
+          key={item.Price}
+        />
+      ))}
     </ArticleContainer>
   )
 }
 
 const ArticleContainer = styled.div`
   display: flex;
-  margin-top: 40px;
-`
-
-const Main = styled.div`
-  display: flex;
-  width: 74vw;
-  min-height: 100%;
-  justify-content: center;
+  height: 80vh;
+  width: 70vw;
+  margin-top: 3%;
+  margin-left: 3%;
+  justify-content: space-around;
   flex-wrap: wrap;
 `
+
 
 export { ArticlesContainer }

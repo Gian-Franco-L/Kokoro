@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react"
+import React, { useRef, useContext, useEffect } from "react"
 import styled from "styled-components"
 import { AppContext } from "../Context/AppContext"
 import { Header } from "../Components/Header/Header"
@@ -10,6 +10,7 @@ import { ArticlesHeader } from "../Components/ArticlesHeader/ArticlesHeader"
 import { ArticlesContainer } from "../Components/ArticlesContainer/ArticlesContainer"
 import { MoreItemsButton } from "../Components/MoreItemsButton/MoreItemsButton"
 import { ShoppingCart } from "../Components/ShoppingCart/ShoppingCart"
+import { Modal } from "../Components/Modal/Modal"
 
 const Layout = () =>{
 
@@ -19,11 +20,20 @@ const Layout = () =>{
     totalArticles,
     setTotalArticles,
     searchValue,
-    articleChoice,
     articlesLimitCount,
+    articlesCart,
     setArticlesLimitCount,
     articlesCount,
-    setArticlesCount
+    setArticlesCount,
+    filterStatus,
+    setFilterStatus,
+    searchedArticles,
+    pageCount,
+    setPageCount,
+    setArticleChoice,
+    openModal,
+    setOpenModal,
+    modalArticle
   } = useContext(AppContext)
 
 
@@ -32,29 +42,38 @@ const Layout = () =>{
   const showCart = useRef(null)
 
   useEffect(() => {
-    console.log("asd");
-  }, [totalArticles]);
+    let articlesAux = []
 
-  // if(searchValue.length < 1){
-  //   filterItems = showArticles
-  // }else{
-  //   filterItems = totalArticles.filter(value =>{
-  //     const todoText = value.Name.toLowerCase()
-  //     const searchText = searchValue.toLowerCase()
-  //     return todoText.includes(searchText)
-  //   })
-  // }
+    if(searchValue.length > 1){
+      for(let i=0; i<12; i++){
+        if(searchedArticles[i] !== undefined){
+          articlesAux.push(searchedArticles[i])
+        }
+      }
+    }else{
+      for(let i=0; i<12; i++){
+        articlesAux.push(totalArticles[i])
+      }
+    }
+    setShowArticles(articlesAux)
+    setArticlesCount(12)
+    setPageCount(1)
+  }, [filterStatus, searchValue]);
 
   return(
     <>
       <Header showCart={showCart} />
-      <ShoppingCart showCart={showCart} />
+      <ShoppingCart
+        showCart={showCart}
+        articlesCart={articlesCart}
+      />
       <Carousel>
         <Slides />
       </Carousel>
       <TipeOfArticles
         tipes={tipes}
         articulos={articulos}
+        setArticleChoice={setArticleChoice}
       >
         <SelectedArticles ref={articulos}>
           <ArticlesHeader 
@@ -63,10 +82,10 @@ const Layout = () =>{
             showCart={showCart}
             totalArticles={totalArticles}
             setTotalArticles={setTotalArticles}
+            setFilterStatus={setFilterStatus}
+            setArticlesCount={setArticlesCount}
           />
-          <ArticlesContainer 
-            showArticles={showArticles}
-          />
+          <ArticlesContainer showArticles={showArticles} />
         </SelectedArticles>
       </TipeOfArticles>
       <MoreItemsButton 
@@ -77,8 +96,16 @@ const Layout = () =>{
         articlesCount={articlesCount}
         setArticlesCount={setArticlesCount}
         totalArticles={totalArticles}
+        pageCount={pageCount}
+        setPageCount={setPageCount}
       />
       <Footer />
+      {
+        openModal === true
+          ? <Modal setOpenModal={setOpenModal} modalArticle={modalArticle}/>
+          : null
+      }
+      
     </>
   )
 }

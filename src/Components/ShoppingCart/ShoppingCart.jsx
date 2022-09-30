@@ -5,10 +5,7 @@ import { v4 as uuidv4 } from "uuid"
 import { ItemOnCart } from "./ItemOnCart/ItemOnCart"
 import { totalCount } from "./invCar&totalCount"
 
-const ShoppingCart = ({ showCart }) =>{
-    const {
-      articlesCart
-    } = useContext(AppContext)
+const ShoppingCart = ({ showCart, articlesCart }) =>{
 
   return(
     <div ref={showCart} className={"CartOff"}>

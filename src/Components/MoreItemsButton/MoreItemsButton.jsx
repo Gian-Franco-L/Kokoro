@@ -10,20 +10,21 @@ const MoreItemsButton = ({
   setArticlesLimitCount,
   articlesCount,
   setArticlesCount,
-  totalArticles
+  totalArticles,
+  pageCount,
+  setPageCount
 }) =>{
 
   return(
     <ButtonsContainer>
-      {articlesCount !== 9
-        ? <PreviousButton  onClick={() => previousItemsButton (setShowArticles, articlesLimitCount, setArticlesLimitCount,
-          totalArticles, articlesCount, setArticlesCount)}/>
-        : <PreviousButton  disabled onClick={() => previousItemsButton (setShowArticles, articlesLimitCount, setArticlesLimitCount,
-          totalArticles, articlesCount, setArticlesCount)}/>
+      {articlesCount !== 12
+        ? <PreviousButton  onClick={() => previousItemsButton (setShowArticles, articlesLimitCount, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount)}/>
+        : <PreviousButton  disabled />
       }
-      {articlesCount < totalArticles.length
-        ? <NextButton onClick={() => nextItemsButton(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount)}/>
-        : <NextButton disabled onClick={() => nextItemsButton(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount)}/>
+      <Number>{pageCount}</Number>
+      {articlesCount < totalArticles.length && showArticles.length === 12
+        ? <NextButton onClick={() => nextItemsButton(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount)}/>
+        : <NextButton disabled />
       }
     </ButtonsContainer>
     
@@ -31,10 +32,12 @@ const MoreItemsButton = ({
 }
 
 const ButtonsContainer= styled.div`
-  position: absolute;
-  height: 50px;
-  width: 200px;
-  left: 55.8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  width: 80vw;
+  margin-left: 18.6%;
 `
 const PreviousButton = styled.button`
   height: 50px;
@@ -43,6 +46,11 @@ const PreviousButton = styled.button`
 const NextButton = styled.button`
   height: 50px;
   width: 100px;
+`
+const Number = styled.div`
+  height: 50px;
+  width: 10px;
+  padding-top: 1.8%;
 `
 
 export { MoreItemsButton }
