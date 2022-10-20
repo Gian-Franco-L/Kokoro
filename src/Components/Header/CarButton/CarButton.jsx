@@ -1,27 +1,64 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
-import { visibleCar } from "./visibleCar"
+import { BsFillCartCheckFill } from "react-icons/bs"
+import { BsFillCartXFill } from "react-icons/bs"
+import { openCloseCart } from "./openCloseCart"
 import { AppContext } from "../../../Context/AppContext"
+import "../../../CSS/Animation.css"
 
 const CarButton = ({ showCart }) =>{
 
   const {
     cartSwitch,
-    setCartSwitch
+    setCartSwitch,
+    itemCartAux,
+    setItemCartAux,
+    articlesCart,
+    onOffCarButton,
+    setOnOffCarButton,
+    setArticlesCart,
+    setCartFilledOrNot
     } = useContext(AppContext)
 
+
   return(
-    <Button>
-      <button onClick={() => visibleCar(showCart, cartSwitch, setCartSwitch)}>Car</button>
-    </Button>
+    <CartButton>
+      <button disabled={onOffCarButton} onClick={() => openCloseCart(
+          showCart,
+          cartSwitch,
+          setCartSwitch,
+          articlesCart,
+          setArticlesCart,
+          itemCartAux,
+          setItemCartAux,
+          setOnOffCarButton,
+          setCartFilledOrNot
+        )}>{
+          cartSwitch === "on"
+            ? <BsFillCartCheckFill className="cartIcon"/>
+            : <BsFillCartXFill className="cartIcon"/>
+        }
+          </button>
+    </CartButton>
   )
 }
 
-const Button = styled.div`
-  left: 80%;
+const CartButton = styled.div`
+  left: 100%;
   button{
-    height: 70px;
-    width: 230px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: pointer;
+    background-color: #eeeeee;
+  }
+  button:hover{
+    box-shadow: 0px 0px 10px 8px #FFFBE9;
+  }
+  button:disabled{
+    background-color: #eeeeee;
+    color: black;
   }
 `
 

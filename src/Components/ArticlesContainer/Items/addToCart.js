@@ -1,19 +1,27 @@
-export default function addToCart(payload, itemsPrice, articlesCart, setArticlesCart){
-  let reRender
-  let articleAmount = articlesCart
+export default function addToCart(payload, itemsPrice, articlesCart, setArticlesCart, cartSwitch, itemCartAux, setItemCartAux){
+  let articleAmount
+  let whereToPlaceAricle
 
-  if(articlesCart.filter(item => item.name === payload).length === 0){
-    setArticlesCart([...articlesCart, {name: payload, amount: 1, price: itemsPrice}])
+  if(cartSwitch === "on"){
+    whereToPlaceAricle = articlesCart
+    articleAmount = articlesCart
   }else{
-    for(let i=0; i<articlesCart.length; i++){
-      if(articlesCart[i].name === payload){
+    whereToPlaceAricle = itemCartAux
+    articleAmount = itemCartAux
+  }
+
+  if(whereToPlaceAricle.filter(item => item.name === payload).length === 0){
+    whereToPlaceAricle === articlesCart
+      ? setArticlesCart([...whereToPlaceAricle, {name: payload, amount: 1, price: itemsPrice}])
+      : setItemCartAux([...whereToPlaceAricle, {name: payload, amount: 1, price: itemsPrice}])
+  }else{
+    for(let i=0; i<whereToPlaceAricle.length; i++){
+      if(whereToPlaceAricle[i].name === payload){
         articleAmount[i].amount++
         articleAmount[i].price = itemsPrice
-        reRender = [...articleAmount, {name: "", amount: "", price: ""}]
-        setArticlesCart(reRender)
-        setTimeout(() =>{
-          setArticlesCart(articleAmount)
-        }, 0)
+        whereToPlaceAricle === articlesCart
+          ? setArticlesCart([...articlesCart])
+          : setItemCartAux([...itemCartAux])
       }
     }
   }

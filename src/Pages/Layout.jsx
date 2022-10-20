@@ -19,7 +19,6 @@ const Layout = () =>{
     setShowArticles,
     totalArticles,
     setTotalArticles,
-    searchValue,
     articlesLimitCount,
     articlesCart,
     setArticlesLimitCount,
@@ -30,10 +29,15 @@ const Layout = () =>{
     searchedArticles,
     pageCount,
     setPageCount,
+    articleChoice,
     setArticleChoice,
     openModal,
     setOpenModal,
-    modalArticle
+    modalArticle,
+    itemCartAux,
+    setItemCartAux,
+    cartFilledOrNot,
+    setCartFilledOrNot
   } = useContext(AppContext)
 
 
@@ -44,28 +48,28 @@ const Layout = () =>{
   useEffect(() => {
     let articlesAux = []
 
-    if(searchValue.length > 1){
-      for(let i=0; i<12; i++){
-        if(searchedArticles[i] !== undefined){
-          articlesAux.push(searchedArticles[i])
-        }
-      }
-    }else{
-      for(let i=0; i<12; i++){
-        articlesAux.push(totalArticles[i])
-      }
+    for(let i=0; i<12; i++){
+      articlesAux.push(totalArticles[i])
     }
+
     setShowArticles(articlesAux)
     setArticlesCount(12)
     setPageCount(1)
-  }, [filterStatus, searchValue]);
+  }, [filterStatus, searchedArticles]);
 
   return(
-    <>
-      <Header showCart={showCart} />
+    <LayoutContainer>
+      <Header
+        showCart={showCart}
+        searchedArticles={searchedArticles}
+      />
       <ShoppingCart
         showCart={showCart}
         articlesCart={articlesCart}
+        itemCartAux={itemCartAux}
+        setItemCartAux={setItemCartAux}
+        cartFilledOrNot={cartFilledOrNot}
+        setCartFilledOrNot={setCartFilledOrNot}
       />
       <Carousel>
         <Slides />
@@ -73,47 +77,57 @@ const Layout = () =>{
       <TipeOfArticles
         tipes={tipes}
         articulos={articulos}
+        articleChoice={articleChoice}
         setArticleChoice={setArticleChoice}
-      >
-        <SelectedArticles ref={articulos}>
-          <ArticlesHeader 
+      />
+      <SelectedArticles ref={articulos}>
+        <ArticlesHeader 
+          articulos={articulos}
+          tipes={tipes}
+          showCart={showCart}
+          totalArticles={totalArticles}
+          setTotalArticles={setTotalArticles}
+          setFilterStatus={setFilterStatus}
+          setArticlesCount={setArticlesCount}
+        />
+        <div>
+          <ArticlesContainer
+            showArticles={showArticles}
+            articleChoice={articleChoice}
             articulos={articulos}
             tipes={tipes}
-            showCart={showCart}
-            totalArticles={totalArticles}
-            setTotalArticles={setTotalArticles}
-            setFilterStatus={setFilterStatus}
-            setArticlesCount={setArticlesCount}
           />
-          <ArticlesContainer showArticles={showArticles} />
-        </SelectedArticles>
-      </TipeOfArticles>
-      <MoreItemsButton 
-        showArticles={showArticles}
-        setShowArticles={setShowArticles}
-        articlesLimitCount={articlesLimitCount}
-        setArticlesLimitCount={setArticlesLimitCount}
-        articlesCount={articlesCount}
-        setArticlesCount={setArticlesCount}
-        totalArticles={totalArticles}
-        pageCount={pageCount}
-        setPageCount={setPageCount}
-      />
+          <MoreItemsButton 
+          showArticles={showArticles}
+          setShowArticles={setShowArticles}
+          articlesLimitCount={articlesLimitCount}
+          setArticlesLimitCount={setArticlesLimitCount}
+          articlesCount={articlesCount}
+          setArticlesCount={setArticlesCount}
+          totalArticles={totalArticles}
+          pageCount={pageCount}
+          setPageCount={setPageCount}
+          />
+        </div>
+      </SelectedArticles>
       <Footer />
-      {
-        openModal === true
-          ? <Modal setOpenModal={setOpenModal} modalArticle={modalArticle}/>
-          : null
-      }
-      
-    </>
+      {openModal === true
+          ? <Modal
+              setOpenModal={setOpenModal}
+              modalArticle={modalArticle}
+            />
+          : null}
+    </LayoutContainer>
   )
 }
 
+const LayoutContainer = styled.div`
+  position: relative;
+`
 const SelectedArticles = styled.div`
   display: none;
+  margin-top: 4%;
 `
-
 export { Layout }
 
 

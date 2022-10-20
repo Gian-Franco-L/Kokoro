@@ -9,7 +9,7 @@ export default function previousItems(setShowArticles, articlesLimitCount, setAr
         limitAlert++
         articlesCountAux--
         setArticlesCount(articlesCountAux)
-        articlesAux.unshift(totalArticles[articlesCountAux-1])
+        articlesAux.unshift(totalArticles[articlesCountAux-12])
       }
     }
 

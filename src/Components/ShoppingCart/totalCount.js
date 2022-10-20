@@ -1,11 +1,11 @@
 const totalCount = (articlesCart) =>{
-  let asd = 0
+  let money = 0
   for(let i=0; i<articlesCart.length; i++){
     if(articlesCart[i].amount !== 0){
-      asd = asd + articlesCart[i].price * articlesCart[i].amount
+      money = money + articlesCart[i].price * articlesCart[i].amount
     }
   }
-  return asd
+  return money
 }
 
 export { totalCount }

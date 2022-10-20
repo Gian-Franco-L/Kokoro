@@ -1,45 +1,73 @@
 import React from "react"
-import { CarButton } from "./CarButton/CarButton";
 import styled from "styled-components"
-import "../../CSS/Animation.css"
+import { CarButton } from "./CarButton/CarButton";
+import { Login	} from "./Login/Login"
+import { Search	} from "./Search/Search"
+import { Searched } from "./Searched/Searched"
+import "../../CSS/react-icons.css"
 
 
-const Header = ({ showCart }) =>{
+const Header = ({ showCart, searchedArticles }) =>{
     return(
+			<>
         <Navbar>
         	<Name>Monica Szeki</Name>
-          <Buttons>
-						<CarButton showCart={showCart} />
-          </Buttons>
+					<Search />
+					<SearchedContainer>
+						{searchedArticles 
+							?	searchedArticles.map(item =>(
+									<Searched 
+										items={item.Name}
+										itemsPrice={item.Price}
+										key={item.Price}
+									/>
+								))
+							: null
+						}
+					</SearchedContainer>
+					
+          <Button>
+						<CarButton
+							showCart={showCart}
+						/>
+          </Button>
+					<Button>
+						<Login />
+					</Button>
         </Navbar>
+			</>
     )
 }
 
 const Navbar = styled.div`
 	z-index: 100;
-	display: flex;
 	position: fixed;
-	top: 0;
-	height: 70px;
+	height: 9%;
 	width: 100%;
-	background-color: black;
-	color: white;
-	justify-content: space-between;	
+	background: linear-gradient(90deg, #FFFBE9 20%, #e3c69a 60%) 0px 0px;
+	color: black;
+	border: 3px solid #E3CAA5;
 `
 
 const Name = styled.div`
-	font-family: 'Architects Daughter';
-	font-size: 50px;
-	padding-left: 50px;
-	padding-top: 5px;
+	position: absolute;
+	font-family: 'Festive', cursive;
+	font-size: 4.5rem;
+	left: 8%;
+	top: -15%;
 `
 
-const Buttons = styled.div`
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	outline: none;
-	text-decoration: none;
+const Button = styled.div`
+	position: absolute;
+	right: 8.9%;
+	top: 13%;
+`
+
+const SearchedContainer = styled.div`
+  width: 30%;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  margin-left: 40.4%;
 `
 
 export { Header }

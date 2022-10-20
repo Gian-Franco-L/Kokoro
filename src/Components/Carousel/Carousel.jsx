@@ -9,20 +9,21 @@ const Carousel = ({ children }) =>{
   const slideCarousel = useRef(null)
   const intervalCarousel = useRef(null)
 
-  useEffect(() =>{
-    intervalCarousel.current = setInterval(() =>{
-      next(slideCarousel)
-    }, 3000)
+  // useEffect(() =>{
+  //   intervalCarousel.current = setInterval(() =>{
+  //     next(slideCarousel)
+  //   }, 4000)
 
-    slideCarousel.current.addEventListener("mouseenter", () =>{
-      clearInterval(intervalCarousel.current)
-    })
-    slideCarousel.current.addEventListener("mouseleave", () =>{
-      intervalCarousel.current = setInterval(() =>{
-        next(slideCarousel)
-      }, 3000)
-    })
-  }, [])
+  //   slideCarousel.current.addEventListener("mouseenter", () =>{
+  //     console.log("asd");
+  //     clearInterval(intervalCarousel.current)
+  //   })
+  //   slideCarousel.current.addEventListener("mouseleave", () =>{
+  //     intervalCarousel.current = setInterval(() =>{
+  //       next(slideCarousel)
+  //     }, 4000)
+  //   })
+  // }, [])
 
   return(
     <MainContainer>
@@ -44,6 +45,8 @@ const Carousel = ({ children }) =>{
 const MainContainer = styled.div`
   position: relative;
   overflow: hidden;
+  padding-bottom: 5%;
+  height: 91vh;
 `
 const ImgCarousel = styled.div`
   display: flex;
@@ -55,7 +58,8 @@ const Slide = styled.div`
   overflow: hidden;
   transition: 0.3s ease all;
   z-index: 1;
-  max-height: 500px;
+  height: 100vh;
+  background-color: #f1f1f1;
 
   img {
       width: 100%;
@@ -67,7 +71,8 @@ const TextSlide = styled.div`
   background: rgba(0, 0, 0, 0.5);
 	color: white;
 	width: 100%;
-	padding: 10px 60px;
+	padding-top: 10px;
+  padding-bottom: 10px;
 	bottom: 0;
 	text-align: center;
 	font-size: 20px;

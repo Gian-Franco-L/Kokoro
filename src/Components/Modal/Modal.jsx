@@ -21,6 +21,7 @@ const Modal = ({ setOpenModal, modalArticle }) =>{
 }
 
 const Overlay = styled.div`
+  z-index: 1;
   position: fixed;
   display: flex;
   top: -10px;

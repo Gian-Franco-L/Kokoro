@@ -1,26 +1,33 @@
 import React from "react"
-import img1 from "../../img/1.jpg"
-import img2 from "../../img/2.jpg"
-import img3 from "../../img/3.jpg"
+import fondo from "../../img/fondo.jpeg"
+import artuno from "../../img/artuno.jpeg"
+import artdos from "../../img/artdos.jpeg"
+import arttres from "../../img/arttres.jpeg"
 import { Slide, TextSlide } from "../Carousel/Carousel"
 
 const Slides = () =>{
     return(
         <>
           <Slide>
-            <a href="/"><img src={img1} alt="1"></img></a>
+          <a href="/"><img src={fondo} alt="0" /></a>
+            <TextSlide>
+                <p>10% de descuento en este producto</p>
+            </TextSlide>
+          </Slide>
+          <Slide>
+            <a href="/"><img src={artuno} alt="1" /></a>
               <TextSlide>
                 <p>15% de descuento en este producto</p>
               </TextSlide>
           </Slide>
           <Slide>
-            <a href="/"><img src={img2} alt="2"></img></a>
+            <a href="/"><img src={artdos} alt="2" /></a>
               <TextSlide>
                 <p>25% de descuento en este producto</p>
               </TextSlide>
           </Slide>
           <Slide>
-            <a href="/"><img src={img3} alt="3"></img></a>
+            <a href="/"><img src={arttres} alt="3" /></a>
               <TextSlide>
                 <p>30% de descuento en este producto</p>
               </TextSlide>

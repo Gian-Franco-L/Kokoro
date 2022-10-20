@@ -1,35 +1,39 @@
 .apearTipeOfArticles{
   display: flex;
-  width: 100%;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   animation: apearArticles;
   animation-duration: 1.2s;
   animation-timing-function: linear;
+  margin-top: 15%;
 }
 
 .disapearTipeOfArticles{
   display: flex;
-  width: 100%;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   animation: disapearArticles;
   animation-duration: 1s;
   animation-timing-function: linear;
+  margin-top: 15%;
 }
 
 .apearArticles{
+  margin-top: 4%;
   animation: apearArticles;
   animation-duration: 1.2s;
   animation-timing-function: linear;
+  margin-top: 15%;
 }
 
 .disapearArticles{
+  margin-top: 4%;
   animation: disapearArticles;
   animation-duration: 1s;
   animation-timing-function: linear;
+  margin-top: 15%;
 }
 
 @keyframes apearArticles{
@@ -49,69 +53,51 @@
   }
 }
 
+.startingCart{
+  z-index: 3;
+  position: fixed;
+  height: 58px;
+  width: 20%;
+  right: 0;
+  background: linear-gradient(90deg, #FFFBE9 3%, #e3c69a 50%) 0px 0px;
+  margin-top: 31px;
+  border: 1px solid black;
+}
+
 .apearCart{
   z-index: 3;
   position: fixed;
-  height: 93%;
-  width: 25%;
-  margin-top: 3.6%;
-  right: -26.3%;
-  background-color: grey;
-  animation-name: apearCart;
-  animation-duration: 1s;
-  animation-timing-function: linear;
+  width: 20%;
+  right: 0;
+  background: linear-gradient(0deg, #e3c69a 1%, #FFFBE9 100%) 0px 0px;
+  animation: apearCart 1s forwards;
+  margin-top: 90px;
+  border: 1px solid black;
 }
 
 @keyframes apearCart{
   0%{
-    transform: translate(0px);
+    transform: translateY(-60px);
+  }100%{
+    transform: translateY(0px);
   }
-  100%{
-    transform: translate(-500px);
-  }
-}
-
-.CartOn{
-  z-index: 3;
-  position: fixed;
-  height: 93%;
-  width: 25%;
-  margin-top: 3.6%;
-  right: 0;
-  background-color: grey;
 }
 
 .desapearCart{
   z-index: 3;
   position: fixed;
-  height: 93%;
-  width: 25%;
-  margin-top: 3.6%;
-  right: 0px;
-  background-color: grey;
-  animation-name: desapearCart;
-  animation-duration: 1s;
-  animation-timing-function: linear;
+  width: 20%;
+  right: 0;
+  background: linear-gradient(90deg, #FFFBE9 3%, #e3c69a 50%) 0px 0px;
+  animation: desapearCart 1s forwards;
+  margin-top: 75px;
+  border: 1px solid black;
 }
 
 @keyframes desapearCart{
   0%{
-    transform: translate(0px);
+    transform: translateY(0px);
+  }100%{
+    transform: translateY(-45px);
   }
-  100%{
-    transform: translate(500px);
-  }
-}
-
-.CartOff{
-  z-index: 3;
-  position: fixed;
-  display: flex;
-  height: 100%;
-  width: 500px;
-  margin-top: 3.6%;
-  right: -500px;
-  flex-direction: column;
-  flex-wrap: wrap;
-  background-color: grey;
 }

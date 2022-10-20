@@ -36,13 +36,13 @@ const Footer = () =>{
 }
 
 const MainContainer = styled.div`
+  display: flex;
   height: 200px;
   width: 100%;
   color: black;
-  background-color: white;
-  display: flex;
+  background-color: grey;
   justify-content: space-around;
-  align-items: top;
+  margin-top: 3%;
 `
 
 const Items = styled.div`

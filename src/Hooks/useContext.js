@@ -70,37 +70,37 @@ const useContext = () =>{
     },
     {
       id: 12,
-      Name: "vb",
+      Name: "b",
       Price: 657,
       Date: 2015
     },
     {
       id: 13,
-      Name: "asd",
+      Name: "c",
       Price: 61,
       Date: 2015.05
     },
     {
       id: 14,
-      Name: "c",
+      Name: "d",
       Price: 285,
       Date: 2015.06
     },
     {
       id: 15,
-      Name: "d",
+      Name: "e",
       Price: 151,
       Date: 2015.08
     },
     {
       id: 16,
-      Name: "e",
+      Name: "f",
       Price: 725,
       Date: 2015.10
     },
     {
       id: 17,
-      Name: "gf",
+      Name: "g",
       Price: 999,
       Date: 2016.01
     },
@@ -112,37 +112,37 @@ const useContext = () =>{
     },
     {
       id: 19,
-      Name: "q",
+      Name: "i",
       Price: 199,
       Date: 2016.07
     },
     {
       id: 20,
-      Name: "t",
+      Name: "j",
       Price: 93,
       Date: 2017.02
     },
     {
       id: 21,
-      Name: "u",
+      Name: "k",
       Price: 222,
       Date: 2018.05
     },
     {
       id: 22,
-      Name: "vc",
+      Name: "l",
       Price: 679,
       Date: 2018.10
     },
     {
       id: 23,
-      Name: "n",
+      Name: "m",
       Price: 172,
       Date: 2019.12
     },
     {
       id: 24,
-      Name: "m",
+      Name: "n",
       Price: 286,
       Date: 2020.11
     },
@@ -151,7 +151,6 @@ const useContext = () =>{
   const [articlesLimitCount, setArticlesLimitCount] = useState(12)
   const [articlesCount, setArticlesCount] = useState(12)
   const [articlesCart, setArticlesCart] = useState([])
-  const [searchValue, setSearchValue] = useState("")
   const [amountToPay, setAmountToPay] = useState(0)
   const [articleChoice, setArticleChoice] = useState(0)
   const [cartSwitch, setCartSwitch] = useState("off")
@@ -160,6 +159,10 @@ const useContext = () =>{
   const [pageCount, setPageCount] = useState(1)
   const [openModal, setOpenModal] = useState(false)
   const [modalArticle, setModalArticle] = useState({})
+  const [itemCartAux, setItemCartAux] = useState([])
+  const [onOffCarButton, setOnOffCarButton] = useState(false)
+  const [cartFilledOrNot ,setCartFilledOrNot] = useState(false)
+
 
   return{
     showArticles,
@@ -172,8 +175,6 @@ const useContext = () =>{
     setTotalArticles,
     articlesCart,
     setArticlesCart,
-    searchValue,
-    setSearchValue,
     amountToPay,
     setAmountToPay,
     articleChoice,
@@ -188,7 +189,13 @@ const useContext = () =>{
     openModal,
     setOpenModal,
     modalArticle,
-    setModalArticle
+    setModalArticle,
+    itemCartAux,
+    setItemCartAux,
+    onOffCarButton,
+    setOnOffCarButton,
+    cartFilledOrNot,
+    setCartFilledOrNot
   }
 }
 

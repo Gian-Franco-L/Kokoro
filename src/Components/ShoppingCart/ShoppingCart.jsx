@@ -1,70 +1,70 @@
-import React, { useContext } from "react"
-import { AppContext } from "../../Context/AppContext"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 import { ItemOnCart } from "./ItemOnCart/ItemOnCart"
-import { totalCount } from "./invCar&totalCount"
+import { totalCount } from "./totalCount"
 
-const ShoppingCart = ({ showCart, articlesCart }) =>{
+const ShoppingCart = ({ showCart, articlesCart, itemCartAux, cartButton, cartFilledOrNot, setCartFilledOrNot }) =>{
+
+  useEffect(() =>{
+    articlesCart.length>0
+      ? showCart.current.style.height = "auto"
+      : showCart.current.style.height = "58px"
+
+      if(itemCartAux.length === 0 && articlesCart.length === 0){
+        setCartFilledOrNot(false)
+      }else{
+        setCartFilledOrNot(true)
+      }
+  }, [articlesCart, articlesCart, articlesCart])
 
   return(
-    <div ref={showCart} className={"CartOff"}>
-      <TittleBack>
-        <CartTittle><h1>Agregados al carrito</h1></CartTittle>
-      </TittleBack>
+    <div ref={showCart} className={"startingCart"}>
       <Items>
-        {articlesCart.map(item =>(
+        {articlesCart.length > 0 && articlesCart.map(item =>(
           <ItemOnCart
             item={item}
             key={uuidv4()}
+            cartButton={cartButton}
           />
         ))}
       </Items>
       <PayPart>
         <Price>
-          {articlesCart.length>0 && totalCount(articlesCart)}
+          {articlesCart.length>0 && "Total: AR$ "+totalCount(articlesCart)}
         </Price>
         <NoPrice>
-          {articlesCart.length===0 && "Ingrese un item en el carrito"}
+          {cartFilledOrNot === false
+            ? "Ingrese un item en el carrito"
+            : null
+          }
         </NoPrice>
       </PayPart>
     </div>
   )
 }
 
-const TittleBack = styled.div`
-`
-const ExitButton = styled.div`
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  top: 1%;
-  right: 5%;
-`
-
-const CartTittle = styled.div`
-  margin-top: 10%;
-  margin-left: 19%;
-`
-
 const Items = styled.div`
-  height: 75%;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /* overflow: auto;
   ::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `
 
 const PayPart = styled.div`
   height: 15%;
-  display: flex;
-  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
 `
 
 const Price = styled.div`
+  display: flex;
+  justify-content: center;
 `
 const NoPrice = styled.div`
+  display: flex;
+  justify-content: center;
 `
 export { ShoppingCart }

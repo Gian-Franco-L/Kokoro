@@ -1,14 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import { BackButton } from "./BackButton/BackButton"
 import { Filter } from "./Filter/Filter"
-import { Search } from "./Search/Search";
+// import { Search } from "./Search/Search";
 
-const ArticlesHeader = ({ articulos, tipes }) =>{
+const ArticlesHeader = () =>{
   return(
     <ArticleHeader>
-      <BackButton articulos={articulos} tipes={tipes} />
-      <Search />
       <Filter />
     </ArticleHeader>
   )
@@ -17,12 +14,8 @@ const ArticlesHeader = ({ articulos, tipes }) =>{
 const ArticleHeader = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
-  height: 87vh;
+  height: 90vh;
   min-width: 20%;
-  top: 10%;
-  left: 0;
-  margin: 30px 0px 0px 20px;
 `
 
 export { ArticlesHeader }
