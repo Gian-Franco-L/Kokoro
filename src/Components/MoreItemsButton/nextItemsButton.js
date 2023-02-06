@@ -1,12 +1,12 @@
 export default function nextItems(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount) {
-  if(showArticles.length>=12)
+  if(showArticles.length>=15)
   {
     let articlesCountAux = articlesCount
     let limitAlert = 0
     let articlesAux = []
 
-    for(let i=0; i<12; i++){
-      if(articlesCountAux < totalArticles.length && limitAlert<12)
+    for(let i=0; i<15; i++){
+      if(articlesCountAux < totalArticles.length && limitAlert<15)
       {
         limitAlert++
         articlesCountAux++
@@ -15,7 +15,7 @@ export default function nextItems(showArticles, setShowArticles, setArticlesLimi
       }
     }
 
-    if(limitAlert !== 12) setArticlesLimitCount(limitAlert)
+    if(limitAlert !== 15) setArticlesLimitCount(limitAlert)
     
     setShowArticles(articlesAux)
     setPageCount(prevState => prevState + 1)

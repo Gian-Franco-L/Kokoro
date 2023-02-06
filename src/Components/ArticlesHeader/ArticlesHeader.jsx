@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Filter } from "./Filter/Filter"
+import { Filter } from "../ArticlesContainer/Filter/Filter"
 // import { Search } from "./Search/Search";
 
 const ArticlesHeader = () =>{

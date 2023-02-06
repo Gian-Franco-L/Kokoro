@@ -1,0 +1,15 @@
+.navBarSzeki{
+  font-size: 1.5rem;
+}
+.home{
+  margin-left: 200px;
+}
+.signIn{
+  position: absolute;
+  right: 20%;
+  top: 17%;
+}
+.searchForm{
+  position: absolute;
+  left: 40%;
+}

@@ -7,8 +7,7 @@ export default function searchFunction (event, totalArticles, searchedArticles, 
   if(event.target.value.length > 1){
     setSearchedArticles(filterItems)
     if(filterItems.length === 0){
-      setSearchedArticles([{Name: "No hay resultados para su busqueda"}])
-      console.log(searchedArticles)
+      setSearchedArticles(-1)
     }
   }else{
     setSearchedArticles(null)

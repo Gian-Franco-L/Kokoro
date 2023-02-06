@@ -21,7 +21,7 @@ const BackButton = ({ articulos, tipes }) =>{
       tipes,
       totalArticles,
       setArticlesCount,
-      setPageCount)}><button><BiArrowToLeft className="backArrow"/>Volver</button></Button>
+      setPageCount)}><button><BiArrowToLeft />Volver</button></Button>
   )
 }
 

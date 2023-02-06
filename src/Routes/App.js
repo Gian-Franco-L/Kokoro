@@ -2,6 +2,8 @@ import React from "react"
 import { Layout } from "../Pages/Layout"
 import { NotFound } from "../Pages/NotFound"
 import { Login } from "../Pages/Login"
+import { Profile } from "../Pages/Profile"
+import { List } from "../Pages/List"
 import { AppContext } from "../Context/AppContext"
 import { useContext } from "../Hooks/useContext"
 import { Route } from "wouter"
@@ -21,6 +23,14 @@ function App() {
       <Route 
         component={Login}
         path="/log"
+      />
+      <Route 
+        component={Profile}
+        path="/profile"
+      />
+      <Route 
+        component={List}
+        path="/list"
       />
     </AppContext.Provider>
   );

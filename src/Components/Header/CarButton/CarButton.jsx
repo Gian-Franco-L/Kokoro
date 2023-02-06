@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import styled from "styled-components"
 import { BsFillCartCheckFill } from "react-icons/bs"
 import { BsFillCartXFill } from "react-icons/bs"
-import { openCloseCart } from "./openCloseCart"
+import { openCloseCart } from "../openCloseCart"
 import { AppContext } from "../../../Context/AppContext"
 import "../../../CSS/Animation.css"
 
@@ -19,7 +19,6 @@ const CarButton = ({ showCart }) =>{
     setArticlesCart,
     setCartFilledOrNot
     } = useContext(AppContext)
-
 
   return(
     <CartButton>
@@ -44,17 +43,19 @@ const CarButton = ({ showCart }) =>{
 }
 
 const CartButton = styled.div`
-  left: 100%;
+  position: absolute;
+  top: 23%;
+  right: 10.8%;
   button{
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
+    height: 50px;
+    width: 230%;
+    border-radius: 10px;
     border: 2px solid black;
+    background-color: #f5f5f5;
     cursor: pointer;
-    background-color: #eeeeee;
   }
   button:hover{
-    box-shadow: 0px 0px 10px 8px #FFFBE9;
+    transform: scale(1.05)
   }
   button:disabled{
     background-color: #eeeeee;

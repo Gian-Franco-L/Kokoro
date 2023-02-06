@@ -1,13 +1,14 @@
-import React, { useEffect, useRef } from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
-import { AiFillCaretLeft as LeftArrow} from "react-icons/ai";
-import { AiFillCaretRight as RightArrow} from "react-icons/ai";
+import { AiOutlineDoubleLeft } from "react-icons/ai";
+import { AiOutlineDoubleRight } from "react-icons/ai";
 import { next, back } from "./next&back"
 
 const Carousel = ({ children }) =>{
   
   const slideCarousel = useRef(null)
   const intervalCarousel = useRef(null)
+  const whiteLine = document.getElementById("whiteLine")
 
   // useEffect(() =>{
   //   intervalCarousel.current = setInterval(() =>{
@@ -25,16 +26,25 @@ const Carousel = ({ children }) =>{
   //   })
   // }, [])
 
+  // background: linear-gradient(0deg, black 55%, white 25%) 0px 0px;
+
   return(
     <MainContainer>
       <ImgCarousel ref={slideCarousel}>
         {children}
       </ImgCarousel>
-      <ButtonsCarousel>
-        <Button onClick={() => back(slideCarousel)}>
+      <ButtonsCarousel id="whiteLine">
+        <Button
+          onClick={() => back(slideCarousel)}
+          onMouseEnter={() => whiteLine.style.background = "linear-gradient(90deg, white -9%, transparent 5%) 0px 0px"}
+          onMouseLeave={() => whiteLine.style.background = ""}>
 					<LeftArrow />
         </Button>
-        <Button right onClick={() => next(slideCarousel)}>
+        <Button
+          right
+          onClick={() => next(slideCarousel)}
+          onMouseEnter={() => whiteLine.style.background = "linear-gradient(-90deg, white -9%, transparent 5%) 0px 0px"}
+          onMouseLeave={() => whiteLine.style.background = ""}>
           <RightArrow />
         </Button>
       </ButtonsCarousel>
@@ -42,53 +52,47 @@ const Carousel = ({ children }) =>{
   )
 }
 
+const LeftArrow = styled(AiOutlineDoubleLeft)`
+  font-size: 2rem;
+  color: white;
+`
+
+const RightArrow = styled(AiOutlineDoubleRight)`
+  font-size: 2rem;
+  color: white;
+`
+
 const MainContainer = styled.div`
   position: relative;
   overflow: hidden;
-  padding-bottom: 5%;
-  height: 91vh;
+  margin-top: 3.9%;
 `
 const ImgCarousel = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `
 const Slide = styled.div`
+  z-index: 1;
   position: relative;
-  min-width: 100%;
+  min-width: 100vw;
+  max-height: 92.5vh;
   overflow: hidden;
   transition: 0.3s ease all;
-  z-index: 1;
-  height: 100vh;
   background-color: #f1f1f1;
-
   img {
       width: 100%;
-      vertical-align: top;
   }
 `
-const TextSlide = styled.div`
-  position: absolute;
-  background: rgba(0, 0, 0, 0.5);
-	color: white;
-	width: 100%;
-	padding-top: 10px;
-  padding-bottom: 10px;
-	bottom: 0;
-	text-align: center;
-	font-size: 20px;
 
-	@media screen and (max-width: 700px){
-		position: relative;
-		background-color: black;
-	}
-`
 const ButtonsCarousel = styled.div`
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	top: 0;
+	height: 76.9%;
+	top: 2%;
 	z-index: 2;
 	pointer-events: none;
+  ${props => props.right ? "right: 1" : "left: 0"}
+  
 `
 const Button = styled.div`
 	position: absolute;
@@ -100,12 +104,14 @@ const Button = styled.div`
 	border: none;
 	cursor: pointer;
 	outline: none;
-	width: 50px;
+	width: 80px;
 	height: 100%;
 	text-align: center;
 	transition: 0.3s ease all;
-
+  @media only screen and (max-width: 991px) {
+    display: none;
+  }
 	${props => props.right ? "right: 0" : "left: 0"}
 `
 
-export { Carousel, Slide, TextSlide }
+export { Carousel, Slide }

@@ -1,5 +1,4 @@
-import React, { useContext } from "react"
-import { AppContext } from "../../Context/AppContext"
+import React from "react"
 import styled from "styled-components"
 import disabledItems from "./disabledItems"
 import '../../CSS/Animation.css';
@@ -21,7 +20,7 @@ const TipeOfArticles = ({ tipes, articulos, articleChoice, setArticleChoice }) =
 }
 
 const ArticleTipes = styled.div`
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;

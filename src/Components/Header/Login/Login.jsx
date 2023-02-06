@@ -1,29 +1,45 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
+import { AppContext } from "../../../Context/AppContext"
 import { IoMdPerson } from "react-icons/io"
 import "../../../CSS/Animation.css"
 
 const Login = () =>{
+
+  const {
+    userName,
+    setOpenLoginModal
+  } = useContext(AppContext)
+
+  function changeModalState(){
+    setOpenLoginModal(true)
+  }
+
   return(
-    <LoginButton>
-      <button><IoMdPerson className="cartIcon"/></button>
-    </LoginButton>
+    <>
+      {!userName &&
+        <LoginButton onClick={changeModalState}>
+        <button><IoMdPerson className="cartIcon"/></button>
+        </LoginButton>
+      }
+    </>
   )
 }
 
 const LoginButton = styled.div`
   position: absolute;
-  left: 50px;
+  top: 23%;
+  right: 25%;
   button{
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
+    height: 50px;
+    width: 230%;
+    border-radius: 10px;
     border: 2px solid black;
-    cursor: pointer;
     background-color: #f5f5f5;
+    cursor: pointer;
   }
   button:hover{
-    box-shadow: 0px 0px 10px 8px #FFFBE9;
+    transform: scale(1.05)
   }
 `
 

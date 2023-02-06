@@ -3,58 +3,70 @@ import styled from "styled-components"
 import whatsapp from "../../img/whatsapp-brands.svg"
 import facebook from "../../img/facebook-brands.svg"
 import instagram from "../../img/instagram-brands.svg"
+import { MdDriveFileMove } from "react-icons/md"
 
 const Footer = () =>{
   return(
     <MainContainer>
       <div>
-        <h2>Acerca de mi</h2>
-        <Items>
-          <h3>Hola soy la moniquita bordadora</h3>
-        </Items>
+        <AboutMe>Acerca de mi</AboutMe>
+        <Items>hola soy la moniquita bordadora</Items>
       </div>
       <div>
-        <h2>Como comprar</h2>
-        <Items>
-        <h3>Al apretar el boton un producto en especifico se agregara</h3>
-        </Items>
+        <p></p>
       </div>
-      <div>
-        <h2>Contactame</h2>
+      <Social>
+        <Contact>Contactame</Contact>
         <SocialMedia>
           <a href="/"><img src={facebook} alt="face" /></a>
-        </SocialMedia>
-        <SocialMedia>
           <a href="/"><img src={instagram} alt="insta" /></a>
-        </SocialMedia>
-        <SocialMedia>
           <a href="/"><img src={whatsapp} alt="wpp" /></a>
         </SocialMedia>
-      </div>
+      </Social>
     </MainContainer>
   )
 }
 
 const MainContainer = styled.div`
   display: flex;
-  height: 200px;
+  height: 250px;
   width: 100%;
   color: black;
-  background-color: grey;
+  background-color: white;
   justify-content: space-around;
-  margin-top: 3%;
+  box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+  margin-top: 6%;
 `
 
-const Items = styled.div`
-  margin-top: 20px;
+const AboutMe = styled.h2`
+  font-size: 1.7rem;
+`
+
+const Items = styled.p`
+  margin-top: 10px;
   max-width: 250px;
+  font-size: 1.3rem;
+`
+
+const Contact = styled.h2`
+  font-size: 1.7rem;
+`
+
+const Social = styled.div`
 `
 
 const SocialMedia = styled.div`
-  height: 30px;
-  width: 30px;
-  background-color: white;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 60px;
+  margin-top: 10px;
+
+  img{
+    height: 50px;
+    width: 50px;
+    margin-bottom: 20px;
+  }
 `
 
 export { Footer }
