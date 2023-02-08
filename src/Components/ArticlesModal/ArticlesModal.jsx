@@ -12,11 +12,16 @@ const ArticlesModal = ({
   cartSwitch,
   itemCartAux,
   setItemCartAux,
-  userName
+  userName,
+  setOpenLoginModal,
+  setLoginRegisterElection
 }) =>{
+
+  const body = document.getElementById("body")
 
   function changeModalState(){
     setOpenArticlesModal(false)
+    body.style.overflowY = "inherit"
   }
 
   const plus = useRef(null)
@@ -54,15 +59,21 @@ const ArticlesModal = ({
     },[500])
   }
 
+  function altRegisterLogin(election){
+    setOpenArticlesModal(false)
+    setOpenLoginModal(true)
+    setLoginRegisterElection(election)
+  }
+
   return(
     <Overlay>
       <ModalContainer>
         <CloseModalButton>
           <button onClick={changeModalState}>X</button>
         </CloseModalButton>
+        <ItemName><strong>{modalArticle.item}</strong></ItemName>
         <Imagen img={modalArticle.img}/>
         <ItemContainer>
-          <ItemName><strong>{modalArticle.item}</strong></ItemName>
           <ItemInfo stuffing={modalArticle.stuffing}>
             <Price><span>Precio</span><span>AR$ {modalArticle.itemsPrice}</span></Price>
             <Size><span>Medida</span><span>{modalArticle.size}</span></Size>
@@ -72,11 +83,11 @@ const ArticlesModal = ({
             }
           </ItemInfo>
           {userName
-            ? <AddToCartButton stuffing={modalArticle.stuffing} ref={buyButton} onClick={() => wrapperFunction(modalArticle.item, modalArticle.itemsPrice, modalArticle.img, articlesCart, setArticlesCart, cartSwitch, itemCartAux, setItemCartAux, setItemToDataBase)}><BorderContainer>Agregar al carrito<PlusOne ref={plus}>+1</PlusOne></BorderContainer></AddToCartButton>
+            ? <BuyContainer stuffing={modalArticle.stuffing}><BorderContainerRegisterButton><AddToCartButton ref={buyButton} onClick={() => wrapperFunction(modalArticle.item, modalArticle.itemsPrice, modalArticle.img, articlesCart, setArticlesCart, cartSwitch, itemCartAux, setItemCartAux, setItemToDataBase)}>Agregar al carrito<PlusOne ref={plus}>+1</PlusOne></AddToCartButton></BorderContainerRegisterButton></BuyContainer>
             : null
           }
           {!userName
-            ? <UserWarning>Registrate o inicia session para realizar una compra</UserWarning>
+            ? <UserWarning stuffing={modalArticle.stuffing}><AltRegisterLogin onClick={() => altRegisterLogin("register")}>Registrate</AltRegisterLogin> o <AltRegisterLogin onClick={() => altRegisterLogin("logIn")}>Inicia sesión</AltRegisterLogin> para realizar una compra</UserWarning>
             : null
           }
       </ItemContainer>
@@ -115,6 +126,7 @@ const ModalContainer = styled.div`
 `
 
 const CloseModalButton = styled.div`
+  z-index: 1;
   position: absolute;
   top: 1%;
   right: 1%;
@@ -142,36 +154,46 @@ const Imagen = styled.div`
   background-size: cover;
   background-color: #FFF;
   @media only screen and (max-width: 991px) {
+    margin-top: 0px;
     height: 100%;
-    width: 80%;
+    width: 75%;
   }
 `
 
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: inherit;
   height: 92.5%;
   width: 38%;
-  margin-top: 10px;
+  margin-top: 150px;
   margin-left: 2%;
   font-size: 1.3rem;
   @media only screen and (max-width: 991px) {
+    justify-content: space-around;
     height: 50%;
     width: 90%;
     margin-left: 0%;
+    margin-top: 0px;
   }
 `
 const ItemName = styled.div`
+  position: absolute;
   display: flex;
   height: 40px;
+  width: 340px;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
-  margin-top: 15%;
-  margin-bottom: 10%;
+  text-align: center;
+  font-size: clamp(1rem, 6vw, 1.6rem);
+  margin-top: 7%;
+  margin-left: 58%;
   @media only screen and (max-width: 991px) {
-    margin-top: 0%;
-    margin-bottom: 0%;
+    position: relative;
+    width: 80%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    margin-left: 0%;
   }
 `
 
@@ -179,8 +201,9 @@ const ItemInfo = styled.div`
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 1px 1px 5px 1px rgb(125, 125, 125);
+  font-size: clamp(1rem, 4vw, 1.3rem);
   @media only screen and (max-width: 991px) {
-
+    ${props => props.stuffing === "none" ? "margin-top: 15px" : "margin-top: 10px"}
   }
   ${props => props.stuffing === "none" ? "margin-top: 30px" : "margin-top: 5px"}
 `
@@ -231,9 +254,11 @@ const Material = styled.div`
   }
   span:nth-child(2n){
     border: none;
+    padding-left: 2%;
+    padding-right: 2%;
   }
   @media only screen and (max-width: 991px) {
-    height: 50px;
+    height: 65px;
   }
 `
 const Stuffing = styled.div`
@@ -254,37 +279,25 @@ const Stuffing = styled.div`
   }
 `
 
-const AddToCartButton = styled.button`
-  height: 60px;
-  width: 150px;
-  background-color: white;
-  border-radius: 30px;
-  font-size: 1rem;
-  margin-left: calc(50% - 75px);
-  border: none;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
-  :disabled{
-    color: black;
-  }
-  @media only screen and (max-width: 991px) {
-    height: 40px;
-    margin-bottom: 20px;
-    ${props => props.stuffing === "none" ? "margin-top: 20px" : "margin-top: 20px"}
-  }
-  ${props => props.stuffing === "none" ? "margin-top: 90px" : "margin-top: 50px"}
-`
-
-const BorderContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 95%;
-  width: 144px;
-  border: 2px solid #CEAB93;
-  border-radius: 50px;
-  margin-left: calc(50% - 72px);
-`
+// const AddToCartButton = styled.button`
+//   height: 60px;
+//   width: 150px;
+//   background-color: white;
+//   border-radius: 30px;
+//   font-size: 1rem;
+//   margin-left: calc(50% - 75px);
+//   border: none;
+//   cursor: pointer;
+//   box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
+//   :disabled{
+//     color: black;
+//   }
+//   @media only screen and (max-width: 991px) {
+//     height: 40px;
+//     margin-bottom: 10px;
+//     margin-top: 10px
+//   }
+// `
 
 const PlusOne = styled.div`
   position: absolute;
@@ -296,7 +309,57 @@ const PlusOne = styled.div`
 
 const UserWarning = styled.p`
   text-align: center;
-  padding-top: 20%;
+  @media only screen and (max-width: 991px) {
+    margin-top: 10px;
+  }
+  ${props => props.stuffing === "none" ? "margin-top: 20%" : "margin-top: 10%"}
+`
+
+const AltRegisterLogin = styled.span`
+  color: #ab6f4a;
+  cursor: pointer;
+  :hover{
+    border-bottom: 2px solid #ab6f4a;
+  }
+`
+
+const BuyContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
+  padding: 3px;
+  background-color: #f5f5f5;
+  margin-left: calc(50% - 100px);
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+  :hover{
+    transform: scale(1.05);
+  }
+  :active{
+    box-shadow: 0px 0px 5px 1px #ab6f4a;
+  }
+  @media only screen and (max-width: 991px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  ${props => props.stuffing === "none" ? "margin-top: 70px" : "margin-top: 40px"}
+`
+
+const BorderContainerRegisterButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #CEAB93;
+  border-radius: 50px;
+`
+
+const AddToCartButton = styled.button`
+  background-color: transparent;
+  border: none;
 `
 
 export { ArticlesModal }

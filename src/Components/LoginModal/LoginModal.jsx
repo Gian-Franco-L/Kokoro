@@ -44,6 +44,7 @@ const LoginModal = ({
   const msjAgain = document.getElementById("msjAgain")
   const msjEmailId = document.getElementById("msjEmail")
   const msjPhoneId = document.getElementById("msjPhoneId")
+  const body = document.getElementById("body")
 
   useEffect(() =>{
     userService.getAllUsers().then(res => {
@@ -57,12 +58,7 @@ const LoginModal = ({
 
   function changeModalState(){
     setOpenLoginModal(false)
-
-    const media = window.matchMedia('(max-width: 992px)')
-    if(media.matches){
-      document.body.style.position = ''
-      window.scrollTo(0, modalScroll)
-    }
+    body.style.overflowY = "inherit"
   }
 
   async function login (event){
@@ -93,6 +89,7 @@ const LoginModal = ({
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordLoginInput.style.color = "black"
       passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
+      body.style.overflowY = "inherit"
     } catch(e){
       userLoginInput.style.color = "black"
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
@@ -106,7 +103,7 @@ const LoginModal = ({
   
   async function register (event){
     event.preventDefault()
-
+    
     const isUserNameLogged = allUsers.filter(user => user.userName === logUser)
     const isEmailLogged = emails.filter(value => value === email)
     const isNumber = /^([0-9 +-])*$/.exec(phone)
@@ -230,6 +227,7 @@ const LoginModal = ({
         'loggedUser', JSON.stringify(user)
         )
         setOpenLoginModal(false)
+        body.style.overflowY = "inherit"
       } catch(e){
       console.error(e);
     }
@@ -286,7 +284,7 @@ const LoginModal = ({
                     />
                 </InputLabel>
               </form>
-              <span><BorderContainerRegisterButton><button onClick={(event) => register(event)}>Iniciar sesión</button></BorderContainerRegisterButton></span>
+              <span><BorderContainerRegisterButton><button onClick={(event) => login(event)}>Iniciar sesión</button></BorderContainerRegisterButton></span>
             </BorderContainerLogin>
           </Login>
         }

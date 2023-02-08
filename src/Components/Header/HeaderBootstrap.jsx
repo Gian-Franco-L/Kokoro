@@ -153,32 +153,31 @@ const EmptyContainer = styled.div`
 const Name = styled.div`
   position: absolute;
 	font-family: 'Festive', cursive;
-  font-size: clamp(1rem, 14vw, 4rem);
+  font-size: clamp(.5rem, 12vw, 4rem);
   top: -8%;
   left: 3%;
-  @media only screen and (max-width: 991px) {
-    top: 0%;
-    left: 3%;
-  }
   @media only screen and (max-width: 500px) {
     top: 10%;
     left: 3%;
+  }
+  @media only screen and (max-width: 280px) {
+    top: 10%;
+    font-size: 2.7rem;
   }
 `
 const NameInfo = styled.div`
   position: absolute;
   font-family: cursive;
   width: 40%;
-  font-size: clamp(0.1rem, 4vw, 1rem);
+  font-size: clamp(0.1rem, 3.3vw, 1rem);
   top: 50%;
   left: 105%;
-  @media only screen and (max-width: 991px) {
-    top: 50%;
-    left: 105%;
-  }
   @media only screen and (max-width: 400px) {
-    top: 65%;
-    left: 105%;
+    top: 55%;
+    left: 102%;
+  }
+  @media only screen and (max-width: 280px) {
+    font-size: 0rem;
   }
 `
 

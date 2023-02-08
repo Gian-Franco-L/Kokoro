@@ -14,15 +14,12 @@ const LoginRegister = ({
   setModalScroll
 }) =>{
 
+  const body = document.getElementById("body")
+
   const user = (election)=>{
     setOpenLoginModal(true)
     setLoginRegisterElection(election)
-
-    const media = window.matchMedia('(max-width: 992px)')
-    if(media.matches){
-      setModalScroll(window.scrollY)
-      document.body.style.position = 'fixed'
-    }
+    body.style.overflowY = "hidden"
   }
 
   const openCloseLoginRegister = () =>{

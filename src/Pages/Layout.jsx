@@ -250,6 +250,8 @@ const Layout = () =>{
           setItemCartAux={setItemCartAux}
           cartFilledOrNot={cartFilledOrNot}
           userName={userName}
+          setOpenLoginModal={setOpenLoginModal}
+          setLoginRegisterElection={setLoginRegisterElection}
         />
       }
       {openLoginModal === true &&
