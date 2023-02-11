@@ -11,7 +11,8 @@ const openCloseCart = (
   enableDisableCollapse,
   loginRegisterSwitch,
   acountRef,
-  searchRef
+  searchRef,
+  buyButton
   ) =>{
   let auxContainer = []
 
@@ -22,10 +23,10 @@ const openCloseCart = (
       setCartSwitch("on")
       enableDisableCollapse.current.style.display = "inline"
       if(acountRef.current){
-        acountRef.current.setAttribute("disabled", "");
+        acountRef.current.setAttribute("disabled", "")
         acountRef.current.style.opacity = "0.5"
       }
-      searchRef.current.setAttribute("disabled", "");
+      searchRef.current.setAttribute("disabled", "")
       searchRef.current.style.opacity = "0.5"
 
       setTimeout(() =>{
@@ -36,20 +37,25 @@ const openCloseCart = (
           }, [((1/itemCartAux.length) * (i+1)) * 1000])
         }
       },[750])
-
+      
       setTimeout(() => {
         setItemCartAux([])
       },[1000])
       setTimeout(() =>{
+        buyButton.current.setAttribute("disabled", "")
+      }, [1100])
+      setTimeout(() =>{
         setOnOffCartButton(false)
+        buyButton.current.removeAttribute("disabled")
       }, [2000])
     }
   } else if(cartSwitch === "on"){
     if(onOffCartButton === false){
-
       let articlesToPop = articlesCart
       let cantOfArticles = articlesCart.length
       auxContainer = articlesCart.filter(item => item)
+      buyButton.current.setAttribute("disabled", "")
+      buyButton.current.style.opacity = "0.5"
 
       setOnOffCartButton(true)
       setCartSwitch("off")
@@ -65,10 +71,10 @@ const openCloseCart = (
         enableDisableCollapse.current.style.display = "none"
       }
       if(acountRef.current){
-        acountRef.current.removeAttribute("disabled");
+        acountRef.current.removeAttribute("disabled")
         acountRef.current.style.opacity = "1"
       }
-      searchRef.current.removeAttribute("disabled");
+      searchRef.current.removeAttribute("disabled")
       searchRef.current.style.opacity = "1"
       
       setTimeout(() =>{

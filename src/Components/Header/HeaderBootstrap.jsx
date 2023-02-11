@@ -35,7 +35,8 @@ function HeaderBootstrap({
   enableDisableCollapse,
   acountRef,
   cartButtonRef,
-  searchRef
+  searchRef,
+  buyButton
 }) {
 
   const handleLoginOut = () =>{
@@ -103,7 +104,8 @@ function HeaderBootstrap({
               enableDisableCollapse,
               loginRegisterSwitch,
               acountRef,
-              searchRef
+              searchRef,
+              buyButton
             )}>Carrito</CartButton>
           </Nav>
           {/* <Form className="d-flex searchForm">

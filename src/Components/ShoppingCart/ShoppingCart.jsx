@@ -13,7 +13,8 @@ const ShoppingCart = ({
   setCartFilledOrNot,
   userName,
   acountRef,
-  setOpenPurchaseModal
+  setOpenPurchaseModal,
+  buyButton
 }) =>{
 
   useEffect(() =>{
@@ -59,8 +60,7 @@ const ShoppingCart = ({
               : null
             }
           </Price>
-          {cartFilledOrNot === "true" && <div><Button onClick={buy}>Comprar</Button></div>}
-          
+          {(cartFilledOrNot === true && userName && !!articlesCart.length) && <div><Button ref={buyButton} onClick={buy}>Comprar</Button></div>}
         </div>
         <NoPrice>
           {cartFilledOrNot === false && "Ingrese un item en el carrito"}

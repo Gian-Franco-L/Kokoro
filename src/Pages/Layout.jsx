@@ -96,6 +96,7 @@ const Layout = () =>{
   const acountRef = useRef(null)
   const cartButtonRef = useRef(null)
   const searchRef = useRef(null)
+  const buyButton = useRef(null)
 
   useEffect(() =>{
     let articlesAux = []
@@ -176,6 +177,7 @@ const Layout = () =>{
         acountRef={acountRef}
         cartButtonRef={cartButtonRef}
         searchRef={searchRef}
+        buyButton={buyButton}
       />
       <SearchedContainer 
         searchedArticles={searchedArticles}
@@ -206,6 +208,7 @@ const Layout = () =>{
         userName={userName}
         acountRef={acountRef}
         setOpenPurchaseModal={setOpenPurchaseModal}
+        buyButton={buyButton}
       />
       <Carousel>
         <Slides />
