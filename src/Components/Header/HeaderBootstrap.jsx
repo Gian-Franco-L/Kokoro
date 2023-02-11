@@ -40,8 +40,26 @@ function HeaderBootstrap({
 }) {
 
   const handleLoginOut = () =>{
+    let status = "inLogOut"
     setUserName(null)
     window.localStorage.removeItem('loggedUser')
+    openCloseCart(
+      showCart,
+      cartSwitch,
+      setCartSwitch,
+      articlesCart,
+      setArticlesCart,
+      itemCartAux,
+      setItemCartAux,
+      onOffCartButton,
+      setOnOffCartButton,
+      enableDisableCollapse,
+      loginRegisterSwitch,
+      acountRef,
+      searchRef,
+      buyButton,
+      status
+    )
   }
 
   const changeModalState = () =>{

@@ -130,9 +130,13 @@ const Layout = () =>{
       setToken(JSON.parse(loggedUserJSON).token)
       setAccess(JSON.parse(loggedUserJSON).access)
       userService.getAllUsers().then(res => {
-        const cartItems = res.map(item => item.cartItems).flat()
-        setItemToDataBase(cartItems)
-        setItemCartAux(cartItems)
+        const user = res.filter(item => item.userName === userName)
+        if(!!user.length){
+          const cartItems = user[0].cartItems
+          setItemToDataBase(cartItems)
+          setItemCartAux(cartItems)
+        }
+        
       })
     }
     setArticlesCount(15)

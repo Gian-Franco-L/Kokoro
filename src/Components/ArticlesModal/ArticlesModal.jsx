@@ -68,29 +68,31 @@ const ArticlesModal = ({
   return(
     <Overlay>
       <ModalContainer>
-        <CloseModalButton>
-          <button onClick={changeModalState}>X</button>
-        </CloseModalButton>
-        <ItemName><strong>{modalArticle.item}</strong></ItemName>
-        <Imagen img={modalArticle.img}/>
-        <ItemContainer>
-          <ItemInfo stuffing={modalArticle.stuffing}>
-            <Price><span>Precio</span><span>AR$ {modalArticle.itemsPrice}</span></Price>
-            <Size><span>Medida</span><span>{modalArticle.size}</span></Size>
-            <Material><span>Material</span><span>{modalArticle.material}</span></Material>
-            {modalArticle.stuffing !== "none" &&
-              <Stuffing><span>Relleno</span><span>{modalArticle.stuffing}</span></Stuffing>
+        <BorderContainer>
+          <CloseModalButton>
+            <button onClick={changeModalState}>X</button>
+          </CloseModalButton>
+          <ItemName><strong>{modalArticle.item}</strong></ItemName>
+          <Imagen img={modalArticle.img}/>
+          <ItemContainer>
+            <ItemInfo stuffing={modalArticle.stuffing}>
+              <Price><span>Precio</span><span>AR$ {modalArticle.itemsPrice}</span></Price>
+              <Size><span>Medida</span><span>{modalArticle.size}</span></Size>
+              <Material><span>Material</span><span>{modalArticle.material}</span></Material>
+              {modalArticle.stuffing !== "none" &&
+                <Stuffing><span>Relleno</span><span>{modalArticle.stuffing}</span></Stuffing>
+              }
+            </ItemInfo>
+            {userName
+              ? <BuyContainer stuffing={modalArticle.stuffing}><PlusOne ref={plus}>+1</PlusOne><ButtonContainer onClick={() => wrapperFunction(modalArticle.item, modalArticle.itemsPrice, modalArticle.img, articlesCart, setArticlesCart, cartSwitch, itemCartAux, setItemCartAux, setItemToDataBase)}><BorderContainerRegisterButton><AddToCartButton ref={buyButton}>Agregar al carrito</AddToCartButton></BorderContainerRegisterButton></ButtonContainer></BuyContainer>
+              : null
             }
-          </ItemInfo>
-          {userName
-            ? <BuyContainer stuffing={modalArticle.stuffing}><BorderContainerRegisterButton><AddToCartButton ref={buyButton} onClick={() => wrapperFunction(modalArticle.item, modalArticle.itemsPrice, modalArticle.img, articlesCart, setArticlesCart, cartSwitch, itemCartAux, setItemCartAux, setItemToDataBase)}>Agregar al carrito<PlusOne ref={plus}>+1</PlusOne></AddToCartButton></BorderContainerRegisterButton></BuyContainer>
-            : null
-          }
-          {!userName
-            ? <UserWarning stuffing={modalArticle.stuffing}><AltRegisterLogin onClick={() => altRegisterLogin("register")}>Registrate</AltRegisterLogin> o <AltRegisterLogin onClick={() => altRegisterLogin("logIn")}>Inicia sesión</AltRegisterLogin> para realizar una compra</UserWarning>
-            : null
-          }
-      </ItemContainer>
+            {!userName
+              ? <UserWarning stuffing={modalArticle.stuffing}><AltRegisterLogin onClick={() => altRegisterLogin("register")}>Registrate</AltRegisterLogin> o <AltRegisterLogin onClick={() => altRegisterLogin("logIn")}>Inicia sesión</AltRegisterLogin> para realizar una compra</UserWarning>
+              : null
+            }
+        </ItemContainer>
+      </BorderContainer>
       </ModalContainer>
     </Overlay>
   )
@@ -116,11 +118,21 @@ const ModalContainer = styled.div`
   width: 900px;
   background-color: #ebe9eb;
   border-radius: 30px;
+  padding: 3px;
+  @media only screen and (max-width: 991px) {
+    height: 95%;
+    width: 90%;
+  }
+`
 
+const BorderContainer = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #CEAB93;
+  border-radius: 30px;
   @media only screen and (max-width: 991px) {
     flex-direction: column;
-    height: 95%;
-    width: 80%;
     align-items: center;
   }
 `
@@ -136,6 +148,17 @@ const CloseModalButton = styled.div`
     font-size: 1.5rem;
     :hover{
       color: #ab6f4a;
+    }
+  }
+  @media only screen and (max-width: 991px) {
+    top: 1%;
+    right: 3%;
+  }
+  @media only screen and (max-width: 280px) {
+    top: .5%;
+    right: 3%;
+    button{
+      font-size: 1.3rem;
     }
   }
 `
@@ -300,11 +323,16 @@ const Stuffing = styled.div`
 // `
 
 const PlusOne = styled.div`
+  z-index: 1;
   position: absolute;
   margin-bottom: 7%;
-  margin-left: 17%;
+  margin-left: 22%;
   font-size: 1.3rem;
   color: rgba(150, 100, 70, 0);
+  @media only screen and (max-width: 991px) {
+    margin-bottom: 0%;
+    margin-left: 80%;
+  }
 `
 
 const UserWarning = styled.p`
@@ -329,9 +357,22 @@ const BuyContainer = styled.span`
   align-items: center;
   height: 50px;
   width: 200px;
+  margin-left: calc(50% - 100px);
+  @media only screen and (max-width: 991px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  ${props => props.stuffing === "none" ? "margin-top: 70px" : "margin-top: 40px"}
+`
+
+const ButtonContainer = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
   padding: 3px;
   background-color: #f5f5f5;
-  margin-left: calc(50% - 100px);
   border-radius: 50px;
   box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
   :hover{
@@ -344,7 +385,6 @@ const BuyContainer = styled.span`
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  ${props => props.stuffing === "none" ? "margin-top: 70px" : "margin-top: 40px"}
 `
 
 const BorderContainerRegisterButton = styled.div`
