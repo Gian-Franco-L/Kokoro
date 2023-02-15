@@ -8,6 +8,7 @@ import userService from "../Services/user"
 import { v4 as uuidv4 } from "uuid"
 import styled from "styled-components"
 import { closeCartOnProfile } from "../Components/Header/closeCartOnProfile"
+import "../CSS/profile.css"
 
 const Profile = () => {
   const {
@@ -70,17 +71,18 @@ const Profile = () => {
   return(
     <LayoutContainer>
       {userName ?
-      <>
-          <Tittle><Link href="/"><Button>Volver</Button></Link><h2>Bienvenido a tu perfil</h2></Tittle>
+        <>
+          <Tittle><h2>Bienvenido a tu perfil</h2></Tittle>
           <UserProfile>
+            <Button><Link href="/">Volver al inicio</Link>&nbsp;| Perfil</Button>
             <UserInfo>
-              <section>
+              <BorderContainer>
                 <UserInfoItem>Usuario: <div>{userName}</div></UserInfoItem>
                 <UserInfoItem>Nombre: <div>{name}</div></UserInfoItem>
                 <UserInfoItem>Email: <div>{email}</div></UserInfoItem>
                 <UserInfoItem>Contacto: <div>{phone}</div></UserInfoItem>
                 <UserInfoItem><button onClick={nameSwitch}>Cambiar nombre de cuenta</button></UserInfoItem>
-              </section>
+              </BorderContainer>
             </UserInfo>
             <UserPurchases>
               {purchaseItems !== 0 && purchaseItems.map(purchases =>(
@@ -112,7 +114,7 @@ const Profile = () => {
             setNewSwitch={setNewSwitch}
             />
           }
-         </>
+        </>
          : <Error><div>Debes registrarte antes de entrar a tu perfil</div><Link href="/"><button>Volver</button></Link></Error>
       }
     </LayoutContainer>
@@ -120,77 +122,75 @@ const Profile = () => {
 }
 
 const LayoutContainer = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #ebe9eb;
 `
 
 const Tittle = styled.div`
   position: relative;
   display: flex;
-  height: 80px;
-  width: 60vw;
-  margin-top: 44px;
-  margin-left: 19%;
-  padding-top: 10px;
-  box-shadow: 0px 0px 10px 3px rgb(154, 154, 154);
-  background-color: white;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+
   h2{
-    font-size: 3rem;
-    width: 65%;
+    width: 100%;
+    font-family: 'Festive', cursive;
+    font-size: clamp(2rem, 13vw, 7rem);
   }
-  @media only screen and (max-width: 820px){
-    width: 90vw;
-    margin-left: 4%;
+  @media only screen and (max-width: 1230px){
+    margin-top: 7%;
   }
 `
 
 const UserProfile = styled.div`
   display: flex;
+  justify-content: space-around;
   @media only screen and (max-width: 820px){
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 `
 
 const UserInfo = styled.div`
+  position: sticky;
   top: 44px;
   height: 42vh;
-  width: 30vw;
-  min-width: 330px;
-  margin-top: 44px;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+  width: 30%;
   box-shadow: 0px 0px 10px 3px rgb(154, 154, 154);
   background-color: white;
   border-radius: 20px;
-  section{
-    margin-top: 1px;
-    margin-left: 1px;
-    height: 99.5%;
-    width: 99.6%;
-    border: 2px solid #CEAB93;
-    border-radius: 20px;
-  }
+  padding: 2px;
   @media only screen and (max-width: 820px){
-    min-width: 95%;
+    position: relative;
+    top: -10px;
+    width: 90%;
   }
 `
 
+const BorderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #CEAB93;
+  border-radius: 20px;
+`
+
 const UserPurchases = styled.div`
-  min-height: 42vh;
+  min-height: 42%;
   width: 62.5vw;
-  margin-top: 44px;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
   margin-bottom: 40px;
   box-shadow: 0px 0px 10px 3px rgb(154, 154, 154);
   background-color: #b5b5b5;
   border-radius: 10px;
   @media only screen and (max-width: 820px){
-    min-width: 95%;
+    width: 90%;
   }
 `
 const WhiteContainer = styled.div`
@@ -218,9 +218,7 @@ const EmptyIcon = styled(BsInfoSquare)`
 
 const UserInfoItem = styled.div`
   display: flex;
-  height: 30px;
-  margin-top: 38px;
-  font-size: 1.3rem;
+  font-size: clamp(.5rem, 6vw, 1.3rem);
   padding-left: 10px;
   margin-left: 6%;
 
@@ -237,34 +235,24 @@ const UserInfoItem = styled.div`
       transform: scale(1.05)
     }
   }
+  @media only screen and (max-width: 350px){
+    margin-left: 0%;
+  }
 `
 
 const Button = styled.div`
   z-index: 1;
-  height: 50px;
-  width: 135px;
-  margin-top: 4px;
-  margin-left: 7.1%;
-  padding-top: 7px;
-  padding-left: 5px;
-  font-size: 1.6rem;
-  border-radius: 30px;
-  box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
-  background-color: white;
-  cursor: pointer;
+  position: absolute;
+  font-size: clamp(.7rem, 1.7vw, 1.3rem);
+  top: 2%;
+  left: 2%;
   a{
-    color: black;
-  }
-  :hover{
-    transform: scale(1.05)
+    color: #AD8B73;
+    text-decoration: none;
+    cursor: pointer;
   }
   @media only screen and (max-width: 820px){
-    padding-top: 5px;
-    margin-top: 7px;
-    height: 45px;
-    width: 120px;
-    margin-left: 20px;
-    margin-right: 5px;
+    top: .5%;
   }
 `
 const Error = styled.div`

@@ -7,17 +7,19 @@ const PurchaseComponent = ({ purchases }) =>{
   return(
     <MainContainer>
       <PurchaseContainer>
-        <InfoContainer>
-          {purchases.info.map(purchase =>(
-            <PurchaseInfo
-              purchase={purchase}
-              key={uuidv4()}
-            />
-          ))}
-        </InfoContainer>
-        <Total>
-          Total: {purchases.total}
-        </Total>
+        <BorderContainer>
+          <InfoContainer>
+            {purchases.info.map(purchase =>(
+              <PurchaseInfo
+                purchase={purchase}
+                key={uuidv4()}
+              />
+            ))}
+          </InfoContainer>
+          <Total>
+            Total: {purchases.total}
+          </Total>
+        </BorderContainer>
       </PurchaseContainer>
     </MainContainer>
   )
@@ -25,33 +27,45 @@ const PurchaseComponent = ({ purchases }) =>{
 
 const MainContainer = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
   background-color: white;
   border-radius: 20px;
 `
 const PurchaseContainer = styled.div`
-  width: 99.8%;
+  padding: 1.5px;
+`
+const BorderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   border: 2px solid #CEAB93;
-  margin: 0.1%;
   border-radius: 20px;
   @media only screen and (max-width: 820px){
-    min-width: 200px;
+    display: inline-block;
   }
 `
+
 const Total = styled.div`
   position: absolute;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 5px);
   width: 20%;
-  top: 50%;
   right: 0;
-  font-size: 1.2rem;
-  margin-top: -1%;
+  font-size: clamp(.5rem, 10vw, 1.3rem);
+  border-left: 2px solid #CEAB93;
+  @media only screen and (max-width: 820px){
+    position: relative;
+    width: 100%;
+    border-left: none;
+    border-top: 2px solid #CEAB93;
+    height: 50px;
+  }
 `
 const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 80%;
-  border-right: 2px solid #CEAB93;
+  padding: 2px;
 `
 export { PurchaseComponent }

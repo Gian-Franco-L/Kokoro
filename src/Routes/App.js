@@ -1,7 +1,6 @@
 import React from "react"
 import { Layout } from "../Pages/Layout"
 import { NotFound } from "../Pages/NotFound"
-import { Login } from "../Pages/Login"
 import { Profile } from "../Pages/Profile"
 import { List } from "../Pages/List"
 import { AppContext } from "../Context/AppContext"
@@ -20,11 +19,7 @@ function App() {
         component={NotFound}
         path="/nf"
       />
-      <Route 
-        component={Login}
-        path="/log"
-      />
-      <Route 
+      <Route
         component={Profile}
         path="/profile"
       />
