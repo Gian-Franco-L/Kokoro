@@ -40,10 +40,6 @@ const LoginModal = ({
   let phoneRegister= document.querySelector("#phoneRegister")
   const userLoginInput = document.getElementById("userLogin")
   const passwordLoginInput = document.getElementById("password")
-  const msjUserId = document.getElementById("msjUser")
-  const msjAgain = document.getElementById("msjAgain")
-  const msjEmailId = document.getElementById("msjEmail")
-  const msjPhoneId = document.getElementById("msjPhoneId")
   const body = document.getElementById("body")
 
   useEffect(() =>{
@@ -64,13 +60,19 @@ const LoginModal = ({
   async function login (event){
     event.preventDefault()
 
-    const isUserNameLogged = allUsers.filter(user => user.userName === logUser)
-    
-    if(!isUserNameLogged.length){
-      userLoginInput.style.color = "#bb3b3b"
+    if(!logUser){
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordLoginInput.style.color = "black"
+      return 0
+    }
+
+    const isUserNameLogged = allUsers.filter(user => user.userName === logUser)
+  
+    if(!isUserNameLogged.length){
+      userLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
       passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
+      userLoginInput.placeholder = "No existe una cuenta con este nombre"
+      userLoginInput.value = ""
+      userLoginInput.classList.add("redPlaceholder")
       return 0
     }
 
@@ -85,16 +87,21 @@ const LoginModal = ({
       setUserName(logUser)
       
       setOpenLoginModal(false)
-      userLoginInput.style.color = "black"
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordLoginInput.style.color = "black"
       passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       body.style.overflowY = "inherit"
+      registerUser.placeholder = "Usuario"
+      registerUser.classList.remove("redPlaceholder")
+      passwordLoginInput.placeholder = "Contraseña"
+      passwordLoginInput.classList.remove("redPlaceholder")
+
     } catch(e){
-      userLoginInput.style.color = "black"
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordLoginInput.style.color = "#bb3b3b"
       passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
+      passwordLoginInput.placeholder = "Contraseña invalida"
+      passwordLoginInput.value = ""
+      passwordLoginInput.classList.add("redPlaceholder")
+      return 0
     }
     setLogUser()
     setLogPassword()
@@ -114,28 +121,31 @@ const LoginModal = ({
     }
     if(!!isUserNameLogged.length){
       registerUser.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "inline"
+      registerUser.placeholder = "Ya existe una cuenta con este nombre"
+      registerUser.value = ""
+      registerUser.classList.add("redPlaceholder")
       return 0
     }
     if(!password){
       registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
+      registerUser.placeholder = "Nombre de cuenta"
+      registerUser.classList.remove("redPlaceholder")
       return 0
     }
     if(!passwordAgain){
       registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
       return 0
     }
     if(password !== passwordAgain){
       registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "inline"
+      passwordRegisterAgain.placeholder = "Las contraseñas son diferentes"
+      passwordRegisterAgain.value = ""
+      passwordRegisterAgain.classList.add("redPlaceholder")
       return 0
     }
     if(!name){
@@ -143,8 +153,8 @@ const LoginModal = ({
       passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
+      passwordRegisterAgain.placeholder = "Repite la contraseña"
+      passwordRegisterAgain.classList.remove("redPlaceholder")
       return 0
     }
     if(!email){
@@ -153,8 +163,6 @@ const LoginModal = ({
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
       return 0
     }
     if(!validator.isEmail(email)){
@@ -163,8 +171,9 @@ const LoginModal = ({
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
+      emailRegister.placeholder = "No es un email correcto"
+      emailRegister.value = ""
+      emailRegister.classList.add("redPlaceholder")
       return 0
     }
     if(!!isEmailLogged.length){
@@ -173,9 +182,9 @@ const LoginModal = ({
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
-      msjEmailId.style.display = "inline"
+      emailRegister.placeholder = "Ya existe una cuenta con este email"
+      emailRegister.value = ""
+      emailRegister.classList.add("redPlaceholder")
       return 0
     }
     if(!phone){
@@ -185,9 +194,8 @@ const LoginModal = ({
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       emailRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       phoneRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
-      msjEmailId.style.display = "none"
+      passwordRegisterAgain.placeholder = "Email"
+      passwordRegisterAgain.classList.remove("redPlaceholder")
       return 0
     }
     if(isNumber === null){
@@ -197,15 +205,10 @@ const LoginModal = ({
       nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       emailRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       phoneRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      msjUserId.style.display = "none"
-      msjAgain.style.display = "none"
-      msjEmailId.style.display = "none"
-      msjPhoneId.style.display = "inline"
       return 0
     }
 
     phoneRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-    msjPhoneId.style.display = "none"
 
     const completeUser = {
       userName: logUser,
@@ -298,14 +301,13 @@ const LoginModal = ({
               <h4>Bienvenido a nuestro sitio Web.</h4>
               <form>
                 <InputLabel>
-                  <MsjUser id="msjUser">Ya existe una cuenta con este usuario</MsjUser>
                   <label htmlFor="user" className="" />
                   <input
                     name="user"
                     type="text"
                     className=""
                     id="userRegister"
-                    placeholder="Nombre para tu cuenta"
+                    placeholder="Nombre de tu cuenta"
                     onChange={({target}) => setLogUser(target.value)}
                     required
                   />
@@ -323,7 +325,6 @@ const LoginModal = ({
                   />
                 </InputLabel>
                 <InputLabel>
-                  <MsjAgain id="msjAgain">Las contraseñas son diferentes</MsjAgain>
                   <label htmlFor="passwordAgain" className="" />
                   <input
                     name="passwordAgain"
@@ -348,7 +349,6 @@ const LoginModal = ({
                   />
                 </InputLabel>
                 <InputLabel>
-                  <MsjEmail id="msjEmail">Ya existe una cuenta con este email</MsjEmail>
                   <label htmlFor="email" className="" />
                   <input
                     name="email"
@@ -361,7 +361,6 @@ const LoginModal = ({
                   />
                 </InputLabel>
                 <InputLabel>
-                  <MsjPhoneId id="msjPhoneId">Solo numeros permitidos</MsjPhoneId>
                   <label htmlFor="phone" className="" />
                   <input
                     name="phone"
@@ -603,54 +602,6 @@ const CloseModalButton = styled.div`
 const InputLabel = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const MsjUser = styled.div`
-  display: none;
-  position: absolute;
-  height: 25px;
-  top: 180px;
-  left: 20%;
-  padding-left: 2%;
-  padding-right: 2%;
-  font-size: 1.1rem;
-  background-color: white;
-`
-
-const MsjAgain = styled.div`
-  display: none;
-  position: absolute;
-  height: 25px;
-  top: 368px;
-  left: 39%;
-  padding-left: 2%;
-  padding-right: 2%;
-  font-size: 1.1rem;
-  background-color: white;
-`
-
-const MsjEmail = styled.div`
-  display: none;
-  position: absolute;
-  height: 25px;
-  bottom: 220px;
-  left: 17%;
-  padding-left: 2%;
-  padding-right: 2%;
-  font-size: 1.1rem;
-  background-color: white;
-`
-
-const MsjPhoneId = styled.div`
-  display: none;
-  position: absolute;
-  height: 25px;
-  bottom: 125px;
-  left: 39%;
-  padding-left: 2%;
-  padding-right: 2%;
-  font-size: 1.1rem;
-  background-color: white;
 `
 
 export { LoginModal }

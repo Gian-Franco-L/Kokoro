@@ -136,7 +136,6 @@ const Layout = () =>{
           setItemToDataBase(cartItems)
           setItemCartAux(cartItems)
         }
-        
       })
     }
     setArticlesCount(15)
@@ -159,8 +158,6 @@ const Layout = () =>{
     <LayoutContainer white={white}>
       <HeaderBootstrap
         showCart={showCart}
-        searchedArticles={searchedArticles}
-        openArticlesModal={openArticlesModal}
         cartSwitch={cartSwitch}
         setCartSwitch={setCartSwitch}
         articlesCart={articlesCart}
@@ -169,9 +166,18 @@ const Layout = () =>{
         setItemCartAux={setItemCartAux}
         onOffCartButton={onOffCartButton}
         setOnOffCartButton={setOnOffCartButton}
-        setCartFilledOrNot={setCartFilledOrNot}
         userName={userName}
         setUserName={setUserName}
+        setPassword={setPassword}
+        setPasswordAgain={setPasswordAgain}
+        setName={setName}
+        setEmail={setEmail}
+        setPhone={setPhone}
+        setEmails={setEmails}
+        setLogUser={setLogUser}
+        setToken={setToken}
+        setAccess={setAccess}
+        setLogPassword={setLogPassword}
         access={access}
         setOpenLoginModal={setOpenLoginModal}
         loginRegisterSwitch={loginRegisterSwitch}

@@ -7,7 +7,7 @@ const PurchaseInfo = ({ purchase }) =>{
       <Img img={purchase.img}/>
       <Info>
         <Name>{purchase.name}</Name>
-        <Amount>Cantidad: {purchase.amount}</Amount>
+        <div>Cantidad: {purchase.amount}</div>
         <Price>Precio: Ar${purchase.price}</Price>
       </Info>
     </PurchaseInfoContainer>
@@ -16,7 +16,7 @@ const PurchaseInfo = ({ purchase }) =>{
 
 const PurchaseInfoContainer = styled.div`
   display: flex;
-  width: 400px;
+  width: 390px;
   padding-top: 2%;
   padding-bottom: 2%;
   font-size: clamp(.5rem, 5vw, 1.3rem);
@@ -45,7 +45,6 @@ const Info = styled.div`
 const Name = styled.div`
   height: 40%;
 `
-const Amount = styled.div``
 const Price = styled.div`
   height: 25%;
 `

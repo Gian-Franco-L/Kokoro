@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react"
-import { PurchaseComponent } from "../Components/PurchaseComponent/PurchaseComponent"
+import { PurchaseComponent } from "../Components/PurchaseProfile/PurchaseProfile"
 import { AppContext } from "../Context/AppContext"
 import {BsInfoSquare} from "react-icons/bs"
+import {MdOutlineChangeCircle} from "react-icons/md"
 import { Link } from "wouter"
 import { SwitchModal } from "../Components/SwitchModal/SwitchModal"
 import userService from "../Services/user"
@@ -81,7 +82,7 @@ const Profile = () => {
                 <UserInfoItem>Nombre: <div>{name}</div></UserInfoItem>
                 <UserInfoItem>Email: <div>{email}</div></UserInfoItem>
                 <UserInfoItem>Contacto: <div>{phone}</div></UserInfoItem>
-                <UserInfoItem><button onClick={nameSwitch}>Cambiar nombre de cuenta</button></UserInfoItem>
+                <ChangeCircle onClick={nameSwitch}/>
               </BorderContainer>
             </UserInfo>
             <UserPurchases>
@@ -194,7 +195,7 @@ const UserPurchases = styled.div`
   }
 `
 const WhiteContainer = styled.div`
-  height: 100%;
+  height: 42vh;
   width: 100%;
   background-color: white;
   border-radius: 10px;
@@ -218,25 +219,31 @@ const EmptyIcon = styled(BsInfoSquare)`
 
 const UserInfoItem = styled.div`
   display: flex;
-  font-size: clamp(.5rem, 6vw, 1.3rem);
+  font-size: clamp(.5rem, 6vw, 1.4rem);
   padding-left: 10px;
   margin-left: 6%;
 
   div{
     margin-left: 5%;
   }
-  button{
-    height: 45px;
-    border: none;
-    box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
-    background-color: white;
-    border-radius: 30px;
-    :hover{
-      transform: scale(1.05)
-    }
+`
+
+const ChangeCircle = styled(MdOutlineChangeCircle)`
+  position: absolute;
+  top: 34.5%;
+  left: 2%;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  :hover{
+    color: #ab6f4a;
+    transform: rotateZ(180deg);
+    transition: .5s;
   }
   @media only screen and (max-width: 350px){
-    margin-left: 0%;
+    top: 35%;
+    height: 20px;
+    width: 20px;
   }
 `
 

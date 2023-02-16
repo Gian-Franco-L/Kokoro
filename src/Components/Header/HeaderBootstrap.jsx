@@ -14,8 +14,6 @@ import { Searched } from "../SearchedContainer/Searched/Searched"
 
 function HeaderBootstrap({
   showCart,
-  searchedArticles,
-  openArticlesModal,
   cartSwitch,
   setCartSwitch,
   articlesCart,
@@ -24,9 +22,18 @@ function HeaderBootstrap({
   setItemCartAux,
   onOffCartButton,
   setOnOffCartButton,
-  setCartFilledOrNot,
   userName,
   setUserName,
+  setPassword,
+  setPasswordAgain,
+  setName,
+  setEmail,
+  setPhone,
+  setEmails,
+  setLogUser,
+  setToken,
+  setAccess,
+  setLogPassword,
   access,
   setOpenLoginModal,
   loginRegisterSwitch,
@@ -42,6 +49,17 @@ function HeaderBootstrap({
   const handleLoginOut = () =>{
     let status = "inLogOut"
     setUserName(null)
+    setPassword(null)
+    setPasswordAgain(null)
+    setName(null)
+    setEmail(null)
+    setPhone(null)
+    setEmails(null)
+    setLogUser(null)
+    setToken(null)
+    setAccess(null)
+    setLogPassword(null)
+
     window.localStorage.removeItem('loggedUser')
     openCloseCart(
       showCart,

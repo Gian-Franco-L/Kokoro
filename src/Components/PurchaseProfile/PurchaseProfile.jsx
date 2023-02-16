@@ -35,7 +35,6 @@ const PurchaseContainer = styled.div`
 `
 const BorderContainer = styled.div`
   display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
   border: 2px solid #CEAB93;
@@ -46,26 +45,29 @@ const BorderContainer = styled.div`
 `
 
 const Total = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - 5px);
   width: 20%;
-  right: 0;
-  font-size: clamp(.5rem, 10vw, 1.3rem);
+  font-size: clamp(.5rem, 10vw, 1.4rem);
   border-left: 2px solid #CEAB93;
+
   @media only screen and (max-width: 820px){
     position: relative;
+    height: 50px;
     width: 100%;
+    padding-top: 10px;
     border-left: none;
     border-top: 2px solid #CEAB93;
-    height: 50px;
   }
 `
 const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 2px;
+  width: 80%;
+  @media only screen and (max-width: 820px){
+    width: 100%;
+  }
 `
 export { PurchaseComponent }
