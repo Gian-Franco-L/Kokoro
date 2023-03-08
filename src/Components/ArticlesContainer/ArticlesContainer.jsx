@@ -13,7 +13,7 @@ const ArticlesContainer = ({ showArticles, articleChoice, articulos, tipes }) =>
       {/* <Tittle id="top">Categoria: {articleChoice}</Tittle> */}
       {/* <BackButton articulos={articulos} tipes={tipes} /> */}
       <div>
-        <Filter />
+        {/* <Filter /> */}
         <ItemsContainer>
           {showArticles.length !== 0 ? showArticles.map(item =>(
             <Items 

@@ -33,11 +33,13 @@ const Search = ({ searchRef }) => {
 const SearchInput = styled.div`
   position: absolute;
   top: 25%;
-  left: 32%;
+  /* left: 30%; */
+  left: 50%;
   display: flex;
   height: 45px;
-  width: 24.5%;
-
+  /* width: 24.5%; */
+  width: 440px;
+  
   input{
     outline: none;
     width: 100%;
@@ -61,6 +63,12 @@ const SearchInput = styled.div`
     top: 0%;
     left: 0%;
     margin-top: 20px;
+  }
+  @media only screen and (max-width: 1515px) {
+    /* left: 35%; */
+  }
+  @media only screen and (max-width: 1320px) {
+    /* left: 37%; */
   }
 `
 

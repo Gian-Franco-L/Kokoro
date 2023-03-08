@@ -3,8 +3,8 @@ import { useState } from "react"
 const useContext = () =>{
   const [totalArticles, setTotalArticles] = useState([])
   const [showArticles, setShowArticles] = useState([])
-  const [articlesLimitCount, setArticlesLimitCount] = useState(12)
-  const [articlesCount, setArticlesCount] = useState(12)
+  const [articlesLimitCount, setArticlesLimitCount] = useState(15)
+  const [articlesCount, setArticlesCount] = useState(15)
   const [articlesCart, setArticlesCart] = useState([])
   const [itemCartAux, setItemCartAux] = useState([])
   const [itemToDataBase, setItemToDataBase] = useState(null)

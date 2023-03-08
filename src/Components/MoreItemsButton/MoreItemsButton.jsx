@@ -14,7 +14,6 @@ const MoreItemsButton = ({
   pageCount,
   setPageCount
 }) =>{
-
   return(
     <ButtonsContainer>
       {articlesCount !== 15

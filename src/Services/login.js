@@ -1,10 +1,10 @@
-import axios from 'axios'
+// import axios from 'axios'
 
-const baseUrl = 'http://localhost:8000/api/login/'
+// const baseUrl = 'http://localhost:8000/api/login/'
 
-const login = async credentials =>{
-  const { data } = await axios.post(baseUrl, credentials)
-  return data
-}
+// const login = async credentials =>{
+//   const { data } = await axios.post(baseUrl, credentials)
+//   return data
+// }
 
-export default { login }
+// export default { login }

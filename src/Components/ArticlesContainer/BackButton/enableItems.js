@@ -11,11 +11,11 @@ export default function enabledItems(
     tipes.current.className = "apearTipeOfArticles"
     tipes.current.style.display = "flex"
     articulos.current.style.display = "none"
-    for(let i=0; i<12; i++){
+    for(let i=0; i<15; i++){
       articlesAux.push(totalArticles[i])
     }
     setShowArticles(articlesAux)
-    setArticlesCount(12)
+    setArticlesCount(15)
     setPageCount(1)
   }, 950)
 }

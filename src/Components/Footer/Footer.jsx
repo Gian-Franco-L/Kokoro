@@ -1,72 +1,123 @@
 import React from "react"
 import styled from "styled-components"
-import whatsapp from "../../img/whatsapp-brands.svg"
-import facebook from "../../img/facebook-brands.svg"
-import instagram from "../../img/instagram-brands.svg"
-import { MdDriveFileMove } from "react-icons/md"
+import { AiOutlineFacebook } from "react-icons/ai"
+import { AiOutlineInstagram } from "react-icons/ai"
+import { AiOutlineWhatsApp } from "react-icons/ai"
+import mercadopagoImg from "../../img/mercadopago2.jpg"
 
 const Footer = () =>{
   return(
     <MainContainer>
-      <div>
-        <AboutMe>Acerca de mi</AboutMe>
-        <Items>hola soy la moniquita bordadora</Items>
-      </div>
-      <div>
-        <p></p>
-      </div>
-      <Social>
-        <Contact>Contactame</Contact>
-        <SocialMedia>
-          <a href="/"><img src={facebook} alt="face" /></a>
-          <a href="/"><img src={instagram} alt="insta" /></a>
-          <a href="/"><img src={whatsapp} alt="wpp" /></a>
-        </SocialMedia>
-      </Social>
+      <Asd>
+        <Flex>
+          <h4>Acerca de mi</h4>
+          <h6>Bordo desde los 4 años y odio a Julieta de gh</h6>
+        </Flex>
+        <Flex>
+          <h4>Formas de pago</h4>
+          <img src={mercadopagoImg} alt="" />
+        </Flex>
+      </Asd>
+      <Asd>
+        <Flex>
+          <h4>Envio</h4>
+          <h6>A convenir con el por wpp luego de su compra.</h6>
+        </Flex>
+        <Social>
+          <Contact>Contacto</Contact>
+          <SocialMedia>
+            <a href="/"><FaceBook /></a>
+            <a href="/"><Instagram /></a>
+            <a href="/"><WhatsApp /></a>
+          </SocialMedia>
+        </Social>
+      </Asd>
     </MainContainer>
   )
 }
 
 const MainContainer = styled.div`
   display: flex;
-  height: 250px;
-  width: 100%;
   color: black;
   background-color: white;
   justify-content: space-around;
   box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
   margin-top: 6%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  @media only screen and (max-width: 730px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
-const AboutMe = styled.h2`
-  font-size: 1.7rem;
+const Asd = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 55%;
+  justify-content: space-around;
+  @media only screen and (max-width: 730px) {
+    width: 100%;
+  }
 `
 
-const Items = styled.p`
-  margin-top: 10px;
-  max-width: 250px;
-  font-size: 1.3rem;
-`
+const Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 350px;
+  img{
+    height: 35px;
+  }
 
-const Contact = styled.h2`
-  font-size: 1.7rem;
+  h4{
+    font-family: 'Festive', cursive;
+    font-size: 3rem;
+  }
+  @media only screen and (max-width: 1415px) {
+    margin-bottom: 5%;
+  }
+  @media only screen and (max-width: 730px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2%;
+  }
 `
 
 const Social = styled.div`
+  width: 350px;
+`
+
+const Contact = styled.h4`
+  text-align: center;
+  font-family: 'Festive', cursive;
+  font-size: 2.5rem;
 `
 
 const SocialMedia = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 200px;
-  width: 60px;
-  margin-top: 10px;
+  justify-content: space-evenly
+`
 
-  img{
-    height: 50px;
-    width: 50px;
-    margin-bottom: 20px;
-  }
+const FaceBook = styled(AiOutlineFacebook)`
+  height: 30px;
+  width: 30px;
+  color: black;
+`
+
+const Instagram = styled(AiOutlineInstagram)`
+  height: 30px;
+  width: 30px;
+  color: black;
+`
+
+const WhatsApp = styled(AiOutlineWhatsApp)`
+  height: 30px;
+  width: 30px;
+  color: black;
 `
 
 export { Footer }

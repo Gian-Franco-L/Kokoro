@@ -109,7 +109,7 @@ function HeaderBootstrap({
                 <LogOutButton onClick={handleLoginOut}>Cerrar Sesion</LogOutButton>
               </ProfileLogOut>
             }
-            {!userName &&
+            {/* {!userName &&
               <>
                 <LoginButton id="loginButton" ref={acountRef} onClick={() => openCloseLoginRegister(
                   loginRegisterSwitch,
@@ -121,13 +121,13 @@ function HeaderBootstrap({
                   searchRef
                 )}>Cuenta</LoginButton>
               </>
-            }
+            } */}
             {/* <NavDropdown title="Perfil" id="navbarScrollingDropdown" className="profile">
               <NavDropdown.Item>Iniciar sesion</NavDropdown.Item>
               <NavDropdown.Item href="/profile">Informacion y Compras</NavDropdown.Item>
               <NavDropdown.Item>Cerrar sesion</NavDropdown.Item>
             </NavDropdown> */}
-            <CartButton href="#" className="cart" id="cartButton" ref={cartButtonRef} onClick={() => openCloseCart(
+            {/* <CartButton href="#" className="cart" id="cartButton" ref={cartButtonRef} onClick={() => openCloseCart(
               showCart,
               cartSwitch,
               setCartSwitch,
@@ -142,7 +142,7 @@ function HeaderBootstrap({
               acountRef,
               searchRef,
               buyButton
-            )}>Carrito</CartButton>
+            )}>Carrito</CartButton> */}
           </Nav>
           {/* <Form className="d-flex searchForm">
             <Form.Control
@@ -193,7 +193,8 @@ const Name = styled.div`
 	font-family: 'Festive', cursive;
   font-size: clamp(.5rem, 12vw, 4rem);
   top: -8%;
-  left: 3%;
+  /* left: 3%; */
+  left: 8%;
   @media only screen and (max-width: 500px) {
     top: 10%;
     left: 3%;
@@ -201,6 +202,9 @@ const Name = styled.div`
   @media only screen and (max-width: 280px) {
     top: 10%;
     font-size: 2.7rem;
+  }
+  @media only screen and (max-width: 1220px) {
+    left: .5%;
   }
 `
 const NameInfo = styled.div`
@@ -216,6 +220,9 @@ const NameInfo = styled.div`
   }
   @media only screen and (max-width: 280px) {
     font-size: 0rem;
+  }
+  @media only screen and (max-width: 1130px) {
+    top: 60%;
   }
 `
 
@@ -252,6 +259,9 @@ const CartButton = styled.button`
       color: inherit
     }
   }
+  @media only screen and (max-width: 1400px) {
+    right: 5%;
+  }
 `
 
 const ContainerToDisable = styled.div`
@@ -273,7 +283,7 @@ const ProfileLink = styled(Link)`
   position: absolute;
   padding-top: 5px;
   top: 20%;
-  right: 33%;
+  right: 35%;
   font-size: 1.5rem;
   width: 75px;
   cursor: pointer;
@@ -290,6 +300,9 @@ const ProfileLink = styled(Link)`
     right: 0%;
     margin-top: 10px;
   }
+  @media only screen and (max-width: 1400px) {
+    right: 30%;
+  }
 `
 
 const LogOutButton = styled.div`
@@ -297,7 +310,7 @@ const LogOutButton = styled.div`
   position: absolute;
   padding-top: 5px;
   top: 20%;
-  right: 22%;
+  right: 25%;
   font-size: 1.5rem;
   width: 145px;
   cursor: pointer;
@@ -312,6 +325,9 @@ const LogOutButton = styled.div`
     right: 0%;
     margin-top: 10px;
   }
+  @media only screen and (max-width: 1400px) {
+    right: 17%;
+  }
 `
 
 const LoginButton = styled.button`
@@ -320,7 +336,7 @@ const LoginButton = styled.button`
   width: 85px;
   padding-top: 5px;
   top: 20%;
-  right: 27.7%;
+  right: 25%;
   font-size: 1.5rem;
   color: #595959;
   background-color: white;

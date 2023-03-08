@@ -8,14 +8,14 @@ import { TipeOfArticles } from "../Components/TipeOfArticles/TipeOfArticles"
 import { Footer } from "../Components/Footer/Footer"
 import { ArticlesContainer } from "../Components/ArticlesContainer/ArticlesContainer"
 import { MoreItemsButton } from "../Components/MoreItemsButton/MoreItemsButton"
-import { ShoppingCart } from "../Components/ShoppingCart/ShoppingCart"
+// import { ShoppingCart } from "../Components/ShoppingCart/ShoppingCart"
 import { ArticlesModal } from "../Components/ArticlesModal/ArticlesModal"
-import { LoginModal } from "../Components/LoginModal/LoginModal"
+// import { LoginModal } from "../Components/LoginModal/LoginModal"
 import { SearchedContainer } from "../Components/SearchedContainer/SearchedContainer"
-import { LoginRegister } from "../Components/LoginRegister/LoginRegister"
-import { PurchaseModal } from "../Components/PurchaseModal/PurchaseModal"
+// import { LoginRegister } from "../Components/LoginRegister/LoginRegister"
+// import { PurchaseModal } from "../Components/PurchaseModal/PurchaseModal"
 import productService from "../Services/product"
-import userService from "../Services/user"
+// import userService from "../Services/user"
 import white from "../img/bgwhite1.jpg"
 
 const Layout = () =>{
@@ -120,39 +120,38 @@ const Layout = () =>{
     }
   }, [filterStatus])
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    if(loggedUserJSON){
-      setUserName(JSON.parse(loggedUserJSON).userName)
-      setName(JSON.parse(loggedUserJSON).name)
-      setEmail(JSON.parse(loggedUserJSON).email)
-      setPhone(JSON.parse(loggedUserJSON).phone)
-      setToken(JSON.parse(loggedUserJSON).token)
-      setAccess(JSON.parse(loggedUserJSON).access)
-      userService.getAllUsers().then(res => {
-        const user = res.filter(item => item.userName === userName)
-        if(!!user.length){
-          const cartItems = user[0].cartItems
-          setItemToDataBase(cartItems)
-          setItemCartAux(cartItems)
-        }
-      })
-    }
-    setArticlesCount(15)
-    setPageCount(1)
-  }, [filterStatus, searchedArticles, userName]);
+  // useEffect(() => {
+  //   const loggedUserJSON = window.localStorage.getItem('loggedUser')
+  //   if(loggedUserJSON){
+  //     setUserName(JSON.parse(loggedUserJSON).userName)
+  //     setName(JSON.parse(loggedUserJSON).name)
+  //     setEmail(JSON.parse(loggedUserJSON).email)
+  //     setPhone(JSON.parse(loggedUserJSON).phone)
+  //     setToken(JSON.parse(loggedUserJSON).token)
+  //     setAccess(JSON.parse(loggedUserJSON).access)
+  //     userService.getAllUsers().then(res => {
+  //       const user = res.filter(item => item.userName === userName)
+  //       if(!!user.length){
+  //         const cartItems = user[0].cartItems
+  //         setItemToDataBase(cartItems)
+  //         setItemCartAux(cartItems)
+  //       }
+  //     })
+  //   }
+  //   setArticlesCount(15)
+  //   setPageCount(1)
+  // }, [filterStatus, searchedArticles, userName]);
 
-  useEffect(() =>{
-    
-    if(itemToDataBase !== null && userName){
-      const loggedUserJSON = window.localStorage.getItem('loggedUser')
-      const userJsonName = JSON.parse(loggedUserJSON).userName
-      userService.updateUser({
-        userName: userJsonName,
-        cartItems: itemToDataBase
-      })
-    }
-  }, [itemToDataBase])
+  // useEffect(() =>{
+  //   if(itemToDataBase !== null && userName){
+  //     const loggedUserJSON = window.localStorage.getItem('loggedUser')
+  //     const userJsonName = JSON.parse(loggedUserJSON).userName
+  //     userService.updateUser({
+  //       userName: userJsonName,
+  //       cartItems: itemToDataBase
+  //     })
+  //   }
+  // }, [itemToDataBase])
 
   return(
     <LayoutContainer white={white}>
@@ -196,7 +195,7 @@ const Layout = () =>{
         acountRef={acountRef}
         cartButtonRef={cartButtonRef}
       />
-      <LoginRegister
+      {/* <LoginRegister
         setOpenLoginModal={setOpenLoginModal}
         setLoginRegisterElection={setLoginRegisterElection}
         loginRegisterSwitch={loginRegisterSwitch}
@@ -206,8 +205,8 @@ const Layout = () =>{
         searchRef={searchRef}
         enableDisableCollapse={enableDisableCollapse}
         setModalScroll={setModalScroll}
-      />
-      <ShoppingCart
+      /> */}
+      {/* <ShoppingCart
         showCart={showCart}
         articlesCart={articlesCart}
         itemCartAux={itemCartAux}
@@ -219,7 +218,7 @@ const Layout = () =>{
         acountRef={acountRef}
         setOpenPurchaseModal={setOpenPurchaseModal}
         buyButton={buyButton}
-      />
+      /> */}
       <Carousel>
         <Slides />
       </Carousel>
@@ -267,7 +266,7 @@ const Layout = () =>{
           setLoginRegisterElection={setLoginRegisterElection}
         />
       }
-      {openLoginModal === true &&
+      {/* {openLoginModal === true &&
         <LoginModal
           setOpenLoginModal={setOpenLoginModal}
           userName={userName}
@@ -308,7 +307,7 @@ const Layout = () =>{
           setArticlesCart={setArticlesCart}
           setItemToDataBase={setItemToDataBase}
         />
-      }
+      } */}
     </LayoutContainer>
   )
 }
