@@ -77,7 +77,7 @@ const Items = styled.div`
   overflow-y: scroll;
   max-height: 50vh;
   @media only screen and (max-width: 991px){
-    max-height: 50vh;
+    max-height: 60vh;
   }
   overflow: auto;
   ::-webkit-scrollbar {
@@ -88,10 +88,12 @@ const Items = styled.div`
 const PayPart = styled.div`
   height: 15%;
   margin-top: 5%;
-  margin-bottom: 5%;
+  border-top: 2px solid #AD8B73;
   div{
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    margin-top: 3px;
   }
   @media only screen and (max-width: 991px){
     height: 15%;
@@ -108,6 +110,9 @@ const NoPrice = styled.h3`
   display: flex;
   justify-content: center;
   font-size: 1.4rem;
+  @media only screen and (max-width: 991px){
+    /* padding-top: 1%; */
+  }
 `
 
 const Button = styled.button`

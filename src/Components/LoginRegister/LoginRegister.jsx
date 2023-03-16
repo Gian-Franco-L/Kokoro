@@ -46,10 +46,12 @@ const LoginRegister = ({
   )
 }
 
-const LogIn = styled.div`
-  padding-top: 15px;
-  text-align: center;
+const LogIn = styled.div  `
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
+  padding-top: 1%;
   border-right: 1px solid #AD8B73;
   cursor: pointer;
   :hover{
@@ -61,9 +63,11 @@ const LogIn = styled.div`
 `
 
 const Register = styled.div`
-  padding-top: 15px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
+  padding-top: 1%;
   cursor: pointer;
   :hover{
     font-size: 1.1rem;

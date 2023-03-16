@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 import addToCart from "./addToCart"
 import "../../CSS/Animation.css"
+import { MdClose } from "react-icons/md";
 
 const ArticlesModal = ({
   setOpenArticlesModal,
@@ -26,6 +27,7 @@ const ArticlesModal = ({
 
   const plus = useRef(null)
   let buyButton = useRef(null)
+  const globalImg = useRef(null)
 
   function wrapperFunction(
     payload,
@@ -65,15 +67,23 @@ const ArticlesModal = ({
     setLoginRegisterElection(election)
   }
 
+  function apearGlobalImg(){
+    globalImg.current.style.display = "inline-block"
+  }
+
+  function desapearGlobalImg(){
+    globalImg.current.style.display = "none"
+  }
+
+
   return(
     <Overlay>
       <ModalContainer>
+        <GlobalImage img={modalArticle.img} ref={globalImg} onClick={desapearGlobalImg}/>
         <BorderContainer>
-          <CloseModalButton>
-            <button onClick={changeModalState}>X</button>
-          </CloseModalButton>
+          <CloseModalButton onClick={changeModalState} />
           <ItemName><strong>{modalArticle.item}</strong></ItemName>
-          <Imagen img={modalArticle.img}/>
+          <Imagen img={modalArticle.img} onClick={apearGlobalImg}/>
           <ItemContainer>
             <ItemInfo stuffing={modalArticle.stuffing}>
               <Price><span>Precio</span><span>AR$ {modalArticle.itemsPrice}</span></Price>
@@ -88,7 +98,7 @@ const ArticlesModal = ({
               : null
             }
             {!userName
-              ? <UserWarning stuffing={modalArticle.stuffing}><AltRegisterLogin onClick={() => altRegisterLogin("register")}>Registrate</AltRegisterLogin> o <AltRegisterLogin onClick={() => altRegisterLogin("logIn")}>Inicia sesión</AltRegisterLogin> para realizar una compra</UserWarning>
+              ? <UserWarning stuffing={modalArticle.stuffing}><AltRegisterLogin onClick={() => altRegisterLogin("logIn")}>Inicia sesión</AltRegisterLogin> o <AltRegisterLogin onClick={() => altRegisterLogin("register")}>Registrate</AltRegisterLogin> para realizar una compra</UserWarning>
               : null
             }
         </ItemContainer>
@@ -137,25 +147,29 @@ const BorderContainer = styled.div`
   }
 `
 
-const CloseModalButton = styled.div`
+const CloseModalButton = styled(MdClose)`
   z-index: 1;
   position: absolute;
-  top: 1%;
-  right: 1%;
+  top: 1.5%;
+  right: 1.5%;
+  width: 35px;
+  height: 35px;
   button{
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     :hover{
       color: #ab6f4a;
     }
   }
   @media only screen and (max-width: 991px) {
-    top: 1%;
+    top: 1.5%;
     right: 3%;
+    width: 30px;
+    height: 30px;
   }
   @media only screen and (max-width: 280px) {
-    top: .5%;
+    top: 1.5%;
     right: 3%;
     button{
       font-size: 1.3rem;
@@ -180,6 +194,22 @@ const Imagen = styled.div`
     margin-top: 0px;
     height: 100%;
     width: 75%;
+  }
+`
+
+const GlobalImage = styled.div`
+  display: none;
+  @media only screen and (max-width: 991px) {
+    z-index: 2;
+    position: absolute;
+    height: 99.3%;
+    width: 98.3%;
+    border-radius: 30px;
+    background-image: url(${props => props.img});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #FFF;
   }
 `
 
@@ -245,7 +275,7 @@ const Price = styled.div`
     border: none;
   }
   @media only screen and (max-width: 991px) {
-    height: 50px;
+    height: 40px;
   }
 `
 const Size = styled.div`
@@ -262,12 +292,12 @@ const Size = styled.div`
     border: none;
   }
   @media only screen and (max-width: 991px) {
-    height: 50px;
+    height: 40px;
   }
 `
 const Material = styled.div`
   display: flex;
-  height: 90px;
+  min-height: 90px;
   align-items: center;
   justify-content: space-around;
   background: linear-gradient(90deg, #d0d0d0 50%, #e0e0e0 50%) 0px 0px;
@@ -281,7 +311,7 @@ const Material = styled.div`
     padding-right: 2%;
   }
   @media only screen and (max-width: 991px) {
-    height: 65px;
+    min-height: 40px;
   }
 `
 const Stuffing = styled.div`
@@ -298,7 +328,7 @@ const Stuffing = styled.div`
     border: none;
   }
   @media only screen and (max-width: 991px) {
-    height: 50px;
+    height: 40px;
   }
 `
 
@@ -330,15 +360,18 @@ const PlusOne = styled.div`
   font-size: 1.3rem;
   color: rgba(150, 100, 70, 0);
   @media only screen and (max-width: 991px) {
+    font-size: 1.5rem;
     margin-bottom: 0%;
-    margin-left: 80%;
+    margin-left: 60%;
   }
 `
 
 const UserWarning = styled.p`
   text-align: center;
+  font-size: 1.5rem;
   @media only screen and (max-width: 991px) {
     margin-top: 10px;
+    font-size: 1.1rem;
   }
   ${props => props.stuffing === "none" ? "margin-top: 20%" : "margin-top: 10%"}
 `

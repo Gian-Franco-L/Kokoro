@@ -82,6 +82,9 @@ const Slide = styled.div`
   img {
       width: 100%;
   }
+  @media only screen and (max-width: 991px){
+    max-height: 100vh;
+  }
 `
 
 const ButtonsCarousel = styled.div`

@@ -43,7 +43,8 @@ function HeaderBootstrap({
   acountRef,
   cartButtonRef,
   searchRef,
-  buyButton
+  buyButton,
+  ProfileLogOutRef
 }) {
 
   const handleLoginOut = () =>{
@@ -76,6 +77,7 @@ function HeaderBootstrap({
       acountRef,
       searchRef,
       buyButton,
+      ProfileLogOutRef,
       status
     )
   }
@@ -100,16 +102,16 @@ function HeaderBootstrap({
             <ContainerToDisable user={userName} ref={searchRef}/>
             {/* <Nav.Link href="#action2" className="signIn">Iniciar Sesion</Nav.Link> */}
             {userName &&
-              <ProfileLogOut>
+              <ProfileLogOut ref={ProfileLogOutRef}>
                 {access === "no" 
                   ? <ProfileLink href="/profile">Perfil</ProfileLink>
                   : <ProfileLink href="/list">Lista</ProfileLink>
                 }
-                
+                <Slash>/</Slash>
                 <LogOutButton onClick={handleLoginOut}>Cerrar Sesion</LogOutButton>
               </ProfileLogOut>
             }
-            {/* {!userName &&
+            {!userName &&
               <>
                 <LoginButton id="loginButton" ref={acountRef} onClick={() => openCloseLoginRegister(
                   loginRegisterSwitch,
@@ -121,13 +123,13 @@ function HeaderBootstrap({
                   searchRef
                 )}>Cuenta</LoginButton>
               </>
-            } */}
+            }
             {/* <NavDropdown title="Perfil" id="navbarScrollingDropdown" className="profile">
               <NavDropdown.Item>Iniciar sesion</NavDropdown.Item>
               <NavDropdown.Item href="/profile">Informacion y Compras</NavDropdown.Item>
               <NavDropdown.Item>Cerrar sesion</NavDropdown.Item>
             </NavDropdown> */}
-            {/* <CartButton href="#" className="cart" id="cartButton" ref={cartButtonRef} onClick={() => openCloseCart(
+            <CartButton href="#" className="cart" id="cartButton" ref={cartButtonRef} onClick={() => openCloseCart(
               showCart,
               cartSwitch,
               setCartSwitch,
@@ -141,8 +143,9 @@ function HeaderBootstrap({
               loginRegisterSwitch,
               acountRef,
               searchRef,
-              buyButton
-            )}>Carrito</CartButton> */}
+              buyButton,
+              ProfileLogOutRef
+            )}>Carrito</CartButton>
           </Nav>
           {/* <Form className="d-flex searchForm">
             <Form.Control
@@ -193,18 +196,22 @@ const Name = styled.div`
 	font-family: 'Festive', cursive;
   font-size: clamp(.5rem, 12vw, 4rem);
   top: -8%;
-  /* left: 3%; */
-  left: 8%;
+  left: 3%;
+  @media only screen and (max-width: 1220px) {
+    position: relative;
+    left: .5%;
+  }
+  @media only screen and (max-width: 991px) {
+    top: 10%;
+  }
   @media only screen and (max-width: 500px) {
+    position: absolute;
     top: 10%;
     left: 3%;
   }
   @media only screen and (max-width: 280px) {
     top: 10%;
     font-size: 2.7rem;
-  }
-  @media only screen and (max-width: 1220px) {
-    left: .5%;
   }
 `
 const NameInfo = styled.div`
@@ -242,6 +249,9 @@ const CartButton = styled.button`
     color: #ab6f4a;
     transition: 0.3s;
   }
+  @media only screen and (max-width: 1400px) {
+    right: 5%;
+  }
   @media only screen and (max-width: 991px) {
     position: relative;
     margin-left: 2%;
@@ -259,9 +269,6 @@ const CartButton = styled.button`
       color: inherit
     }
   }
-  @media only screen and (max-width: 1400px) {
-    right: 5%;
-  }
 `
 
 const ContainerToDisable = styled.div`
@@ -275,7 +282,31 @@ const ContainerToDisable = styled.div`
 const ProfileLogOut = styled.div`
   display: flex;
   margin-left: 2%;
-  margin-bottom: 1px;
+  margin-top: 10px;
+`
+
+const Slash = styled.div`
+  display: none;
+  @media only screen and (max-width: 991px) {
+    z-index: 1;
+    display: inline;
+    position: relative;
+    margin-left: 5%;
+    top: 20%;
+    padding-top: 5px;
+    right: 0%;
+    margin-top: 10px;
+    color: #595959;
+    font-size: 1.5rem;
+    text-decoration: none;
+
+  }
+  @media only screen and (max-width: 500px) {
+    position: relative;
+    margin-left: 2%;
+    right: 0%;
+    margin-top: 10px;
+  }
 `
 
 const ProfileLink = styled(Link)`
@@ -294,14 +325,14 @@ const ProfileLink = styled(Link)`
     color: #ab6f4a;
     transition: 0.3s;
   } 
+  @media only screen and (max-width: 1400px) {
+    right: 30%;
+  }
   @media only screen and (max-width: 991px) {
     position: relative;
     margin-left: 2%;
     right: 0%;
     margin-top: 10px;
-  }
-  @media only screen and (max-width: 1400px) {
-    right: 30%;
   }
 `
 
@@ -319,14 +350,15 @@ const LogOutButton = styled.div`
     color: #ab6f4a;
     transition: 0.3s;
   }
-  @media only screen and (max-width: 991px) {
-    position: relative;
-    margin-left: 5%;
-    right: 0%;
-    margin-top: 10px;
-  }
+  
   @media only screen and (max-width: 1400px) {
     right: 17%;
+  }
+  @media only screen and (max-width: 991px) {
+    position: relative;
+    margin-left: 9%;
+    right: 0%;
+    margin-top: 10px;
   }
 `
 
@@ -373,10 +405,14 @@ const EnableDisableCollapse = styled.div`
     width: 56px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.3);
-    right: 0%;
-    top: 0%;
+    right: 0.1%;
+    top: 8%;
     margin-right: 12px;
     margin-top: 21px;
+  }
+  @media only screen and (max-width: 500px) {
+    right: 0%;
+    top: 0%;
   }
 `
 

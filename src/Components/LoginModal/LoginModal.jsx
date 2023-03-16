@@ -431,7 +431,7 @@ const BorderContainerLogin = styled.div`
   padding: 2%;
 
   h2{
-    font-size: 4rem;
+    font-size: clamp(3rem, 10vw, 4rem);
     font-family: 'Festive', cursive;
     @media only screen and (max-width: 300px) {
       font-size: 3rem;

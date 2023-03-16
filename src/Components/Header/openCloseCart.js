@@ -13,6 +13,7 @@ const openCloseCart = (
   acountRef,
   searchRef,
   buyButton,
+  ProfileLogOutRef,
   status = "default"
   ) =>{
   let auxContainer = []
@@ -27,10 +28,21 @@ const openCloseCart = (
         if(acountRef.current){
           acountRef.current.setAttribute("disabled", "")
           acountRef.current.style.opacity = "0.5"
+          if (window.matchMedia("(max-width: 991px)").matches) {
+            acountRef.current.style.display = "none"
+          }
         }
         if(searchRef.current){
           searchRef.current.setAttribute("disabled", "")
           searchRef.current.style.opacity = "0.5"
+          if (window.matchMedia("(max-width: 991px)").matches) {
+            searchRef.current.style.display = "none"
+          }
+        }
+        if(ProfileLogOutRef.current){
+          if (window.matchMedia("(max-width: 991px)").matches) {
+            ProfileLogOutRef.current.style.display = "none"
+          }
         }
 
         setTimeout(() =>{
@@ -80,9 +92,20 @@ const openCloseCart = (
       if(acountRef.current){
         acountRef.current.removeAttribute("disabled")
         acountRef.current.style.opacity = "1"
+        if (window.matchMedia("(max-width: 991px)").matches) {
+          acountRef.current.style.display = "inline-block"
+        }
+      }
+      if(ProfileLogOutRef.current){
+        if (window.matchMedia("(max-width: 991px)").matches) {
+          ProfileLogOutRef.current.style.display = "flex"
+        }
       }
       searchRef.current.removeAttribute("disabled")
       searchRef.current.style.opacity = "1"
+      if (window.matchMedia("(max-width: 991px)").matches) {
+        searchRef.current.style.display = "inline-block"
+      }
       
       setTimeout(() =>{
         showCart.current.className = "desapearCart"

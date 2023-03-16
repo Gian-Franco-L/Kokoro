@@ -1,4 +1,4 @@
-export default function searchFunction (event, totalArticles, searchedArticles, setSearchedArticles){
+export default function searchFunction (event, totalArticles, setSearchedArticles){
     let filterItems = totalArticles.filter(value =>{
       const todoText = value.Name.toLowerCase()
       const searchText = event.target.value.toLowerCase()

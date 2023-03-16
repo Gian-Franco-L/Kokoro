@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3f125fd6.css",
-    "main.js": "/static/js/main.6c476ea6.js",
+    "main.css": "/static/css/main.724e7c4e.css",
+    "main.js": "/static/js/main.91fc1528.js",
     "static/media/bgwhite1.jpg": "/static/media/bgwhite1.e2fd503ad5ed3e8fad3f.jpg",
     "static/media/caminos.jpeg": "/static/media/caminos.1fbe5f42ffc29f065351.jpeg",
     "static/media/bolso.jpeg": "/static/media/bolso.d003c668b658ff39c006.jpeg",
@@ -9,15 +9,13 @@
     "static/media/25.jpeg": "/static/media/25.6206c3143b102a333c73.jpeg",
     "static/media/canastas.jpeg": "/static/media/canastas.231e518066c406d5bf9e.jpeg",
     "static/media/tutores.jpeg": "/static/media/tutores.6731c64ac84f50b10760.jpeg",
-    "static/media/instagram-brands.svg": "/static/media/instagram-brands.813fd06b51b26e101fbbdde32e64af13.svg",
-    "static/media/whatsapp-brands.svg": "/static/media/whatsapp-brands.202a5bbf98298b6a0c2c4b46f368fa56.svg",
+    "static/media/portada5.jpeg": "/static/media/portada5.3c4015477d102dbdf285.jpeg",
     "index.html": "/index.html",
-    "static/media/facebook-brands.svg": "/static/media/facebook-brands.c6089f12d8bb287d9dcefca86bac3740.svg",
-    "main.3f125fd6.css.map": "/static/css/main.3f125fd6.css.map",
-    "main.6c476ea6.js.map": "/static/js/main.6c476ea6.js.map"
+    "main.724e7c4e.css.map": "/static/css/main.724e7c4e.css.map",
+    "main.91fc1528.js.map": "/static/js/main.91fc1528.js.map"
   },
   "entrypoints": [
-    "static/css/main.3f125fd6.css",
-    "static/js/main.6c476ea6.js"
+    "static/css/main.724e7c4e.css",
+    "static/js/main.91fc1528.js"
   ]
 }

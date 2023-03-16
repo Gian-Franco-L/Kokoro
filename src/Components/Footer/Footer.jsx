@@ -20,15 +20,15 @@ const Footer = () =>{
       </Asd>
       <Asd>
         <Flex>
-          <h4>Envio</h4>
+          <h4>Envios</h4>
           <h6>A convenir con el por wpp luego de su compra.</h6>
         </Flex>
         <Social>
           <Contact>Contacto</Contact>
           <SocialMedia>
-            <a href="/"><FaceBook /></a>
-            <a href="/"><Instagram /></a>
-            <a href="/"><WhatsApp /></a>
+            <a href="https://www.facebook.com/profile.php?id=100007108849316" target="_blank"><FaceBook /></a>
+            <a href="https://www.instagram.com/monicaszeki/" target="_blank"><Instagram /></a>
+            <a href="https://wa.me/541562965524" target="_blank"><WhatsApp /></a>
           </SocialMedia>
         </Social>
       </Asd>

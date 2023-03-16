@@ -5,7 +5,7 @@ import searchFunction from "./searchFunction"
 import { BsSearch } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
 
-const Search = ({ searchRef }) => {
+const Search = ({ searchRef, searchInput }) => {
 
   const {
     totalArticles,
@@ -19,8 +19,8 @@ const Search = ({ searchRef }) => {
   }
 
   return(
-    <SearchInput>
-      <input ref={searchRef} onChange={(event) => searchFunction(event, totalArticles, searchedArticles, setSearchedArticles)} placeholder="Que estas buscando?"/>
+    <SearchInput ref={searchRef}>
+      <input onChange={(event) => searchFunction(event, totalArticles, setSearchedArticles)} placeholder="Que estas buscando?"/>
       {
         searchedArticles
           ? <CrossIcon onClick={clearSearch}><AiIconClose /></CrossIcon>
@@ -33,12 +33,10 @@ const Search = ({ searchRef }) => {
 const SearchInput = styled.div`
   position: absolute;
   top: 25%;
-  /* left: 30%; */
-  left: 50%;
+  left: 30%;
   display: flex;
   height: 45px;
-  /* width: 24.5%; */
-  width: 440px;
+  width: 24.5%;
   
   input{
     outline: none;
@@ -55,7 +53,12 @@ const SearchInput = styled.div`
         transition: 0.3s;
     } */
   }
-  
+  @media only screen and (max-width: 1515px) {
+    left: 35%;
+  }
+  @media only screen and (max-width: 1320px) {
+    left: 37%;
+  }
   @media only screen and (max-width: 991px) {
     position: relative;
     margin-left: 2%;
@@ -64,17 +67,12 @@ const SearchInput = styled.div`
     left: 0%;
     margin-top: 20px;
   }
-  @media only screen and (max-width: 1515px) {
-    /* left: 35%; */
-  }
-  @media only screen and (max-width: 1320px) {
-    /* left: 37%; */
-  }
 `
 
 const SearchIcon = styled.div`
   position: absolute;
   right: 2%;
+  top: 0%;
   height: 40px;
   width: 35px;
   border-left: 1px solid black;

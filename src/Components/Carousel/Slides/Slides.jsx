@@ -6,13 +6,14 @@ import colgantes from "../../../img/colgante.jpeg"
 import canastas from "../../../img/canastas.jpeg"
 import tutores from "../../../img/tutores.jpeg"
 import caminos from "../../../img/caminos.jpeg"
+import portada from "../../../img/portada5.jpeg"
 import { Slide } from "../../Carousel/Carousel"
 
 const Slides = () =>{
     return(
         <>
           <Slide>
-            <SlideBackground>
+            <SlideBackground img={portada}>
               <Img1 img={bolsos}/>
               <Img2 img={veinticinco}/>
               <Img3 img={colgantes}/>
@@ -50,7 +51,17 @@ const SlideBackground = styled.div`
   width: 100%;
   background-color: #ebe9eb;
   @media only screen and (max-width: 991px) {
-    background-color: black;
+    height: 88vh;
+    margin-top: 65px;
+    background-image: url(${props => props.img});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #FFF;
+  }
+  @media only screen and (max-width: 280px) {
+    height: 100vh;
+    margin-top: 70px;
   }
 `
 const Img1 = styled.div`

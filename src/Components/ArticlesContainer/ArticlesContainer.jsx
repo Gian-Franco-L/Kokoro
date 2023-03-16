@@ -4,6 +4,7 @@ import { Items } from "./Items/Items"
 import { BackButton } from "./BackButton/BackButton"
 import { Filter } from "./Filter/Filter"
 import { v4 as uuidv4 } from "uuid"
+import { Skeletons } from "./Skeletons/Skeletons"
 
 
 const ArticlesContainer = ({ showArticles, articleChoice, articulos, tipes }) =>{
@@ -27,7 +28,7 @@ const ArticlesContainer = ({ showArticles, articleChoice, articulos, tipes }) =>
               key={uuidv4()}
             />
           ))
-          : <ErrorContainer>Cargando...</ErrorContainer>}
+          : <Skeletons />}
         </ItemsContainer>
       </div>
     </ArticleContainer>
@@ -47,7 +48,7 @@ const Tittle = styled.div`
   display: flex;
   height: 10vh;
   width: 30vw;
-  font-size: clamp(6rem, 15vw, 13rem);
+  font-size: clamp(5rem, 15vw, 13rem);
   justify-content: center;
   align-items: center;
   border-bottom: 4px solid black;
@@ -68,19 +69,6 @@ const ItemsContainer = styled.div`
   @media only screen and (max-width: 584px){
     margin-left: 1%;
     margin-right: 1%;
-  }
-`
-
-const ErrorContainer = styled.div`
-  width: 95vw;
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: clamp(2rem, 15vw, 5rem);
-  background-color: #d4d4d4;
-  @media only screen and (max-width: 584px){
-    height: 60vh;
   }
 `
 
