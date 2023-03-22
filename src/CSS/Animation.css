@@ -99,7 +99,7 @@
   justify-content: space-around;
   height: 6.1vh;
   width: 19%;
-  right: 20%;
+  right: 17.6%;
   top: 0%;
   background: linear-gradient(0deg, #ebe9eb 1%, white 100%) 0px 0px;
   border-bottom: 2px solid #AD8B73;
@@ -115,7 +115,7 @@
   justify-content: space-around;
   height: 6.1vh;
   width: 19%;
-  right: 20%;
+  right: 17.6%;
   top: 7.5%;
   background: linear-gradient(0deg, #ebe9eb 1%, white 100%) 0px 0px;
   border-bottom: 2px solid #AD8B73;
@@ -123,6 +123,37 @@
   border-left: 1px solid #AD8B73;
   transition: 1s;
   transition-delay: 0.3s;
+}
+
+@media only screen and (max-width: 1220px) {
+  .apearLoginRegister{
+    z-index: 3;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    height: 6.1vh;
+    width: 19%;
+    right: 18.5%;
+    top: 11%;
+    background: linear-gradient(0deg, #ebe9eb 1%, white 100%) 0px 0px;
+    border-bottom: 2px solid #AD8B73;
+    border-right: 1px solid #AD8B73;
+    border-left: 1px solid #AD8B73;
+    transition: 1s;
+    transition-delay: 0.3s;
+  }
+  .apearCart{
+    z-index: 3;
+    position: fixed;
+    width: 20%;
+    right: 0;
+    top: 11%;
+    background: linear-gradient(0deg, #ebe9eb 1%, white 100%) 0px 0px;
+    border-bottom: 2px solid #AD8B73;
+    border-right: 1px solid #AD8B73;
+    border-left: 1px solid #AD8B73;
+    transition: 1s;
+  }
 }
 
 @media only screen and (max-width: 991px) {

@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { AppContext } from "../../../Context/AppContext"
 import styled from "styled-components"
 import outOfCart from "./outOfCart"
-import { AiOutlineClose } from 'react-icons/ai';
+import { MdClose } from "react-icons/md";
 
 
 const ItemOnCart = ({ item }) =>{
@@ -13,17 +13,26 @@ const ItemOnCart = ({ item }) =>{
   } = useContext(AppContext)
   return(
     <>
+      <Line />
       <NameCantKick>
         <i>{item.name}</i>
         <div>{item.amount>1 ? "x" + item.amount : null}</div>
         <Kick>
-          {item.name.length>0 ? <button onClick={() => outOfCart(item.name, articlesCart, setArticlesCart, setItemToDataBase)}><AiIconClose /></button> : null}
+          {item.name.length>0 ? <button onClick={() => outOfCart(item.name, articlesCart, setArticlesCart, setItemToDataBase)}><Close /></button> : null}
         </Kick>
       </NameCantKick>
       <Price>Precio: AR$ {item.price}</Price>
     </>
   )
 }
+
+const Close = styled(MdClose)`
+  height: 25px;
+  width: 25px;
+  :hover{
+    color: #ab6f4a;
+  }
+`
 
 const NameCantKick = styled.div`
   position: relative;
@@ -40,6 +49,11 @@ const NameCantKick = styled.div`
     margin-left: 5%;
   }
 `
+const Line = styled.div`
+  width: 90%;
+  border-top: 1px solid #AD8B73;
+  margin-left: 5%;
+`
 const Kick = styled.div`
   button{
     border: none;
@@ -51,22 +65,12 @@ const Kick = styled.div`
   }
 `
 
-const AiIconClose = styled(AiOutlineClose)`
-  height: 25px;
-  width: 25px;
-  border-radius: 60px;
-
-  :hover{
-    transform: scale(1.2)
-  }
-`
-
 const Price = styled.div`
   max-width: 87%;
   margin-top: 2%;
   padding-bottom: 3%;
   margin-left: 7%;
-  border-bottom: 1px solid grey;
+  
 `
 
 export { ItemOnCart }

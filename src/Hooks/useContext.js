@@ -39,7 +39,9 @@ const useContext = () =>{
   const [allUsers, setAllUsers] = useState()
   const [modalScroll, setModalScroll] = useState()
   const [wppLink, setWppLink] = useState("https://wa.me/541562965524?text=Hola%20mi%20nombre%20es")
-  
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState()
+  const [newPassword, setNewPassword] = useState()
+
   return{
     showArticles,
     setShowArticles,
@@ -115,7 +117,11 @@ const useContext = () =>{
     modalScroll,
     setModalScroll,
     wppLink,
-    setWppLink
+    setWppLink,
+    forgotPasswordEmail,
+    setForgotPasswordEmail,
+    newPassword,
+    setNewPassword
   }
 }
 

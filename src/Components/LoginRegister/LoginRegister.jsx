@@ -40,8 +40,8 @@ const LoginRegister = ({
 
   return(
     <div className="startingLoginRegister" onClick={openCloseLoginRegister} ref={loginRegisterRef}>
-      <LogIn onClick={() => user("logIn")}><h3>Iniciar Sesion</h3></LogIn>
-      <Register onClick={() => user("register")}><h3>Registrarse</h3></Register>
+      <LogIn onClick={() => user("logIn")}>Iniciar Sesion</LogIn>
+      <Register onClick={() => user("register")}>Registrarse</Register>
     </div>
   )
 }
@@ -53,6 +53,7 @@ const LogIn = styled.div  `
   width: 50%;
   padding-top: 1%;
   border-right: 1px solid #AD8B73;
+  font-size: clamp(.5rem, 2vw, 1rem);
   cursor: pointer;
   :hover{
     font-size: 1.1rem;

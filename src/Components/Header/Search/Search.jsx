@@ -19,8 +19,8 @@ const Search = ({ searchRef, searchInput }) => {
   }
 
   return(
-    <SearchInput ref={searchRef}>
-      <input onChange={(event) => searchFunction(event, totalArticles, setSearchedArticles)} placeholder="Que estas buscando?"/>
+    <SearchInput>
+      <input onChange={(event) => searchFunction(event, totalArticles, setSearchedArticles)} placeholder="Que estás buscando?" ref={searchRef}/>
       {
         searchedArticles
           ? <CrossIcon onClick={clearSearch}><AiIconClose /></CrossIcon>
@@ -78,12 +78,6 @@ const SearchIcon = styled.div`
   border-left: 1px solid black;
 `
 
-const BsIconSearch = styled(BsSearch)`
-  height: 30px;
-  width: 30px;
-  padding-left: 5px;
-`
-
 const AiIconClose = styled(AiOutlineClose)`
   height: 30px;
   width: 30px;
@@ -97,6 +91,12 @@ const CrossIcon = styled.div`
   width: 35px;
   border-left: 1px solid black;
   cursor: pointer;
+`
+
+const BsIconSearch = styled(BsSearch)`
+  height: 30px;
+  width: 30px;
+  padding-left: 5px;
 `
 
 export { Search }

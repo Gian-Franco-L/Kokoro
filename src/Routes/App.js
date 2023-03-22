@@ -3,6 +3,8 @@ import { Layout } from "../Pages/Layout"
 import { NotFound } from "../Pages/NotFound"
 import { Profile } from "../Pages/Profile"
 import { List } from "../Pages/List"
+import { ResetPassword } from "../Pages/ResetPassword"
+import { ForgotPassword } from "../Pages/ForgotPassword"
 import { AppContext } from "../Context/AppContext"
 import { useContext } from "../Hooks/useContext"
 import { Route } from "wouter"
@@ -27,6 +29,13 @@ function App() {
         component={List}
         path="/list"
       />
+      <Route  
+        component={ForgotPassword}
+        path="/forgotpassword"
+      />
+      <Route path="/resetpassword/:id/:token">
+        {params => <ResetPassword id={params.id} token={params.token} />}
+      </Route>
     </AppContext.Provider>
   );
 }

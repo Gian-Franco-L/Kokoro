@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'https://kokoro-backend-db.vercel.app/api/users/'
+const baseUrl = `${process.env}/api/users/`
 
 const createUser = async user =>{
   const { data } = await axios.post(baseUrl, user)
@@ -16,4 +16,5 @@ const updateUser = async credentials =>{
   const { data } = await axios.put(baseUrl, credentials)
   return data
 }
+
 export default { createUser, getAllUsers, updateUser }

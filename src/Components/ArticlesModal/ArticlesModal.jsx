@@ -154,13 +154,9 @@ const CloseModalButton = styled(MdClose)`
   right: 1.5%;
   width: 35px;
   height: 35px;
-  button{
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    font-size: 1.7rem;
-    :hover{
-      color: #ab6f4a;
-    }
+  cursor: pointer;
+  :hover{
+    color: #ab6f4a;
   }
   @media only screen and (max-width: 991px) {
     top: 1.5%;

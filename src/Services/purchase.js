@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = "https://kokoro-backend-db.vercel.app/api/purchases/"
+const baseUrl = `${process.env}/api/purchases/`
 
 const getAllPurchases = () =>{
   const req = axios.get(baseUrl)

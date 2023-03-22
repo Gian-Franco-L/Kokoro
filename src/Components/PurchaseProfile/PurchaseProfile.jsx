@@ -56,7 +56,6 @@ const Total = styled.div`
     position: relative;
     height: 50px;
     width: 100%;
-    padding-top: 10px;
     border-left: none;
     border-top: 2px solid #CEAB93;
   }

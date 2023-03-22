@@ -131,14 +131,15 @@ const Layout = () =>{
       setPhone(JSON.parse(loggedUserJSON).phone)
       setToken(JSON.parse(loggedUserJSON).token)
       setAccess(JSON.parse(loggedUserJSON).access)
-      userService.getAllUsers().then(res => {
-        const user = res.filter(item => item.userName === userName)
-        if(!!user.length){
-          const cartItems = user[0].cartItems
-          setItemToDataBase(cartItems)
-          setItemCartAux(cartItems)
-        }
-      })
+      userService.getAllUsers()
+        .then(res => {
+          const user = res.filter(item => item.userName === userName)
+          if(!!user.length){
+            const cartItems = user[0].cartItems
+            setItemToDataBase(cartItems)
+            setItemCartAux(cartItems)
+          }
+        })
     }
     setArticlesCount(15)
     setPageCount(1)

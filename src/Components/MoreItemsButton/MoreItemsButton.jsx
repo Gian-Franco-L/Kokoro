@@ -33,7 +33,7 @@ const ButtonsContainer= styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 3%;
   a{
     display: flex;
     justify-content: center;

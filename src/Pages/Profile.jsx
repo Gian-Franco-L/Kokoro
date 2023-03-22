@@ -143,7 +143,7 @@ const Tittle = styled.div`
     font-size: clamp(2rem, 13vw, 7rem);
   }
   @media only screen and (max-width: 1230px){
-    margin-top: 7%;
+    margin-top: 12%;
   }
 `
 
@@ -250,7 +250,7 @@ const ChangeCircle = styled(MdOutlineChangeCircle)`
 const Button = styled.div`
   z-index: 1;
   position: absolute;
-  font-size: clamp(.7rem, 1.7vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
   top: 2%;
   left: 2%;
   a{
@@ -259,7 +259,8 @@ const Button = styled.div`
     cursor: pointer;
   }
   @media only screen and (max-width: 820px){
-    top: .5%;
+    top: 1%;
+    left: 2.5%;
   }
 `
 const Error = styled.div`

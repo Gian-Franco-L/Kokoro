@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import NavbarBootstrap from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -10,7 +9,6 @@ import "../../CSS/BootstrapModifier.css"
 import { openCloseCart } from "./openCloseCart"
 import { openCloseLoginRegister } from "./openCloseLoginRegister";
 import { Link } from "wouter"
-import { Searched } from "../SearchedContainer/Searched/Searched"
 
 function HeaderBootstrap({
   showCart,
@@ -82,10 +80,6 @@ function HeaderBootstrap({
     )
   }
 
-  const changeModalState = () =>{
-    setOpenLoginModal(true)
-  }
-
   return (
     <Navbar expand="lg" fixed="top" z-index="2">
       <Container fluid>
@@ -100,7 +94,6 @@ function HeaderBootstrap({
           >
             <NavDropdown.Divider />
             <ContainerToDisable user={userName} ref={searchRef}/>
-            {/* <Nav.Link href="#action2" className="signIn">Iniciar Sesion</Nav.Link> */}
             {userName &&
               <ProfileLogOut ref={ProfileLogOutRef}>
                 {access === "no" 
@@ -108,7 +101,7 @@ function HeaderBootstrap({
                   : <ProfileLink href="/list">Lista</ProfileLink>
                 }
                 <Slash>/</Slash>
-                <LogOutButton onClick={handleLoginOut}>Cerrar Sesion</LogOutButton>
+                <LogOutButton onClick={handleLoginOut}>Cerrar Sesión</LogOutButton>
               </ProfileLogOut>
             }
             {!userName &&
@@ -124,11 +117,6 @@ function HeaderBootstrap({
                 )}>Cuenta</LoginButton>
               </>
             }
-            {/* <NavDropdown title="Perfil" id="navbarScrollingDropdown" className="profile">
-              <NavDropdown.Item>Iniciar sesion</NavDropdown.Item>
-              <NavDropdown.Item href="/profile">Informacion y Compras</NavDropdown.Item>
-              <NavDropdown.Item>Cerrar sesion</NavDropdown.Item>
-            </NavDropdown> */}
             <CartButton href="#" className="cart" id="cartButton" ref={cartButtonRef} onClick={() => openCloseCart(
               showCart,
               cartSwitch,
@@ -147,32 +135,7 @@ function HeaderBootstrap({
               ProfileLogOutRef
             )}>Carrito</CartButton>
           </Nav>
-          {/* <Form className="d-flex searchForm">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              color="red"
-            />
-            <Button>Search</Button>
-          </Form> */}
           <Search searchRef={searchRef}/>
-          {/* {
-						(searchedArticles && !openArticlesModal) &&
-							<SearchedContainer>
-								{searchedArticles.length > 0
-									?	searchedArticles.map(item =>(
-											<Searched 
-												items={item.Name}
-												itemsPrice={item.Price}
-												key={item.Price}
-											/>
-										))
-									: <NoResult>No hay resultados para su busqueda</NoResult>
-								}
-							</SearchedContainer>
-					} */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -198,15 +161,15 @@ const Name = styled.div`
   top: -8%;
   left: 3%;
   @media only screen and (max-width: 1220px) {
-    position: relative;
-    left: .5%;
+    left: 0%;
   }
   @media only screen and (max-width: 991px) {
-    top: 10%;
+    top: 0%;
   }
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 420px) {
+    margin-top: 15px;
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 3%;
   }
   @media only screen and (max-width: 280px) {
@@ -221,15 +184,16 @@ const NameInfo = styled.div`
   font-size: clamp(0.1rem, 3.3vw, 1rem);
   top: 50%;
   left: 105%;
-  @media only screen and (max-width: 400px) {
-    top: 55%;
-    left: 102%;
-  }
-  @media only screen and (max-width: 280px) {
-    font-size: 0rem;
-  }
   @media only screen and (max-width: 1130px) {
     top: 60%;
+  }
+  @media only screen and (max-width: 400px) {
+    font-size: 0rem;
+    top: 55%;
+    left: 102%;
+  }  
+  @media only screen and (max-width: 280px) {
+    font-size: 0rem;
   }
 `
 
@@ -314,7 +278,7 @@ const ProfileLink = styled(Link)`
   position: absolute;
   padding-top: 5px;
   top: 20%;
-  right: 35%;
+  right: 33%;
   font-size: 1.5rem;
   width: 75px;
   cursor: pointer;
@@ -341,7 +305,7 @@ const LogOutButton = styled.div`
   position: absolute;
   padding-top: 5px;
   top: 20%;
-  right: 25%;
+  right: 22%;
   font-size: 1.5rem;
   width: 145px;
   cursor: pointer;
@@ -414,26 +378,6 @@ const EnableDisableCollapse = styled.div`
     right: 0%;
     top: 0%;
   }
-`
-
-const SearchedContainer = styled.div`
-  position: absolute;
-  top: 95%;
-  left: 30.3%;
-  width: 30.6%; 
-  background-color: white;
-  border-bottom: 2px solid #AD8B73;
-`
-
-const NoResult = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80px;
-  width: 97%;
-  background-color: white;
-  border-radius: 10px;
-	font-size: 1.1rem;
 `
 
 export { HeaderBootstrap }

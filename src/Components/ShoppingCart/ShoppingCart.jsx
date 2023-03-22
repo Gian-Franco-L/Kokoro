@@ -52,24 +52,23 @@ const ShoppingCart = ({
           />
         ))}
       </Items>
-      <PayPart>
-        <div>
+      <PayPartContainer>
+        <PayPart>
           <Price>
             {articlesCart.length>0 && userName 
               ? "Total: AR$ "+totalCount(articlesCart)
               : null
             }
           </Price>
-          {(cartFilledOrNot === true && userName && !!articlesCart.length) && <div><Button ref={buyButton} onClick={buy}>Comprar</Button></div>}
-        </div>
+          {(cartFilledOrNot === true && userName && !!articlesCart.length) && <BuyLink ref={buyButton} onClick={buy}><BorderContainer><Button>Comprar</Button></BorderContainer></BuyLink>}
+        </PayPart>
         <NoPrice>
           {cartFilledOrNot === false && "Ingrese un item en el carrito"}
         </NoPrice>
-      </PayPart>
+      </PayPartContainer>
     </div>
   )
 }
-
 
 const Items = styled.div`
   display: flex;
@@ -85,21 +84,22 @@ const Items = styled.div`
   }
 `
 
-const PayPart = styled.div`
+const PayPartContainer = styled.div`
   height: 15%;
   margin-top: 5%;
   border-top: 2px solid #AD8B73;
-  div{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 3px;
-  }
   @media only screen and (max-width: 991px){
     height: 15%;
     margin-top: 2%;
     margin-bottom: 2%;
   }
+`
+
+const PayPart = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 6px;
 `
 
 const Price = styled.div`
@@ -109,24 +109,46 @@ const Price = styled.div`
 const NoPrice = styled.h3`
   display: flex;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
   @media only screen and (max-width: 991px){
     /* padding-top: 1%; */
   }
 `
 
-const Button = styled.button`
-  border-radius: 30px;
-  box-shadow: 2px 2px 5px 1px rgb(125, 125, 125);
-  background-color: white;
-  border: none;
+const BuyLink = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 50px;
+  padding: 3px;
+  box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+  text-decoration: none;
   cursor: pointer;
   :hover{
-    transform: scale(1.05)
+    transform: scale(1.05);
   }
-  :active{
-    box-shadow: 1px 1px 5px 3px #e3c69a;
-  }
+`
+
+const BorderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #CEAB93;
+  border-radius: 50px;
+`
+
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 90px;
+  background-color: white;
+  border-radius: 60px;
+  border: none;
 `
 
 export { ShoppingCart }

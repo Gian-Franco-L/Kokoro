@@ -1,21 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.724e7c4e.css",
-    "main.js": "/static/js/main.91fc1528.js",
+    "main.css": "/static/css/main.418cdcdb.css",
+    "main.js": "/static/js/main.731b8817.js",
     "static/media/bgwhite1.jpg": "/static/media/bgwhite1.e2fd503ad5ed3e8fad3f.jpg",
+    "static/media/instagram.png": "/static/media/instagram.db2612bd586501d9ed3e.png",
     "static/media/caminos.jpeg": "/static/media/caminos.1fbe5f42ffc29f065351.jpeg",
     "static/media/bolso.jpeg": "/static/media/bolso.d003c668b658ff39c006.jpeg",
     "static/media/colgante.jpeg": "/static/media/colgante.aa4b9bae4209c550a339.jpeg",
+    "static/media/corazones.jpeg": "/static/media/corazones.560f1aeb34fab19e54d6.jpeg",
     "static/media/25.jpeg": "/static/media/25.6206c3143b102a333c73.jpeg",
     "static/media/canastas.jpeg": "/static/media/canastas.231e518066c406d5bf9e.jpeg",
     "static/media/tutores.jpeg": "/static/media/tutores.6731c64ac84f50b10760.jpeg",
     "static/media/portada5.jpeg": "/static/media/portada5.3c4015477d102dbdf285.jpeg",
+    "static/media/whatsapp.png": "/static/media/whatsapp.faed58bdb4c0d5a76c2c.png",
     "index.html": "/index.html",
-    "main.724e7c4e.css.map": "/static/css/main.724e7c4e.css.map",
-    "main.91fc1528.js.map": "/static/js/main.91fc1528.js.map"
+    "main.418cdcdb.css.map": "/static/css/main.418cdcdb.css.map",
+    "main.731b8817.js.map": "/static/js/main.731b8817.js.map"
   },
   "entrypoints": [
-    "static/css/main.724e7c4e.css",
-    "static/js/main.91fc1528.js"
+    "static/css/main.418cdcdb.css",
+    "static/js/main.731b8817.js"
   ]
 }

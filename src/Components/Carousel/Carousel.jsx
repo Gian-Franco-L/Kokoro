@@ -7,7 +7,7 @@ import { next, back } from "./next&back"
 const Carousel = ({ children }) =>{
   
   const slideCarousel = useRef(null)
-  const intervalCarousel = useRef(null)
+  // const intervalCarousel = useRef(null)
   const whiteLine = document.getElementById("whiteLine")
 
   // useEffect(() =>{
@@ -36,14 +36,14 @@ const Carousel = ({ children }) =>{
       <ButtonsCarousel id="whiteLine">
         <Button
           onClick={() => back(slideCarousel)}
-          onMouseEnter={() => whiteLine.style.background = "linear-gradient(90deg, white -9%, transparent 5%) 0px 0px"}
+          onMouseEnter={() => whiteLine.style.background = "linear-gradient(90deg, #cdb7a9 -9%, transparent 5%) 0px 0px"}
           onMouseLeave={() => whiteLine.style.background = ""}>
 					<LeftArrow />
         </Button>
         <Button
           right
           onClick={() => next(slideCarousel)}
-          onMouseEnter={() => whiteLine.style.background = "linear-gradient(-90deg, white -9%, transparent 5%) 0px 0px"}
+          onMouseEnter={() => whiteLine.style.background = "linear-gradient(-90deg, #cdb7a9 -9%, transparent 5%) 0px 0px"}
           onMouseLeave={() => whiteLine.style.background = ""}>
           <RightArrow />
         </Button>
@@ -88,14 +88,13 @@ const Slide = styled.div`
 `
 
 const ButtonsCarousel = styled.div`
+	z-index: 2;
 	position: absolute;
 	width: 100%;
-	height: 76.9%;
+	height: 77%;
 	top: 2%;
-	z-index: 2;
 	pointer-events: none;
   ${props => props.right ? "right: 1" : "left: 0"}
-  
 `
 const Button = styled.div`
 	position: absolute;
@@ -114,7 +113,7 @@ const Button = styled.div`
   @media only screen and (max-width: 991px) {
     display: none;
   }
-	${props => props.right ? "right: 0" : "left: 0"}
+	${props => props.right ? "right: -5px" : "left: -5px"}
 `
 
 export { Carousel, Slide }

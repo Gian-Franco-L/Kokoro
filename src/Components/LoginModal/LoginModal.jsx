@@ -4,6 +4,8 @@ import "../../CSS/Animation.css"
 import userService from "../../Services/user"
 import loginService from "../../Services/login"
 import validator from "validator"
+import { Link } from "wouter"
+import { MdClose } from "react-icons/md";
 
 const LoginModal = ({
   setOpenLoginModal,
@@ -55,6 +57,12 @@ const LoginModal = ({
   function changeModalState(){
     setOpenLoginModal(false)
     body.style.overflowY = "inherit"
+    setLogUser()
+    setLogPassword()
+    setPasswordAgain()
+    setName()
+    setEmail()
+    setPhone()
   }
 
   async function login (event){
@@ -62,6 +70,14 @@ const LoginModal = ({
 
     if(!logUser){
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
+      return 0
+    }
+    if(!logPassword){
+      userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
+      passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
+      passwordLoginInput.placeholder = "Ingrese una contraseña"
+      passwordLoginInput.value = ""
+      passwordLoginInput.classList.add("redPlaceholder")
       return 0
     }
 
@@ -77,25 +93,27 @@ const LoginModal = ({
     }
 
     try{
-      const user = await loginService.login({
-        logUser,
-        logPassword
-      })
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-      )
-      setUserName(logUser)
-      
-      setOpenLoginModal(false)
-      userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      body.style.overflowY = "inherit"
-      registerUser.placeholder = "Usuario"
-      registerUser.classList.remove("redPlaceholder")
-      passwordLoginInput.placeholder = "Contraseña"
-      passwordLoginInput.classList.remove("redPlaceholder")
-
+      if(logUser && logPassword){
+        const user = await loginService.login({
+          logUser,
+          logPassword
+        })
+        window.localStorage.setItem(
+          'loggedUser', JSON.stringify(user)
+        )
+        setUserName(logUser)
+        
+        setOpenLoginModal(false)
+        userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
+        passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
+        body.style.overflowY = "inherit"
+        registerUser.placeholder = "Usuario"
+        registerUser.classList.remove("redPlaceholder")
+        passwordLoginInput.placeholder = "Contraseña"
+        passwordLoginInput.classList.remove("redPlaceholder")
+      }
     } catch(e){
+      console.log("asd");
       userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
       passwordLoginInput.placeholder = "Contraseña invalida"
@@ -139,7 +157,7 @@ const LoginModal = ({
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
       return 0
     }
-    if(password !== passwordAgain){
+    if(password.toLowerCase() !== passwordAgain.toLowerCase()){
       registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
       passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
@@ -255,9 +273,7 @@ const LoginModal = ({
         <section>
         {loginRegisterElection === "logIn" &&
           <Login>
-            <CloseModalButton>
-              <button onClick={changeModalState}>X</button>
-            </CloseModalButton>
+            <CloseModalButton onClick={changeModalState} />
             <BorderContainerLogin>
               <h2>Inicio de sesión</h2>
               <h4>Inicia sesion si ya posees una cuenta registrada en nuestro sitio web.</h4>
@@ -288,14 +304,13 @@ const LoginModal = ({
                 </InputLabel>
               </form>
               <span><BorderContainerRegisterButton><button onClick={(event) => login(event)}>Iniciar sesión</button></BorderContainerRegisterButton></span>
+              <RecoveryLink><Link href="http://localhost:3000/forgotpassword">¿Has olvidado la contraseña?</Link></RecoveryLink>
             </BorderContainerLogin>
           </Login>
         }
         {loginRegisterElection === "register" &&
           <Register>
-            <CloseModalButton>
-              <button onClick={changeModalState}>X</button>
-            </CloseModalButton>
+            <CloseModalButton onClick={changeModalState} />
             <BorderContainerRegister>
               <h2>Registro</h2>
               <h4>Bienvenido a nuestro sitio Web.</h4>
@@ -328,7 +343,7 @@ const LoginModal = ({
                   <label htmlFor="passwordAgain" className="" />
                   <input
                     name="passwordAgain"
-                    type="passwordAgain"
+                    type="password"
                     className=""
                     id="passwordRegisterAgain"
                     placeholder="Repite la contraseña"
@@ -463,6 +478,7 @@ const BorderContainerLogin = styled.div`
   }
 
   span{
+    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -482,22 +498,6 @@ const BorderContainerLogin = styled.div`
   button{
     background-color: transparent;
     border: none;
-  }
-`
-
-const BorderContainerLoginButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 95%;
-  width: 124px;
-  margin-left: -2%;
-  border: 2px solid #CEAB93;
-  border-radius: 50px;
-  @media (hover: none){
-    margin-left: -2%;
-    margin-right: -2%;
-    margin-top: .5%;
   }
 `
 
@@ -569,10 +569,7 @@ const BorderContainerRegister = styled.div`
       box-shadow: 0px 0px 5px 1px #ab6f4a;
     }
   }
-  button{
-    background-color: transparent;
-    border: none;
-  }
+  
 `
 
 const BorderContainerRegisterButton = styled.div`
@@ -583,18 +580,35 @@ const BorderContainerRegisterButton = styled.div`
   width: 100%;
   border: 2px solid #CEAB93;
   border-radius: 50px;
+  button{
+    height: 40px;
+    width: 120px;
+    background-color: transparent;
+    border: none;
+  }
 `
 
-const CloseModalButton = styled.div`
+const CloseModalButton = styled(MdClose)`
   position: absolute;
-  top: 1%;
-  right: 2.5%;
-  button{
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    font-size: 1.5rem;
-    :hover{
-      color: #ab6f4a;
+  top: 1.5%;
+  right: 2%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  :hover{
+    color: #ab6f4a;
+  }
+  @media only screen and (max-width: 991px) {
+    top: 1.5%;
+    right: 3%;
+    width: 30px;
+    height: 30px;
+  }
+  @media only screen and (max-width: 280px) {
+    top: 1.5%;
+    right: 3%;
+    button{
+      font-size: 1.3rem;
     }
   }
 `
@@ -602,6 +616,16 @@ const CloseModalButton = styled.div`
 const InputLabel = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+const RecoveryLink = styled.div`
+  a{
+    text-decoration: none;
+    color: black;
+    :hover{
+      color: #ab6f4a;
+    }
+  }
 `
 
 export { LoginModal }
