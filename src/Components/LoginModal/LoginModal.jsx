@@ -1,279 +1,66 @@
-import React, { useEffect } from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
-import "../../CSS/Animation.css"
 import userService from "../../Services/user"
 import loginService from "../../Services/login"
+import { changeModalState, login, register } from "./Functions/LoginModalFunctions"
 import validator from "validator"
 import { Link } from "wouter"
 import { MdClose } from "react-icons/md";
+import { AppContext } from "../../Context/AppContext"
+import { useGetUsersEmailsAndQuerySelectors } from "../../Hooks/useGetUsersEmailsAndQuerySelectors"
 
-const LoginModal = ({
-  setOpenLoginModal,
-  userName,
-  setUserName,
-  password,
-  setPassword,
-  passwordAgain,
-  setPasswordAgain,
-  name,
-  setName,
-  email,
-  setEmail,
-  phone,
-  setPhone,
-  emails,
-  setEmails,
-  logUser,
-  setLogUser,
-  logPassword,
-  setLogPassword,
-  setToken,
-  loginRegisterElection,
-  allUsers,
-  setAllUsers,
-  modalScroll
-}) =>{
-  
-  let registerUser = document.querySelector("#userRegister")
-  let passwordRegister = document.querySelector("#passwordRegister")
-  let passwordRegisterAgain = document.querySelector("#passwordRegisterAgain")
-  let nameLastnameRegister= document.querySelector("#nameLastnameRegister")
-  let emailRegister= document.querySelector("#emailRegister")
-  let phoneRegister= document.querySelector("#phoneRegister")
-  const userLoginInput = document.getElementById("userLogin")
-  const passwordLoginInput = document.getElementById("password")
-  const body = document.getElementById("body")
+const LoginModal = () =>{
+  const {
+    setOpenLoginModal,
+    setUserName,
+    password,
+    setPassword,
+    passwordAgain,
+    setPasswordAgain,
+    name,
+    setName,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    emails,
+    logUser,
+    setLogUser,
+    logPassword,
+    setLogPassword,
+    setToken,
+    setAccess,
+    loginRegisterElection,
+    allUsers
+  } = useContext(AppContext)
 
-  useEffect(() =>{
-    userService.getAllUsers().then(res => {
-      const mail = res.map(mail => mail.email)
-      setEmails(mail)
-    })
-    userService.getAllUsers().then(res => {
-      setAllUsers(res.filter(userInfo => userInfo.userName))
-    })
-  }, [setEmails, email, setAllUsers])
+  const {
+    body,
+    registerUser,
+    passwordRegister,
+    passwordRegisterAgain,
+    nameLastnameRegister,
+    emailRegister,
+    phoneRegister,
+    userLoginInput,
+    passwordLoginInput
+  } = useGetUsersEmailsAndQuerySelectors()
 
-  function changeModalState(){
-    setOpenLoginModal(false)
-    body.style.overflowY = "inherit"
-    setLogUser()
-    setLogPassword()
-    setPasswordAgain()
-    setName()
-    setEmail()
-    setPhone()
-  }
-
-  async function login (event){
-    event.preventDefault()
-
-    if(!logUser){
-      userLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(!logPassword){
-      userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordLoginInput.placeholder = "Ingrese una contraseña"
-      passwordLoginInput.value = ""
-      passwordLoginInput.classList.add("redPlaceholder")
-      return 0
-    }
-
-    const isUserNameLogged = allUsers.filter(user => user.userName === logUser)
-  
-    if(!isUserNameLogged.length){
-      userLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      userLoginInput.placeholder = "No existe una cuenta con este nombre"
-      userLoginInput.value = ""
-      userLoginInput.classList.add("redPlaceholder")
-      return 0
-    }
-
-    try{
-      if(logUser && logPassword){
-        const user = await loginService.login({
-          logUser,
-          logPassword
-        })
-        window.localStorage.setItem(
-          'loggedUser', JSON.stringify(user)
-        )
-        setUserName(logUser)
-        
-        setOpenLoginModal(false)
-        userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-        passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-        body.style.overflowY = "inherit"
-        registerUser.placeholder = "Usuario"
-        registerUser.classList.remove("redPlaceholder")
-        passwordLoginInput.placeholder = "Contraseña"
-        passwordLoginInput.classList.remove("redPlaceholder")
-      }
-    } catch(e){
-      console.log("asd");
-      userLoginInput.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordLoginInput.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordLoginInput.placeholder = "Contraseña invalida"
-      passwordLoginInput.value = ""
-      passwordLoginInput.classList.add("redPlaceholder")
-      return 0
-    }
-    setLogUser()
-    setLogPassword()
-  }
-
-  
-  async function register (event){
-    event.preventDefault()
-    
-    const isUserNameLogged = allUsers.filter(user => user.userName === logUser)
-    const isEmailLogged = emails.filter(value => value === email)
-    const isNumber = /^([0-9 +-])*$/.exec(phone)
-
-    if(!logUser){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(!!isUserNameLogged.length){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      registerUser.placeholder = "Ya existe una cuenta con este nombre"
-      registerUser.value = ""
-      registerUser.classList.add("redPlaceholder")
-      return 0
-    }
-    if(!password){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      registerUser.placeholder = "Nombre de cuenta"
-      registerUser.classList.remove("redPlaceholder")
-      return 0
-    }
-    if(!passwordAgain){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(password.toLowerCase() !== passwordAgain.toLowerCase()){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordRegisterAgain.placeholder = "Las contraseñas son diferentes"
-      passwordRegisterAgain.value = ""
-      passwordRegisterAgain.classList.add("redPlaceholder")
-      return 0
-    }
-    if(!name){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordRegisterAgain.placeholder = "Repite la contraseña"
-      passwordRegisterAgain.classList.remove("redPlaceholder")
-      return 0
-    }
-    if(!email){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(!validator.isEmail(email)){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      emailRegister.placeholder = "No es un email correcto"
-      emailRegister.value = ""
-      emailRegister.classList.add("redPlaceholder")
-      return 0
-    }
-    if(!!isEmailLogged.length){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      emailRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      emailRegister.placeholder = "Ya existe una cuenta con este email"
-      emailRegister.value = ""
-      emailRegister.classList.add("redPlaceholder")
-      return 0
-    }
-    if(!phone){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      emailRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      phoneRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordRegisterAgain.placeholder = "Email"
-      passwordRegisterAgain.classList.remove("redPlaceholder")
-      return 0
-    }
-    if(isNumber === null){
-      registerUser.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      nameLastnameRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      emailRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      phoneRegister.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-
-    phoneRegister.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-
-    const completeUser = {
-      userName: logUser,
-      password: password,
-      name: name,
-      email: email,
-      phone: phone,
-      cartItem: []
-    }
-    await userService.createUser(completeUser)
-
-    try{
-      const user = await loginService.login({
-        logUser: logUser,
-        logPassword: password
-      })
-
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-        )
-        setOpenLoginModal(false)
-        body.style.overflowY = "inherit"
-      } catch(e){
-      console.error(e);
-    }
-    
-    registerUser.value = ''
-    passwordRegister.value = ''
-    passwordRegisterAgain.value = ''
-    nameLastnameRegister.value = ''
-    emailRegister.value = ''
-    phoneRegister.value = ''
-    setUserName(logUser)
-    setLogUser()
-    setPassword()
-    setPasswordAgain()
-    setName()
-    setEmail()
-    setPhone()
-  }
   return(
     <Overlay>
       <ModalContainer loginRegisterElection={loginRegisterElection}>
         <section>
         {loginRegisterElection === "logIn" &&
           <Login>
-            <CloseModalButton onClick={changeModalState} />
+            <CloseModalButton onClick={() => changeModalState(
+              setOpenLoginModal,
+              body,
+              setLogUser,
+              setLogPassword,
+              setPasswordAgain,
+              setName,
+              setEmail,
+              setPhone)} />
             <BorderContainerLogin>
               <h2>Inicio de sesión</h2>
               <h4>Inicia sesion si ya posees una cuenta registrada en nuestro sitio web.</h4>
@@ -296,21 +83,47 @@ const LoginModal = ({
                       name="password"
                       type="password"
                       className=""
-                      id="password"
+                      id="passwordLogin"
                       placeholder="Contraseña"
                       onChange={({target}) => setLogPassword(target.value)}
                       required
                     />
                 </InputLabel>
+                <span><BorderContainerRegisterButton><button onClick={(event) => login(
+                  event,
+                  logUser,
+                  logPassword,
+                  userLoginInput,
+                  passwordLoginInput,
+                  setLogPassword,
+                  allUsers,
+                  setLogUser,
+                  loginService,
+                  setUserName,
+                  setOpenLoginModal,
+                  body,
+                  registerUser,
+                  setName,
+                  setEmail,
+                  setToken,
+                  setAccess
+                )}>Iniciar sesión</button></BorderContainerRegisterButton></span>
               </form>
-              <span><BorderContainerRegisterButton><button onClick={(event) => login(event)}>Iniciar sesión</button></BorderContainerRegisterButton></span>
-              <RecoveryLink><Link href="http://localhost:3000/forgotpassword">¿Has olvidado la contraseña?</Link></RecoveryLink>
+              <RecoveryLink><Link href="/forgotpassword">¿Has olvidado la contraseña?</Link></RecoveryLink>
             </BorderContainerLogin>
           </Login>
         }
         {loginRegisterElection === "register" &&
           <Register>
-            <CloseModalButton onClick={changeModalState} />
+            <CloseModalButton onClick={() => changeModalState(
+              setOpenLoginModal,
+              body,
+              setLogUser,
+              setLogPassword,
+              setPasswordAgain,
+              setName,
+              setEmail,
+              setPhone)} />
             <BorderContainerRegister>
               <h2>Registro</h2>
               <h4>Bienvenido a nuestro sitio Web.</h4>
@@ -382,13 +195,43 @@ const LoginModal = ({
                     type="text"
                     className=""
                     id="phoneRegister"
-                    placeholder="Telefono: 011 XXXX-XXXX"
+                    placeholder="Telefono"
                     onChange={({target}) => setPhone(target.value)}
                     required
                   />
                 </InputLabel>
+                <span><BorderContainerRegisterButton><button onClick={(event) => register(
+                  event,
+                  validator,
+                  body,
+                  allUsers,
+                  emails,
+                  logUser,
+                  password,
+                  name,
+                  email,
+                  phone,
+                  passwordAgain,
+                  userService,
+                  registerUser,
+                  passwordRegister,
+                  passwordRegisterAgain,
+                  nameLastnameRegister,
+                  emailRegister,
+                  phoneRegister,
+                  loginService,
+                  setOpenLoginModal,
+                  setUserName,
+                  setLogUser,
+                  setPassword,
+                  setPasswordAgain,
+                  setName,
+                  setEmail,
+                  setToken,
+                  setPhone,
+                  setAccess
+                )}>Registrarse</button></BorderContainerRegisterButton></span>
               </form>
-              <span><BorderContainerRegisterButton><button onClick={(event) => register(event)}>Registrarse</button></BorderContainerRegisterButton></span>
             </BorderContainerRegister>
           </Register>
         }
@@ -408,7 +251,7 @@ const Overlay = styled.div`
   bottom: -10px;
   left: -10px;
   right: -10px;
-  background: rgba(32, 35, 51, 0.9);
+  background: rgba(52, 48, 41, 0.8);
 `
 
 const ModalContainer = styled.div`
@@ -441,7 +284,7 @@ const BorderContainerLogin = styled.div`
   text-align: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 20px;
   padding: 2%;
 
@@ -453,15 +296,13 @@ const BorderContainerLogin = styled.div`
     }
   }
   h4{
-    @media only screen and (max-width: 300px) {
-      font-size: 1.2rem;
-    }
+    font-size: clamp(.8rem, 4vw, 1.3rem);
   }
   form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 25%;
+    height: 40%;
     width: 85%;
     input{
       font-size: 1.3rem;
@@ -472,27 +313,25 @@ const BorderContainerLogin = styled.div`
       border-bottom: 2px solid black;
       outline: none;
       :hover{
-        border-bottom: 2px solid #ab6f4a;
+        border-bottom: 2px solid #AC8DAF;
       }
     }
   }
 
   span{
-    margin-top: 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 8%;
+    position: relative;
+    height: 20%;
     width: 130px;
+    left: calc(50% - 65px);
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     :hover{
       transform: scale(1.05);
     }
     :active{
-      box-shadow: 0px 0px 5px 1px #ab6f4a;
+      box-shadow: 0px 0px 5px 5px #AC8DAF;
     }
   }
   button{
@@ -506,7 +345,7 @@ const Register = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
   width: 100%;
   padding: 5px;
   background-color: #ebe9eb;
@@ -516,25 +355,27 @@ const Register = styled.div`
 const BorderContainerRegister = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 20px;
   padding: 2%;
 
   h2{
-    font-size: 4.5rem;
+    font-size: 5rem;
     font-family: 'Festive', cursive;
   }
-
+  h4{
+    font-size: clamp(.8rem, 4vw, 1.3rem);
+  }
   form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 55%;
+    height: 60%;
     width: 85%;
     input{
       font-size: 1.3rem;
@@ -545,7 +386,7 @@ const BorderContainerRegister = styled.div`
       border-bottom: 2px solid black;
       outline: none;
       :hover{
-        border-bottom: 2px solid #ab6f4a;
+        border-bottom: 2px solid #AC8DAF;
       }
       @media only screen and (max-width: 300px) {
         font-size: 1rem;
@@ -553,20 +394,20 @@ const BorderContainerRegister = styled.div`
     }
   }
   span{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 6%;
+    position: relative;
+    height: 10%;
     width: 130px;
+    left: calc(50% - 65px);
+    margin-top: 5%;
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     :hover{
       transform: scale(1.05);
     }
     :active{
-      box-shadow: 0px 0px 5px 1px #ab6f4a;
+      box-shadow: 0px 0px 5px 5px #AC8DAF;
     }
   }
   
@@ -578,7 +419,7 @@ const BorderContainerRegisterButton = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
   button{
     height: 40px;
@@ -596,7 +437,7 @@ const CloseModalButton = styled(MdClose)`
   height: 35px;
   cursor: pointer;
   :hover{
-    color: #ab6f4a;
+    color: #AC8DAF;
   }
   @media only screen and (max-width: 991px) {
     top: 1.5%;
@@ -623,7 +464,7 @@ const RecoveryLink = styled.div`
     text-decoration: none;
     color: black;
     :hover{
-      color: #ab6f4a;
+      color: #AC8DAF;
     }
   }
 `

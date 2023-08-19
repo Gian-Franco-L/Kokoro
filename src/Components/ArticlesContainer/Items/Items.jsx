@@ -1,16 +1,20 @@
 import React, { useContext } from "react"
 import { AppContext } from "../../../Context/AppContext"
+import { changeModalState } from "./Functions/ItemFunctions"
 import styled from "styled-components"
 
 const Items = ({
-  items,
-  itemsPrice,
+  name,
+  price,
+  date,
   size,
   material,
   stuffing,
-  choice,
+  itemType,
+  status,
   img
 }) =>{
+
   const {
     setOpenArticlesModal,
     setModalArticle,
@@ -18,27 +22,31 @@ const Items = ({
 
   const body = document.getElementById("body")
 
-  function changeModalState(){
-    setOpenArticlesModal(true)
-    setModalArticle({
-      'item': items,
-      'itemsPrice': itemsPrice,
-      'size': size,
-      'material': material,
-      'stuffing': stuffing,
-      'choice': choice,
-      'img': img
-    })
-    body.style.overflowY = "hidden"
+  let updateObject = {
+    'Name': name,
+    'Price': price,
+    'Date': date,
+    'Size': size,
+    'Fabric': material,
+    'Stuffing': stuffing,
+    'Type': itemType,
+    'Status': status,
+    'Img': img
   }
 
   return(
-    <MainContainer onClick={changeModalState}>
-      <BorderContainer>
-        <ArticleItem img={img}/>
-        <ArticleInfo>{items}</ArticleInfo>
-      </BorderContainer>
-    </MainContainer>
+    <>
+     {
+      updateObject.Status === "on"
+        ? <MainContainer onClick={() => changeModalState(body, setModalArticle, setOpenArticlesModal, updateObject)}>
+            <BorderContainer>
+              <ArticleItem img={img}/>
+              <ArticleInfo>{name}</ArticleInfo>
+            </BorderContainer>
+          </MainContainer>
+        : null
+     }
+    </>
   )
 }
 
@@ -50,15 +58,22 @@ const MainContainer = styled.div`
   flex-direction: column;
   height: 365px;
   width: 232px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  margin-right: 2%;
   padding: 3px;
+  margin-top: 4%;
+  margin-left: 2%;
+  margin-right: 2%;
   background-color: #ffffff;
-  box-shadow: 1px 1px 4px 1px rgb(125, 125, 125);
+  box-shadow: 0px 0px 8px 8px #AC8DAF;
   border-radius: 20px;
+  cursor: pointer;
   :hover{
     transform: scale(1.03)
+  }
+  @media only screen and (max-width: 991px){
+    margin-top: 8%;
+    :hover{
+      transform: scale(1)
+    }
   }
   @media only screen and (max-width: 584px){
     width: 250px;
@@ -72,7 +87,7 @@ const BorderContainer = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 20px;
 `
 

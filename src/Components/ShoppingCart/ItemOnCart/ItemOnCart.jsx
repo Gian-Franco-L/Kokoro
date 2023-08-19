@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { AppContext } from "../../../Context/AppContext"
 import styled from "styled-components"
-import outOfCart from "./outOfCart"
+import outOfCart from "../Function/outOfCart"
 import { MdClose } from "react-icons/md";
 
 
@@ -9,16 +9,19 @@ const ItemOnCart = ({ item }) =>{
   const {
     setItemToDataBase,
     articlesCart,
-    setArticlesCart
+    setArticlesCart,
+    discountCant,
+    setDiscountCant
   } = useContext(AppContext)
+
   return(
     <>
       <Line />
       <NameCantKick>
-        <i>{item.name}</i>
+        <i>{item.cuelloGorroSizeChoice === '?' ? item.name : `${item.name} ${item.cuelloGorroSizeChoice}`}</i>
         <div>{item.amount>1 ? "x" + item.amount : null}</div>
         <Kick>
-          {item.name.length>0 ? <button onClick={() => outOfCart(item.name, articlesCart, setArticlesCart, setItemToDataBase)}><Close /></button> : null}
+          {item.name.length>0 ? <button onClick={() => outOfCart(item.name, articlesCart, setArticlesCart, setItemToDataBase, discountCant, setDiscountCant, item.cuelloGorroSizeChoice)}><Close /></button> : null}
         </Kick>
       </NameCantKick>
       <Price>Precio: AR$ {item.price}</Price>
@@ -30,7 +33,7 @@ const Close = styled(MdClose)`
   height: 25px;
   width: 25px;
   :hover{
-    color: #ab6f4a;
+    color: #AC8DAF;
   }
 `
 
@@ -51,7 +54,7 @@ const NameCantKick = styled.div`
 `
 const Line = styled.div`
   width: 90%;
-  border-top: 1px solid #AD8B73;
+  border-top: 1px solid #AC8DAF;
   margin-left: 5%;
 `
 const Kick = styled.div`

@@ -1,43 +1,31 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { AppContext } from "../Context/AppContext"
 import { ListOfPurchases } from "../Components/ListOfPurchases/ListOfPurchases"
 import { Link } from "wouter"
 import styled from "styled-components"
-import userService from "../Services/user"
+import { UserNotFound } from "../Components/UserNotFound/UserNotFound"
+import { useUpdateLocalStorage } from "../Hooks/useUpdateLocalStorage"
+import { useGetAllPurchaseItems } from "../Hooks/useGetAllPurchaseItems"
+import { AccessDenied } from "../Components/AccessDenied/AccessDenied"
 
 const List = () =>{
   const {
     userName,
-    setUserName,
-    access,
-    setAccess,
-    purchaseItems,
-    setPurchaseItems
+    access
   } = useContext(AppContext)
 
-  useEffect(() =>{
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    if(loggedUserJSON){
-      setUserName(JSON.parse(loggedUserJSON).userName)
-      setAccess(JSON.parse(loggedUserJSON).access)
-    }
-  }, [])
-
-  useEffect(() =>{
-    if(userName !== null){
-      const loggedUserJSON = window.localStorage.getItem('loggedUser')
-      userService.getAllUsers(JSON.parse(loggedUserJSON).userName)
-        .then(res => setPurchaseItems(res))
-    }
-  }, [userName])
+  useUpdateLocalStorage()
+  useGetAllPurchaseItems()
 
   return(
     <>
-     {(access === "no" && access === undefined)
-        ? <Error><div>No tienes acceso a esta dirección</div><Link href="/"><button>Volver</button></Link></Error>
-        : <ListOfPurchases purchaseItems={purchaseItems} />
-     }
-    </>
+     {userName
+      ? (access === "no" || access === undefined)
+        ? <AccessDenied />
+        : <ListOfPurchases />
+      : <UserNotFound />
+      } 
+      </>
   )
 }
 
@@ -52,7 +40,7 @@ const Error = styled.div`
   right: -10px;
   justify-content: center;
   align-items: center;
-  background: rgba(33, 20, 20, 0.9);
+  background: rgba(52, 48, 41, 0.8);
   
 
   div{
@@ -62,7 +50,7 @@ const Error = styled.div`
     font-size: 2rem;
     padding-top: 1.5%;
     border-radius: 20px;
-    box-shadow: 0px 0px 2px 1px #ab6f4a;
+    box-shadow: 0px 0px 2px 1px #AC8DAF;
   }
   button{
     z-index: 1;

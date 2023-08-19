@@ -1,29 +1,74 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
-import nextItemsButton from "./nextItemsButton"
-import previousItemsButton from "./previousItemsButton"
+import { backOrNextItems, toTop } from "./Functions/backOrNextItems"
+import { AppContext } from "../../Context/AppContext"
 
-const MoreItemsButton = ({
-  showArticles,
-  setShowArticles,
-  articlesLimitCount,
-  setArticlesLimitCount,
-  articlesCount,
-  setArticlesCount,
-  totalArticles,
-  pageCount,
-  setPageCount
-}) =>{
+const MoreItemsButton = ({ backNextToTop }) =>{
+
+  const {
+    totalHomeArticles,
+    totalWinterArticles,
+    showArticles,
+    setShowArticles,
+    articlesLimitCount,
+    setArticlesLimitCount,
+    articlesCount,
+    setArticlesCount,
+    articleChoice,
+    pageCount,
+    setPageCount
+  } = useContext(AppContext)
+
+  let maxHomeOrWinter = articleChoice === 'niños' ? totalWinterArticles : totalHomeArticles
+
   return(
     <ButtonsContainer>
       {articlesCount !== 15
-        ? <a href="#top"><BorderContainer><PreviousNextButton  onClick={() => previousItemsButton (setShowArticles, articlesLimitCount, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount)}>Anterior</PreviousNextButton></BorderContainer></a>
-        : <span><BorderContainer><PreviousNextButton  disabled>Anterior</PreviousNextButton></BorderContainer></span>
+        ? <a onClick={() => (toTop(backNextToTop), backOrNextItems({
+          backOrNextChoice: "back",
+          setShowArticles,
+          articlesLimitCount,
+          setArticlesLimitCount,
+          totalHomeArticles,
+          totalWinterArticles,
+          articlesCount,
+          setArticlesCount,
+          setPageCount,
+          articleChoice}))}>
+            <BorderContainer>
+                <PreviousNextButton>Anterior</PreviousNextButton>
+            </BorderContainer>
+          </a>
+        : <span>
+            <BorderContainer>
+              <PreviousNextButton  disabled>Anterior</PreviousNextButton>
+            </BorderContainer>
+          </span>
       }
-      <Number><BorderContainerNumber>{pageCount}</BorderContainerNumber></Number>
-      {articlesCount < totalArticles.length && showArticles.length === 15
-        ? <a href="#top"><BorderContainer><PreviousNextButton onClick={() => nextItemsButton(showArticles, setShowArticles, setArticlesLimitCount, totalArticles, articlesCount, setArticlesCount, setPageCount)}>Siguiente</PreviousNextButton></BorderContainer></a>
-        : <span><BorderContainer><PreviousNextButton disabled>Siguiente</PreviousNextButton></BorderContainer></span>
+      <NumberPageCount>
+        <BorderContainerNumber>{pageCount}</BorderContainerNumber>
+      </NumberPageCount>
+      {articlesCount < maxHomeOrWinter.length && showArticles.length === 15
+        ? <a onClick={() => (toTop(backNextToTop),backOrNextItems({
+          backOrNextChoice: "next",
+          setShowArticles,
+          articlesLimitCount,
+          setArticlesLimitCount,
+          totalHomeArticles,
+          totalWinterArticles,
+          articlesCount,
+          setArticlesCount,
+          setPageCount,
+          articleChoice}))}>
+            <BorderContainer>
+                <PreviousNextButton>Siguiente</PreviousNextButton>
+              </BorderContainer>
+            </a>
+        : <span>
+            <BorderContainer>
+              <PreviousNextButton disabled>Siguiente</PreviousNextButton>
+            </BorderContainer>
+          </span>
       }
     </ButtonsContainer>
   )
@@ -41,7 +86,7 @@ const ButtonsContainer= styled.div`
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     text-decoration: none;
     :hover{
       transform: scale(1.05);
@@ -54,11 +99,15 @@ const ButtonsContainer= styled.div`
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
-    :disabled{
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
+    /* :disabled{
       transform: scale(1);
-      box-shadow: 1px 1px 4px 1px rgb(171, 171, 171);
-    }
+      box-shadow: 0px 0px 5px 5px #AC8DAF;
+    } */
+  }
+
+  @media only screen and (max-width: 991px) {
+    margin-top: 10%;
   }
 `
 
@@ -68,7 +117,7 @@ const BorderContainer = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
 `
 
@@ -83,7 +132,7 @@ const PreviousNextButton = styled.button`
   border: none;
 `
 
-const Number = styled.div`
+const NumberPageCount = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +142,7 @@ const Number = styled.div`
   text-align: center;
   background-color: white;
   border-radius: 60px;
-  box-shadow: 1px 1px 4px 1px rgb(125, 125, 125);
+  box-shadow: 0px 0px 5px 5px #AC8DAF;
   margin-left: 20px;
   margin-right: 20px;
   @media only screen and (max-width: 300px) {
@@ -108,9 +157,7 @@ const BorderContainerNumber = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
-  border-radius: 50px;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
 `
 

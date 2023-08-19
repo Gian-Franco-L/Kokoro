@@ -1,15 +1,18 @@
 import React, { useContext } from "react"
 import { AppContext } from "../../../Context/AppContext"
+import { changeModalState } from "./Functions/SearchedFunctions"
 import styled from "styled-components"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
 
 const Searched = ({
   items,
   itemsPrice,
+  date,
   size,
   material,
   stuffing,
-  choice,
+  type,
+  status,
   img
 }) => {
 
@@ -19,20 +22,20 @@ const Searched = ({
     setModalArticle,
   } = useContext(AppContext)
 
-  function changeModalState(){
-    setOpenArticlesModal(true)
-    setModalArticle({
-      'item': items,
-      'itemsPrice': itemsPrice,
-      'size': size,
-      'material': material,
-      'stuffing': stuffing,
-      'choice': choice,
-      'img': img
-    })
-  }
   return(
-    <SearchedItem onClick={changeModalState}>
+    <SearchedItem onClick={() => changeModalState(
+      setOpenArticlesModal, 
+      setModalArticle,
+      items,
+      itemsPrice,
+      date,
+      size,
+      material,
+      stuffing,
+      type,
+      status,
+      img
+    )}>
       {
         searchedArticles !== -1
           && <>
@@ -62,7 +65,7 @@ const SearchedItem = styled.div`
     #Arrow{
       display: inline;
       font-size: 1.4rem;
-      color: #AD8B73;
+      color: #70416D;
     }
   }
 `
@@ -88,7 +91,8 @@ const Imagen = styled.div`
 const NamePriceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   height: 90px;
   width: 70%;
 `
@@ -96,10 +100,12 @@ const NamePriceContainer = styled.div`
 const ItemName = styled.div`
   font-size: 1.05rem;
   text-align: center;
+  width: 90%;
 `
 
 const ItemPrice = styled.div`
   font-size: 1.05rem;
   text-align: center;
+  border-bottom: 2px solid #AC8DAF;
 `
 export { Searched }

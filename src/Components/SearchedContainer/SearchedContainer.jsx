@@ -1,53 +1,24 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import { Searched } from "./Searched/Searched"
 import { v4 as uuidv4 } from "uuid"
 import styled from "styled-components"
+import { AppContext } from "../../Context/AppContext"
+import { useActiveDisablecollapseButton } from "../../Hooks/useActiveDisablecollapseButton"
 
-const SearchedContainer = ({searchedArticles, openLoginModal, enableDisableCollapse, acountRef, cartButtonRef, cartSwitch, ProfileLogOutRef}) => {
+const SearchedContainer = () => {
 
-  useEffect(()=>{
-    if(searchedArticles){
-      enableDisableCollapse.current.style.display = "inline"
-      if(acountRef.current){
-        acountRef.current.setAttribute("disabled", "");
-        acountRef.current.style.opacity = "0.5"
-        if (window.matchMedia("(max-width: 991px)").matches) {
-          acountRef.current.style.display = "none"
-        }
-      }
-      if(ProfileLogOutRef.current){
-        if (window.matchMedia("(max-width: 991px)").matches) {
-          ProfileLogOutRef.current.style.display = "none"
-        }
-      }
-      cartButtonRef.current.setAttribute("disabled", "");
-      cartButtonRef.current.style.opacity = "0.5"
-      if (window.matchMedia("(max-width: 991px)").matches) {
-        cartButtonRef.current.style.display = "none"
-      }
-    }else if(searchedArticles === null){
-      enableDisableCollapse.current.style.display = "none"
-      if(acountRef.current){
-        acountRef.current.removeAttribute("disabled");
-        acountRef.current.style.opacity = "1"
-        if (window.matchMedia("(max-width: 991px)").matches) {
-          acountRef.current.style.display = "inline-block"
-        }
-      }
-      if(ProfileLogOutRef.current){
-        if (window.matchMedia("(max-width: 991px)").matches) {
-          ProfileLogOutRef.current.style.display = "flex"
-        }
-      }
-      cartButtonRef.current.removeAttribute("disabled");
-      cartButtonRef.current.style.opacity = "1"
-      if (window.matchMedia("(max-width: 991px)").matches) {
-        cartButtonRef.current.style.display = "inline-block"
-      }
-    }
-  }, [searchedArticles])
+  const {
+    cartSwitch,
+    searchedArticles,
+    openLoginModal,
+    setEnableDisableCollapse,
+    setCartButtonEnableDisable,
+    setProfileLogOutDisableOrFlex,
+    setProfileLoginButtonStatusOpacityDisplay
+  } = useContext(AppContext)
 
-  
+  useActiveDisablecollapseButton({ setEnableDisableCollapse, setProfileLoginButtonStatusOpacityDisplay, setCartButtonEnableDisable, setProfileLogOutDisableOrFlex, searchedArticles })
+
   return(
     <MainContainter cartSwitch={cartSwitch}>
       {
@@ -58,10 +29,12 @@ const SearchedContainer = ({searchedArticles, openLoginModal, enableDisableColla
                   <Searched 
                   items={item.Name}
                   itemsPrice={item.Price}
+                  date={item.Date}
                   size={item.Size}
                   material={item.Material}
                   stuffing={item.Stuffing}
-                  choice={item.Choice}
+                  type={item.Type}
+                  status={item.Status}
                   img={item.Img}
                   key={uuidv4()}
                   />
@@ -77,14 +50,14 @@ const SearchedContainer = ({searchedArticles, openLoginModal, enableDisableColla
 const MainContainter = styled.div`
   z-index: 2;
   position: fixed;
-  top: 7.3%;
+  top: 9%;
   width: 24%;
   max-height: 57%;
   background-color: white;
   margin-left: 30.4%;
   overflow-y: scroll;
-  border-right: 1px solid #AD8B73;
-  border-left: 1px solid #AD8B73;
+  border-right: 2px solid #AC8DAF;
+  border-left: 2px solid #AC8DAF;
   ::-webkit-scrollbar {
     display: none;
   }

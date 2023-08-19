@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { AppContext } from "../../../Context/AppContext"
+import { changeModalState } from "./Functions/LoginFunctions"
 import { IoMdPerson } from "react-icons/io"
-import "../../../CSS/Animation.css"
 
 const Login = () =>{
 
@@ -11,14 +11,10 @@ const Login = () =>{
     setOpenLoginModal
   } = useContext(AppContext)
 
-  function changeModalState(){
-    setOpenLoginModal(true)
-  }
-
   return(
     <>
       {!userName &&
-        <LoginButton onClick={changeModalState}>
+        <LoginButton onClick={() => changeModalState(setOpenLoginModal)}>
         <button><IoMdPerson className="cartIcon"/></button>
         </LoginButton>
       }

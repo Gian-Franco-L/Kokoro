@@ -6,7 +6,7 @@ const AllPurchases = ({ user }) =>{
     <PurchaseInfoContainer>
       <User>
         <Name><h1>{user.name}</h1></Name>
-        <Phone><h1>Numero: {user.phone}</h1></Phone>
+        <Phone><h1>Telefono: {user.phone}</h1></Phone>
       </User>
     </PurchaseInfoContainer>
   )
@@ -16,10 +16,9 @@ const PurchaseInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 2%;
-  padding-bottom: 2%;
+  padding-bottom: 1%;
   margin-bottom: 1%;
   font-size: 1.2rem;
-  border-bottom: 5px solid black;
   border-top: 5px solid black;
 `
 

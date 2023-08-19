@@ -1,25 +1,25 @@
 import React from "react"
-import MyLoader from "../../../Loader/MyLoader"
+import MyLoaderItems from "../../../Loader/MyLoaderItems"
 import styled from "styled-components"
 
 const Skeletons = () => {
  return(
     <ErrorContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
-      <LoaderContainer><MyLoader /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
+      <LoaderContainer><MyLoaderItems /></LoaderContainer>
     </ErrorContainer>
  )
 }

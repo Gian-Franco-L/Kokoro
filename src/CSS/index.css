@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: unset;
 }
 
 code {
@@ -12,4 +13,5 @@ code {
 
 *{
   font-family: 'Kanit', sans-serif;
+  user-select: none;
 }

@@ -6,9 +6,11 @@ const PurchaseInfo = ({ purchase }) =>{
     <PurchaseInfoContainer>
       <Img img={purchase.img}/>
       <Info>
-        <Name>{purchase.name}</Name>
+        <div>
+          {purchase.cuelloGorroSizeChoice === '?' ? purchase.name : `${purchase.name} ${purchase.cuelloGorroSizeChoice}`}
+        </div>
         <div>Cantidad: {purchase.amount}</div>
-        <Price>Precio: Ar${purchase.price}</Price>
+        <div>Precio: Ar${purchase.price}</div>
       </Info>
     </PurchaseInfoContainer>
   )
@@ -39,14 +41,9 @@ const Img = styled.div`
 `
 
 const Info = styled.div`
-  padding-top: 3%;
-`
-
-const Name = styled.div`
-  height: 40%;
-`
-const Price = styled.div`
-  height: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `
 
 export { PurchaseInfo }

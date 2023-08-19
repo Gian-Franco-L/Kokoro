@@ -1,50 +1,30 @@
-import React, { useRef } from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
-import { AiOutlineDoubleLeft } from "react-icons/ai";
-import { AiOutlineDoubleRight } from "react-icons/ai";
-import { next, back } from "./next&back"
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import { next, back } from "./Functions/CarouselFunctions"
+import { AppContext } from "../../Context/AppContext";
+import { useCarouselMovement } from "../../Hooks/useCarouselMovement";
 
-const Carousel = ({ children }) =>{
-  
-  const slideCarousel = useRef(null)
-  // const intervalCarousel = useRef(null)
-  const whiteLine = document.getElementById("whiteLine")
+const Carousel = ({ children, intervalCarousel }) =>{
 
-  // useEffect(() =>{
-  //   intervalCarousel.current = setInterval(() =>{
-  //     next(slideCarousel)
-  //   }, 4000)
+  const {
+    buttonsCarouselState,
+    setButtonsCarouselState
+  } = useContext(AppContext)
 
-  //   slideCarousel.current.addEventListener("mouseenter", () =>{
-  //     console.log("asd");
-  //     clearInterval(intervalCarousel.current)
-  //   })
-  //   slideCarousel.current.addEventListener("mouseleave", () =>{
-  //     intervalCarousel.current = setInterval(() =>{
-  //       next(slideCarousel)
-  //     }, 4000)
-  //   })
-  // }, [])
-
-  // background: linear-gradient(0deg, black 55%, white 25%) 0px 0px;
+  const { slideCarousel, slideButtons } = useCarouselMovement({ setButtonsCarouselState, intervalCarousel })
 
   return(
-    <MainContainer>
+    <MainContainer ref={intervalCarousel}>
       <ImgCarousel ref={slideCarousel}>
         {children}
       </ImgCarousel>
-      <ButtonsCarousel id="whiteLine">
-        <Button
-          onClick={() => back(slideCarousel)}
-          onMouseEnter={() => whiteLine.style.background = "linear-gradient(90deg, #cdb7a9 -9%, transparent 5%) 0px 0px"}
-          onMouseLeave={() => whiteLine.style.background = ""}>
+      <ButtonsCarousel ref={slideButtons}>
+        <Button onClick={() => buttonsCarouselState && back(slideCarousel, setButtonsCarouselState)}>
 					<LeftArrow />
         </Button>
-        <Button
-          right
-          onClick={() => next(slideCarousel)}
-          onMouseEnter={() => whiteLine.style.background = "linear-gradient(-90deg, #cdb7a9 -9%, transparent 5%) 0px 0px"}
-          onMouseLeave={() => whiteLine.style.background = ""}>
+        <Button right onClick={() => buttonsCarouselState && next(slideCarousel, setButtonsCarouselState)}>
           <RightArrow />
         </Button>
       </ButtonsCarousel>
@@ -52,20 +32,20 @@ const Carousel = ({ children }) =>{
   )
 }
 
-const LeftArrow = styled(AiOutlineDoubleLeft)`
-  font-size: 2rem;
+const LeftArrow = styled(FaArrowLeft)`
+  font-size: 2.5rem;
   color: white;
 `
 
-const RightArrow = styled(AiOutlineDoubleRight)`
-  font-size: 2rem;
+const RightArrow = styled(FaArrowRight)`
+  font-size: 2.5rem;
   color: white;
 `
 
 const MainContainer = styled.div`
   position: relative;
   overflow: hidden;
-  margin-top: 3.9%;
+  margin-top: 4.5%;
 `
 const ImgCarousel = styled.div`
   display: flex;
@@ -90,9 +70,10 @@ const Slide = styled.div`
 const ButtonsCarousel = styled.div`
 	z-index: 2;
 	position: absolute;
-	width: 100%;
+	width: 98.3%;
 	height: 77%;
 	top: 2%;
+  margin-left: 1%;
 	pointer-events: none;
   ${props => props.right ? "right: 1" : "left: 0"}
 `

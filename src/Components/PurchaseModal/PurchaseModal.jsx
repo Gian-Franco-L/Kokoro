@@ -1,77 +1,87 @@
-import React, { useEffect } from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
-import { totalCount } from "../ShoppingCart/totalCount"
+import { totalCount } from "../ShoppingCart/Function/totalCount"
 import purchaseService from "../../Services/purchase"
 import { MdClose } from "react-icons/md";
+import { openCloseCart } from "../Header/CarButton/Functions/CarButtonFunctions"
+import { finishPurchase, closeModalButton } from "./Functions/PurchaseModalFunctions"
+import { AppContext } from "../../Context/AppContext";
+import { useCreateMessage } from "../../Hooks/useCreateMessage"
 
-const PurchaseModal = ({
-    setOpenPurchaseModal,
-    name,
-    email,
+const PurchaseModal = () =>{
+  const {
     articlesCart,
+    setArticlesCart,
+    cartSwitch,
+    setCartSwitch,
+    itemCartAux,
+    setItemCartAux,
+    setItemToDataBase,
+    onOffCartButton,
+    setOnOffCartButton,
+    setCartFilledOrNot,
+    email,
+    token,
+    loginRegisterSwitch,
+    setOpenPurchaseModal,
     wppLink,
     setWppLink,
-    token,
-    setItemCartAux,
-    setArticlesCart,
-    setItemToDataBase
-  }) =>{
+    discountCant,
+    setDiscountCant,
+    setEnableDisableCollapse,
+    setSearchEnableDisable,
+    setBuyButtonEnableDisable,
+    setProfileLogOutDisableOrFlex,
+    setShopingCartStatus,
+    setProfileLoginButtonStatusOpacityDisplay
+  } = useContext(AppContext)
 
-  useEffect(() =>{
-    let auxWppLink = wppLink
-    let articlesCartNames = []
-    let auxName = name.split(' ')
-    const total = totalCount(articlesCart)
-
-    articlesCart.length > 0 && articlesCart.map(item =>(
-      articlesCartNames.push(item.name)
-    ))
-
-    for(let i=0; i<auxName.length; i++){
-      auxWppLink = auxWppLink + "%20" + auxName[i]
-    }
-
-    auxWppLink = auxWppLink + ",%20acabo%20de%20comprar"
-
-    articlesCartNames.forEach(element => {
-      let splitElement = element.split(' ')
-      for(let i=0; i<splitElement.length; i++){
-        auxWppLink = auxWppLink + "%20" + splitElement[i]
-      }
-      auxWppLink = auxWppLink + ","
-    })
-    
-    auxWppLink = auxWppLink + `%20y%20el%20total%20es%20Ar$${total}`
-
-    setWppLink(auxWppLink)
-  }, [])
-
-  async function finishPurchase(){
-    const purchase = {
-      info: articlesCart.map(item => item),
-      total: totalCount(articlesCart),
-      email: email
-    }
-
-    setItemCartAux([])
-    setArticlesCart([])
-    setItemToDataBase([])
-    await purchaseService.createPurchase(purchase, {token})
-  }
+  const body = document.getElementById("body")
+  useCreateMessage()
 
   return(
     <Overlay>
       <ModalContainer>
-        <CloseModalButton onClick={() => setOpenPurchaseModal(false)} />
+        <CloseModalButton onClick={() => closeModalButton(body, setOpenPurchaseModal, setWppLink)} />
         <BorderContainer>
           <Tittle>Pasos para finalizar la compra</Tittle>
-          <Point>1. Transferencia por MercadoPago mediante nuestro alias es la única forma de pago por el momento.</Point>
-          <Point>2. Tener el mismo nombre de cuenta de MercadoPago que el nombre dé cuenta de perfil, aunque no es necesario sí que hará que el proceso sea más rápido. (podés cambiarlo en tu perfil)</Point>
-          <Point>3. La transferencia de dinero tiene que ser exacta, esto nos ayudara a la hora de identificar tu pedido.</Point>
+          <Point>1. Si es pago en efectivo, a convenir con el vendedor.</Point>
+          <Point>2. Si es pago por Mercado Pago, la transferencia de dinero tiene que ser exacta, esto nos ayudara a la hora de identificar tu pedido.</Point>
+          <Point>3. Tener el mismo nombre de cuenta de Mercado Pago que el nombre dé cuenta de perfil, aunque no es necesario, sí que hará que el proceso sea más rápido. (podés cambiarlo en tu perfil)</Point>
           <Point>4. Al finalizar se guardará un registro de tu compra en tu perfil, podés tomarte tu tiempo para hacer la transferencia, pero no es hasta el momento de realizarla que se iniciara con tu pedido.</Point>
-          <AliasTittle>5. Nuestro alias:<Alias>monideco</Alias></AliasTittle>
+          <AliasTittle>5. Nuestro alias:<Alias>monica.decoracion</Alias></AliasTittle>
           <Point>6. Mandanos un mensaje automático a nuestro WhatsApp antes de finalizar.</Point>
-          <a href={wppLink} Target="_blank" onClick={() => setOpenPurchaseModal(false)}><BorderContainerButton onClick={finishPurchase}><Finish>Mandar mensaje y finalizar</Finish></BorderContainerButton></a>
+          <a href={wppLink} target="_blank" onClick={() => {setOpenPurchaseModal(false); finishPurchase(
+              articlesCart,
+              totalCount,
+              discountCant,
+              email,
+              body,
+              purchaseService,
+              token,
+              openCloseCart,
+              setShopingCartStatus,
+              cartSwitch,
+              setCartSwitch,
+              setArticlesCart,
+              itemCartAux,
+              setItemCartAux,
+              onOffCartButton,
+              setOnOffCartButton,
+              setEnableDisableCollapse,
+              loginRegisterSwitch,
+              setProfileLoginButtonStatusOpacityDisplay,
+              setSearchEnableDisable,
+              setBuyButtonEnableDisable,
+              setProfileLogOutDisableOrFlex,
+              setDiscountCant,
+              setItemToDataBase,
+              setCartFilledOrNot,
+              setWppLink)}}>
+            <BorderContainerButton>
+              <Finish>Mandar mensaje y finalizar</Finish>
+            </BorderContainerButton>
+          </a>
         </BorderContainer>
       </ModalContainer>
     </Overlay>
@@ -88,20 +98,20 @@ const Overlay = styled.div`
   right: -10px;
   justify-content: center;
   align-items: center;
-  background: rgba(32, 35, 51, 0.8);
+  background: rgba(52, 48, 41, 0.8);
 `
 
 const ModalContainer = styled.div`
   position: absolute;
   display: flex;
-  height: 85vh;
+  height: 810px;
   width: 550px;
   background-color: #ebe9eb;
   border-radius: 30px;
   padding: 3px;
   @media only screen and (max-width: 991px){
     width: 90%;
-    height: 95vh;
+    height: 90%;
   }
   a{
     display: flex;
@@ -111,7 +121,7 @@ const ModalContainer = styled.div`
     margin-bottom: 2%;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     text-decoration: none;
     height: 50px;
     width: 230px;
@@ -120,12 +130,12 @@ const ModalContainer = styled.div`
       transform: scale(1.05);
     }
     @media only screen and (max-width: 991px){
-      height: 40px;
+      height: 35px;
       width: 200px;
-      margin-left: calc(50% - 100px);
+      margin-left: 0%;
     }
     @media only screen and (max-height: 550px) {
-      height: 35px;
+      height: 30px;
       font-size: .8rem;
     }
   }
@@ -137,7 +147,7 @@ const BorderContainer = styled.div`
   justify-content: space-around;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 30px;
   @media only screen and (max-width: 991px) {
     flex-direction: column;
@@ -155,7 +165,7 @@ const CloseModalButton = styled(MdClose)`
   cursor: pointer;
 
   :hover{
-    color: #ab6f4a;
+    color: #AC8DAF;
   }
 
   @media only screen and (max-width: 991px) {
@@ -196,8 +206,6 @@ const Point = styled.h5`
   width: 90%;
   margin-left: 5%;
   font-size: clamp(.1rem, 4.3vw, 1.25rem);
-  @media only screen and (max-width: 991px){
-  }
   @media only screen and (max-height: 550px) {
     font-size: 0.8rem;
   }
@@ -205,17 +213,20 @@ const Point = styled.h5`
 
 const AliasTittle = styled.h5`
   display: flex;
+  width: 90%;
   margin-left: 5%;
   font-size: clamp(.1rem, 4.3vw, 1.25rem);
 `
 
 const Alias = styled.div`
-  width: 100px;
   text-align: center;
-  background-color: white;
-  color: #9a6a48;
+  padding-left: 1%;
+  padding-right: 1%;
   margin-left: 10px;
+  background-color: white;
+  color: #70416D;
   border-radius: 20px;
+  user-select: all;
 `
 
 const BorderContainerButton = styled.div`
@@ -224,7 +235,7 @@ const BorderContainerButton = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
 `
 
@@ -236,9 +247,7 @@ const Finish = styled.button`
   font-size: clamp(.9rem, 1.45vw, 1rem);
   border: none;
   cursor: pointer;
-  :hover{
-    transform: scale(1.05)
-  }
+  background-color: transparent;
   @media only screen and (max-height: 550px){
     font-size: .9rem;
   }

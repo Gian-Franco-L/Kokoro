@@ -1,95 +1,92 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
-import filterFuncion from "./filterFuncion"
+import filterFuncion from "./Functions/filterFuncion"
 import { AppContext } from "../../../Context/AppContext"
 
 const Filter = () => {
   const {
-    totalArticles,
-    setTotalArticles,
-    setFilterStatus
+    articleChoice,
+    setArticleChoice,
+    setArticlesCount,
+    setPageCount,
   } = useContext(AppContext)
 
   return(
     <FilterItems>
-      <article>
-        <input type="radio" name="filter" onClick={() =>filterFuncion(4, totalArticles, setTotalArticles, setFilterStatus)} defaultChecked/>
-        <div>
-          <span>
-            Mas nuevo a mas viejo
-          </span>
-        </div>
-      </article>
-      <article>
-        <input type="radio" name="filter" onClick={() =>filterFuncion(3, totalArticles, setTotalArticles, setFilterStatus)}/>
-        <div>
-          <span>
-            Mas viejo a mas nuevo
-          </span>
-        </div>
-      </article>
-      <article>
-        <input type="radio" name="filter" onClick={() =>filterFuncion(1, totalArticles, setTotalArticles, setFilterStatus)}/>
-        <div>
-          <span>
-            Precio mayor a menor
-          </span>
-        </div>
-      </article>
-      <article>
-        <input type="radio" name="filter" onClick={() =>filterFuncion(2, totalArticles, setTotalArticles, setFilterStatus)}/>
-        <div>
-          <span>
-            menor a mayor
-          </span>
-        </div>
-      </article>
+      <BorderContainer>
+        <DiscountTittle>Categorias</DiscountTittle>
+        <Buttons articleChoice={articleChoice}>
+          <button id="HogarWord" onClick={() =>filterFuncion(setArticleChoice, setArticlesCount, setPageCount, "hogar")}>
+            Hogar
+          </button>
+          <button id="NiñosWord" onClick={() =>filterFuncion(setArticleChoice, setArticlesCount, setPageCount, "niños")}>
+            Niños
+          </button>
+        </Buttons>
+      </BorderContainer>
     </FilterItems>
   )
 }
 
 
 const FilterItems = styled.div`
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  height: 120px;
+  width: 22%;
+  padding: 3px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 5px 5px #AC8DAF;
+  border-radius: 20px;
+`
+
+const BorderContainer = styled.div`
+  position: relative;
   display: flex;
-  width: 90%;
-  justify-content: space-around;
-  margin-left: 4.5%;
-  margin-bottom: 2%;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 2px solid #AC8DAF;
+  border-radius: 20px;
+`
 
-  article{
-    position: relative;
-    height: 60px;
-    width: 13%;
-    float: left;
-    border: none;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    border-radius: 60px;
-    box-shadow: 1px 1px 4px 1px rgb(125, 125, 125);
-  }
+const DiscountTittle = styled.h4`
+  position: relative;
+  height: 30px;
+  width: 100%;
+  text-align: center;
+  padding-top: 1%;
+`
 
-  article div {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    border-radius: 60px;
-  }
+const Buttons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  font-size: clamp(1rem, 5vw, 1.7rem);
+  border-radius: 20px;
 
-  article input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 100%;
-    opacity: 0;
-    cursor: pointer;
-    border-radius: 60px;
-  }
   
-  input[type=radio]:checked ~ div {
-    box-shadow: 1px 1px 5px 3px #e3c69a;
+  button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    border: none;
+    background-color: transparent;
+  }
+
+  #HogarWord{
+    color: ${props => props.articleChoice === "hogar" ? "#70416D" : "#212529"};
+    border-top: 2px solid #AC8DAF;
+    border-right: 2px solid #AC8DAF;
+  }
+  #NiñosWord{
+    color: ${props => props.articleChoice === "niños" ? "#70416D" : "#212529"};
+    border-top: 2px solid #AC8DAF;
   }
 `
 

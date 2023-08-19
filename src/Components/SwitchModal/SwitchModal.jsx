@@ -1,4 +1,5 @@
 import React from "react"
+import { changeModalState, switchX } from "./Functions/SwitchModalFunctions"
 import userService from "../../Services/user"
 import styled from "styled-components"
 
@@ -14,38 +15,12 @@ const SwitchModal = ({
     setNewSwitch,
 }) => {
 
-  function changeModalState(){
-    setSwitchElection()
-  }
-
-  async function switchX(){
-    try{
-      const user = await userService.updateUser({
-        userName: userName,
-        election: switchElection,
-        updateElection: newSwitch
-      })
-
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-      )
-
-      setUserName(user.userName)
-      setName(user.name)
-      setEmail(user.email)
-      setPhone(user.phone)
-      setSwitchElection()
-    } catch(e){
-      console.error(e);
-    }
-  }
-
   return(
     <Overlay>
       <ModalContainer>
         <ChangeName>
           <CloseModalButton>
-            <button onClick={changeModalState}>X</button>
+            <button onClick={() => changeModalState(setSwitchElection)}>X</button>
           </CloseModalButton>
           <BorderContainerChangeName>
             <h2>Cambio de {switchElection}</h2>
@@ -63,7 +38,20 @@ const SwitchModal = ({
                 />
               </InputLabel>
             </form>
-            <span><BorderContainerChangeNameButton><button onClick={switchX}>Cambiar</button></BorderContainerChangeNameButton></span>
+            <span>
+              <BorderContainerChangeNameButton>
+                <button onClick={() => switchX(
+                  userService,
+                  userName,
+                  switchElection,
+                  newSwitch,
+                  setUserName,
+                  setName,
+                  setEmail,
+                  setPhone,
+                  setSwitchElection)}>Cambiar</button>
+              </BorderContainerChangeNameButton>
+            </span>
           </BorderContainerChangeName>
         </ChangeName>
       </ModalContainer>
@@ -115,7 +103,7 @@ const CloseModalButton = styled.div`
     border: none;
     font-size: 1.5rem;
     :hover{
-      color: #ab6f4a;
+      color: #AC8DAF;
     }
   }
 `
@@ -128,7 +116,7 @@ const BorderContainerChangeName = styled.div`
   text-align: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 20px;
   padding: 2%;
 
@@ -155,7 +143,7 @@ const BorderContainerChangeName = styled.div`
       border-bottom: 2px solid black;
       outline: none;
       :hover{
-        border-bottom: 2px solid #ab6f4a;
+        border-bottom: 2px solid #AC8DAF;
       }
     }
   }
@@ -169,12 +157,12 @@ const BorderContainerChangeName = styled.div`
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     :hover{
       transform: scale(1.05);
     }
     :active{
-      box-shadow: 0px 0px 5px 1px #ab6f4a;
+      box-shadow: 0px 0px 5px 5px #AC8DAF;
     }
     @media only screen and (max-width: 300px) {
       height: 12%;
@@ -197,7 +185,7 @@ const BorderContainerChangeNameButton = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
 `
 

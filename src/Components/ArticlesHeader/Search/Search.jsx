@@ -7,13 +7,13 @@ const Search = () => {
   const {
     setSearchValue,
     searchValue,
-    totalArticles,
+    totalHomeArticles,
     setSearchedArticles
   } = useContext(AppContext)
 
   return(
     <SearchInput>
-      <input onChange={(event) => searchFunction(event, setSearchValue, searchValue, totalArticles, setSearchedArticles)}/>
+      <input onChange={(event) => searchFunction(event, setSearchValue, searchValue, totalHomeArticles, setSearchedArticles)}/>
     </SearchInput>
   )
 }

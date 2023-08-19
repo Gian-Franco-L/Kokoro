@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from "react"
+import React, { useContext } from "react"
+import { handleSubmit } from "./Functions/ResetPasswordFunctions"
 import styled from "styled-components"
 import resetPasswordService from "../Services/resetPassword"
 import { AppContext } from "../Context/AppContext"
@@ -9,49 +10,13 @@ const ResetPassword = ({ id, token }) => {
     passwordAgain,
     setPasswordAgain,
     newPassword,
-    setNewPassword
+    setNewPassword,
+    resetPasswordRegister,
+    setResetPasswordRegister
   } = useContext(AppContext)
 
-  const passwordRegister = useRef(null)
-  // let passwordRegister = document.querySelector("#passwordRegister")
   let passwordRegisterAgain = document.querySelector("#passwordRegisterAgain")
   let msjError = document.querySelector("#msj")
-
-  const handleSubmit = (event) =>{
-    event.preventDefault()
-
-    if(!newPassword){
-      passwordRegister.current.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(!passwordAgain){
-      passwordRegister.current.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      return 0
-    }
-    if(newPassword.toLowerCase() !== passwordAgain.toLowerCase()){
-      passwordRegister.current.style.boxShadow = "0px 0px 5px 1px #ab6f4a"
-      passwordRegisterAgain.style.boxShadow = "0px 0px 5px 1px #bb3b3b"
-      passwordRegisterAgain.placeholder = "Las contraseñas son diferentes"
-      passwordRegisterAgain.value = ""
-      passwordRegisterAgain.classList.add("redPlaceholder")
-      return 0
-    }
-
-    const userEmail = {
-      id: id,
-      token: token,
-      password: newPassword
-    }
-
-    resetPasswordService.resetPassword(userEmail)
-      .then(() =>{
-        window.location.replace('http://localhost:3000/');
-      })
-      .catch(() =>{
-        msjError.innerHTML = "El link ha expirado, vuelve a intentarlo."
-      })
-  }
 
   return(
     <Background>
@@ -65,7 +30,7 @@ const ResetPassword = ({ id, token }) => {
               name="password"
               type="password"
               className=""
-              ref={passwordRegister}
+              resetPasswordRegister={resetPasswordRegister}
               placeholder="Contraseña"
               onChange={({target}) => setNewPassword(target.value)}
               required
@@ -83,7 +48,19 @@ const ResetPassword = ({ id, token }) => {
               required
             />
           </InputLabel>
-          <span><BorderContainerForgotPassword><button onClick={(event) => handleSubmit(event)}>Enviar correo</button></BorderContainerForgotPassword></span>
+          <span>
+            <BorderContainerForgotPassword><button onClick={(event) => handleSubmit(
+              event,
+              newPassword,
+              passwordAgain,
+              setResetPasswordRegister,
+              passwordRegisterAgain,
+              id,
+              token,
+              resetPasswordService,
+              msjError)}>Cambiar contraseña</button>
+            </BorderContainerForgotPassword>
+          </span>
         </BorderContainer>
       </MainContainer>
     </Background>
@@ -96,7 +73,7 @@ const Background = styled.div`
   width: 100vw;
   justify-content: center;
   align-items: center;
-  background-color: rgba(44, 45, 49, 0.9);
+  background: rgba(52, 48, 41, 0.8);
 `
 
 const MainContainer = styled.form`
@@ -126,12 +103,12 @@ const MainContainer = styled.form`
     padding: 3px;
     background-color: #f5f5f5;
     border-radius: 50px;
-    box-shadow: 0px 0px 5px 1px rgb(125, 125, 125);
+    box-shadow: 0px 0px 5px 5px #AC8DAF;
     :hover{
       transform: scale(1.05);
     }
     :active{
-      box-shadow: 0px 0px 5px 1px #ab6f4a;
+      box-shadow: 0px 0px 5px 5px #AC8DAF;
     }
   }
 `
@@ -145,7 +122,7 @@ const BorderContainer   = styled.div`
   text-align: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 20px;
   padding: 2%;
 
@@ -164,7 +141,7 @@ const BorderContainer   = styled.div`
       border-bottom: 2px solid black;
       outline: none;
       :hover{
-        border-bottom: 2px solid #ab6f4a;
+        border-bottom: 2px solid #AC8DAF;
       }
     }
   }
@@ -174,6 +151,7 @@ const InputLabel = styled.div`
   display: flex;
   flex-direction: column;
   width: 70%;
+  box-shadow: ${props => props.resetPasswordRegister === true ? "0px 0px 5px 1px #AC8DAF" : "0px 0px 5px 1px #bb3b3b"};
   input{
     font-size: clamp(.9rem, 2.2vw, 1.3rem);
     background-color: #ebe9eb;
@@ -183,7 +161,7 @@ const InputLabel = styled.div`
     border-bottom: 2px solid black;
     outline: none;
     :hover{
-      border-bottom: 2px solid #ab6f4a;
+      border-bottom: 2px solid #AC8DAF;
     }
   }
 `
@@ -194,7 +172,7 @@ const BorderContainerForgotPassword = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  border: 2px solid #CEAB93;
+  border: 2px solid #AC8DAF;
   border-radius: 50px;
   button{
     font-size: clamp(.9rem, 2.2vw, 1rem);
@@ -203,6 +181,5 @@ const BorderContainerForgotPassword = styled.div`
     border-radius: 50px;
   }
 `
-
 
 export { ResetPassword }

@@ -13,6 +13,6 @@
   position: absolute;
   left: 40%;
 }
-.redPlaceholder::-webkit-input-placeholder {
+/* .redPlaceholder::-webkit-input-placeholder {
   color: rgb(199, 56, 56)
-}
+} */

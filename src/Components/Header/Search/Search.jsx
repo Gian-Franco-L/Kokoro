@@ -1,38 +1,51 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
 import { AppContext } from "../../../Context/AppContext"
-import searchFunction from "./searchFunction"
+import { searchFunction, clearSearch } from "./Functions/SearchFunction"
 import { BsSearch } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
+import { useGetAllArticles } from "../../../Hooks/useGetAllArticles"
 
-const Search = ({ searchRef, searchInput }) => {
+const Search = () => {
 
   const {
-    totalArticles,
     searchedArticles,
-    setSearchedArticles
+    setSearchedArticles,
+    searchEnableDisable
   } = useContext(AppContext)
 
-  function clearSearch(){
-    searchRef.current.value = ""
-    setSearchedArticles(null)
-  }
+  const { allArticles } = useGetAllArticles()
 
   return(
-    <SearchInput>
-      <input onChange={(event) => searchFunction(event, totalArticles, setSearchedArticles)} placeholder="Que estás buscando?" ref={searchRef}/>
-      {
-        searchedArticles
-          ? <CrossIcon onClick={clearSearch}><AiIconClose /></CrossIcon>
-          : <SearchIcon><BsIconSearch /></SearchIcon>
-      }
-    </SearchInput>
+    <>
+      {searchEnableDisable.display === true && searchEnableDisable.disabled
+              ? <SearchInput opacity={searchEnableDisable.opacity}>
+                  <input disabled onChange={(event) => searchFunction(event, allArticles, setSearchedArticles)} placeholder="Que estás buscando?" id="searchInputRef"/>
+                  {
+                    searchedArticles
+                      ? <CrossIcon onClick={() => clearSearch(setSearchedArticles)}><AiIconClose /></CrossIcon>
+                      : <SearchIcon><BsIconSearch /></SearchIcon>
+                  }
+                </SearchInput>
+              : searchEnableDisable.display === true && !searchEnableDisable.disabled
+                ? <SearchInput opacity={searchEnableDisable.opacity}>
+                    <input onChange={(event) => searchFunction(event, allArticles, setSearchedArticles)} placeholder="Que estás buscando?" id="searchInputRef"/>
+                    {
+                      searchedArticles
+                        ? <CrossIcon onClick={() => clearSearch(setSearchedArticles)}><AiIconClose /></CrossIcon>
+                        : <SearchIcon><BsIconSearch /></SearchIcon>
+                    }
+                  </SearchInput>
+                : null
+          }
+    </>
+    
   )
 }
 
 const SearchInput = styled.div`
   position: absolute;
-  top: 25%;
+  top: 30%;
   left: 30%;
   display: flex;
   height: 45px;
@@ -45,11 +58,11 @@ const SearchInput = styled.div`
     font-size: 20px;
     padding-left: 10px;
     border-radius: 60px;
-    border: 2px solid #646464;
+    border: 2px solid #AC8DAF;
     background-color: #f5f5f5;
     /* :hover~div{
-        color: #ab6f4a;
-        border-left-color: #ab6f4a;
+        color: #AC8DAF;
+        border-left-color: #AC8DAF;
         transition: 0.3s;
     } */
   }
@@ -61,12 +74,13 @@ const SearchInput = styled.div`
   }
   @media only screen and (max-width: 991px) {
     position: relative;
-    margin-left: 2%;
+    margin-left: 0%;
     width: 96%;
     top: 0%;
     left: 0%;
     margin-top: 20px;
   }
+  ${props => props.opacity === "1" ? "opacity: 1" : "opacity: 0.5"}
 `
 
 const SearchIcon = styled.div`
@@ -75,7 +89,7 @@ const SearchIcon = styled.div`
   top: 0%;
   height: 40px;
   width: 35px;
-  border-left: 1px solid black;
+  border-left: 1px solid #AC8DAF;
 `
 
 const AiIconClose = styled(AiOutlineClose)`
@@ -87,9 +101,10 @@ const AiIconClose = styled(AiOutlineClose)`
 const CrossIcon = styled.div`
   position: absolute;
   right: 2%;
+  top: 0%;
   height: 40px;
   width: 35px;
-  border-left: 1px solid black;
+  border-left: 1px solid #AC8DAF;
   cursor: pointer;
 `
 

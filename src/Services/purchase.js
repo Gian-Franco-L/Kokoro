@@ -1,25 +1,45 @@
 import axios from 'axios'
 
-const baseUrl = `${process.env}/api/purchases/`
+const baseUrl = 'https://kokoro-backend-db-3thm.vercel.app/api/purchases/'
+// const baseUrl = `http://localhost:8000/api/purchases/`
 
-const getAllPurchases = () =>{
+const getAllPurchases = async () =>{
   const req = axios.get(baseUrl)
-  return req.then(res => res.data)
+  const res = await req
+  return res.data
 }
 
-const createPurchase = (newObject, {token}) =>{
+const createPurchase = async (newObject, {token}) =>{
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
   const req = axios.post(baseUrl, newObject, config)
-  return req.then(res => res.data)
+  const res = await req
+  return res.data
 }
 
-const updatePurchase = (id, newObject) =>{
-  const req = axios.put(`${baseUrl}/${id}`, newObject)
-  return req.then(res => res.data)
+const deletePurchase = async (id, {token}) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const req = axios.delete(`${baseUrl}${id}`, config)
+  const res = await req
+  return res.data
 }
 
-export default { getAllPurchases, createPurchase, updatePurchase }
+const updatePurchase = async (id, newObject, {token}) =>{
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+  const req = axios.put(`${baseUrl}${id}`, newObject, config)
+  const res = await req
+  return res.data
+}
+
+export default { getAllPurchases, createPurchase, deletePurchase, updatePurchase }

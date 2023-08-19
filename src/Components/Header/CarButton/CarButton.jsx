@@ -2,42 +2,56 @@ import React, { useContext } from "react"
 import styled from "styled-components"
 import { BsFillCartCheckFill } from "react-icons/bs"
 import { BsFillCartXFill } from "react-icons/bs"
-import { openCloseCart } from "../openCloseCart"
+import { openCloseCart } from "./Functions/CarButtonFunctions"
 import { AppContext } from "../../../Context/AppContext"
-import "../../../CSS/Animation.css"
 
-const CarButton = ({ showCart }) =>{
+const CarButton = () =>{
 
   const {
     cartSwitch,
     setCartSwitch,
+    articlesCart,
+    setArticlesCart,
     itemCartAux,
     setItemCartAux,
-    articlesCart,
+    onOffCartButton,
+    setOnOffCartButton,
+    setEnableDisableCollapse,
+    loginRegisterSwitch,
+    setProfileLoginButtonStatusOpacityDisplay,
+    setSearchEnableDisable,
+    setBuyButtonEnableDisable,
+    setProfileLogOutDisableOrFlex,
+    setDiscountCant,
     onOffCarButton,
-    setOnOffCarButton,
-    setArticlesCart,
-    setCartFilledOrNot
+    setShopingCartStatus
     } = useContext(AppContext)
 
   return(
     <CartButton>
       <button disabled={onOffCarButton} onClick={() => openCloseCart(
-          showCart,
+          setShopingCartStatus,
           cartSwitch,
           setCartSwitch,
           articlesCart,
           setArticlesCart,
           itemCartAux,
           setItemCartAux,
-          setOnOffCarButton,
-          setCartFilledOrNot
+          onOffCartButton,
+          setOnOffCartButton,
+          setEnableDisableCollapse,
+          loginRegisterSwitch,
+          setProfileLoginButtonStatusOpacityDisplay,
+          setSearchEnableDisable,
+          setBuyButtonEnableDisable,
+          setProfileLogOutDisableOrFlex,
+          setDiscountCant
         )}>{
           cartSwitch === "on"
-            ? <BsFillCartCheckFill className="cartIcon"/>
-            : <BsFillCartXFill className="cartIcon"/>
+            ? <BsFillCartCheckFill className="cartIcon" />
+            : <BsFillCartXFill className="cartIcon" />
         }
-          </button>
+      </button>
     </CartButton>
   )
 }
