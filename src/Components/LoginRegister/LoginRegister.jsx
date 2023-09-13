@@ -63,10 +63,10 @@ const apearLoginRegister = css`
   position: fixed;
   display: flex;
   justify-content: space-around;
-  height: 6.1vh;
+  height: 6vh;
   width: 19%;
   right: 17.6%;
-  top: 9%;
+  top: 8.6%;
   background: linear-gradient(0deg, #ebe9eb 1%, white 100%) 0px 0px;
   border-bottom: 2px solid #AC8DAF;
   border-right: 1px solid #AC8DAF;

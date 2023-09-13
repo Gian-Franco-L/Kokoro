@@ -32,7 +32,8 @@ const ArticlesContainer = ({ backNextToTop }) =>{
       }
       <div>
         <ItemsContainer>
-          {showArticles.length !== 0 ? showArticles.map(item =>(
+          {showArticles.length !== 0
+          ? showArticles.map(item =>(
             item.Status 
               ? <Items 
                   name={item.Name}
@@ -47,7 +48,7 @@ const ArticlesContainer = ({ backNextToTop }) =>{
                   key={uuidv4()}
                 />
              : null
-          ))
+            ))
           : <Skeletons />}
         </ItemsContainer>
       </div>

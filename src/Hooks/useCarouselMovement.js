@@ -7,7 +7,6 @@ export function useCarouselMovement({ setButtonsCarouselState, intervalCarousel 
   const slideButtons = useRef(null)
 
   useEffect(() =>{
-    console.log("Carousel moved");
     if(window.matchMedia("(max-width: 991px)").matches){
       let xClick, xMove, xResu, lastResu
       intervalCarousel.current = setInterval(() =>{
